@@ -1,0 +1,120 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+.login-content {
+    max-width: 500px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 16px;
+}
+
+.login-container h2 {
+    padding: 1rem 1rem 1.5rem 1rem;
+}
+
+
+.back-btn-container{
+    margin: 1rem;
+    position: absolute;
+    top: 2%;
+    left: 1%;
+}
+
+.back-btn{
+    color: black;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContainer {
+    margin-bottom: 15px;
+    padding: 0 0 1rem 0;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 0.4rem;
+    min-width: 300px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.email-error,
+.password-error {
+    display: flex;
+    padding: 4px 0 0 4px;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.email-input,
+.password-input {
+    position: relative;
+}
+
+.email-input input,
+.password-input input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    top: 55%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button {
+    color: white;
+    background-color: black;
+    padding: 12px 24px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 300px;
+    max-width: 100%;
+}
+
+.new-user {
+    margin: 0.8rem 0 0.4rem 0;
+}
+
+.new-user span {
+    font-size: 14px;
+}
+
+.signup-button {
+    margin: 0 0 0 0.5rem;
+    font-size: 14px;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}

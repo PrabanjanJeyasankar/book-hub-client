@@ -1,0 +1,142 @@
+.search-form {
+    padding: 12px 0;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .search-form-content {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-form form {
+    width: 60%;
+  }
+  
+  .search-form-elem {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    padding-left: 18px;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+input.form-control {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 2rem;
+    margin-right: 10px;
+    width: 0;
+    min-width: 0;
+}
+  .form-control {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .form-control::placeholder {
+    color: #aaaaaa;
+  }
+  
+  .search-form-elem button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin: 0 0.5rem 0 0;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-sb {
+    justify-content: space-between;
+  }
+  
+  .flex-c {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text-purple {
+    color: #6b46c1;
+  }
+  
+
+
+  @media (max-width: 1440px) {
+    .search-form form {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .search-form form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 992px) {
+    .search-form form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-form form {
+        width: 70%;
+    }
+    .search-form-elem {
+        padding: 8px;
+        padding-left: 16px;
+    }
+    .form-control {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .search-form-elem {
+        /* flex-direction: column; */
+        padding: 8px;
+        padding-left: 10px;
+    }
+    button {
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-control {
+        font-size: 12px;
+
+    }
+    .search-form form {
+      width: 70%;
+  }
+    .search-form-elem {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+        padding: 6px;
+        padding-left: 8px;
+    }
+    button {
+        margin-top: 6px;
+    }
+}
