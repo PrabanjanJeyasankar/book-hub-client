@@ -6,8 +6,27 @@
     
 }
 
+:root{
+    --color-black: #1B2023;
+}
+
 body, html{
     width: 100%;
     height: 100%;
     overflow-x: hidden;
 }
+
+
+/*
+on select background : #EFF0F0
+
+bakcground color : #1B2023 - black
+
+baclgroubd gray : #B3B4B5
+dark gray #8A8D8F
+
+
+$platinum: #E5E6E6ff;
+$eerie-black: #1B2023ff;
+$silver: #A7A8AAff;
+*/

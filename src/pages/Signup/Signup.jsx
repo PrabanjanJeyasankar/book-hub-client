@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import './Signup.css'
-import { Eye, EyeOff, ChevronLeft } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function Signup() {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -15,21 +14,19 @@ function Signup() {
         e.preventDefault()
 
         const newErrors = {}
-        if (!firstName) newErrors.firstName = '* First Name is required'
+        if (!name) newErrors.name = '* Name is required'
         if (!email) newErrors.email = '* Email is required'
         if (!password) newErrors.password = '* Password is required'
 
         setErrors(newErrors)
 
         if (Object.keys(newErrors).length === 0) {
-            console.log({ firstName, lastName, email, password })
+            console.log({ name, email, password })
         }
     }
-    const handleFirstNameChange = (e) => {
-        setLastName(e.target.value)
-    }
-    const handleLastNameChange = (e) => {
-        setLastName(e.target.value)
+
+    const handleNameChange = (e) => {
+        setName(e.target.value)
     }
 
     const handleEmailChange = (e) => {
@@ -46,42 +43,24 @@ function Signup() {
 
     return (
         <div className='signup-container'>
-            {/* <div className='back-btn-container'>
-                <Link className='back-btn' to='/'>
-                    <ChevronLeft size={40} strokeWidth={1} />
-                </Link>
-            </div> */}
             <div className='signup-content'>
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit} className='form'>
                     <div className='form-container'>
                         <div className='inputContainer'>
-                            <div className='first-name-input'>
+                            <div className='name-input'>
                                 <input
-                                    id='firstName'
+                                    id='name'
                                     type='text'
-                                    placeholder='First Name*'
-                                    value={firstName}
-                                    onChange={handleFirstNameChange}
+                                    placeholder='Enter name'
+                                    value={name}
+                                    onChange={handleNameChange}
                                 />
                             </div>
-                            <div className='first-name-error'>
-                                {errors.firstName && (
-                                    <span className='error'>
-                                        {errors.firstName}
-                                    </span>
+                            <div className='name-error'>
+                                {errors.name && (
+                                    <span className='error'>{errors.name}</span>
                                 )}
-                            </div>
-                        </div>
-                        <div className='inputContainer'>
-                            <div className='last-name-input'>
-                                <input
-                                    id='lastName'
-                                    type='text'
-                                    placeholder='Last Name*'
-                                    value={lastName}
-                                    onChange={handleLastNameChange}
-                                />
                             </div>
                         </div>
                         <div className='inputContainer'>
@@ -89,7 +68,7 @@ function Signup() {
                                 <input
                                     id='email'
                                     type='email'
-                                    placeholder='Email*'
+                                    placeholder='Enter email'
                                     value={email}
                                     onChange={handleEmailChange}
                                 />
@@ -108,7 +87,7 @@ function Signup() {
                                     id='password'
                                     type={showPassword ? 'text' : 'password'}
                                     value={password}
-                                    placeholder='Password*'
+                                    placeholder='Enter password'
                                     onChange={handlePasswordChange}
                                 />
                                 <button

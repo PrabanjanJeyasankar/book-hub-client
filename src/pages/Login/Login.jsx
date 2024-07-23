@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Login.css'
-import { Eye, EyeOff, ChevronLeft } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function Login() {
@@ -37,11 +37,6 @@ function Login() {
 
     return (
         <div className='login-container'>
-        {/* <div className='back-to-home-container'>
-                <Link className='back-button' to='/'>
-                <ChevronLeft size={40} strokeWidth={1}/>
-                </Link>
-            </div> */}
             <div className='login-content'>
                 <h2>Log In</h2>
                 <form onSubmit={handleSubmit} className='form'>
@@ -57,9 +52,7 @@ function Login() {
                         </div>
                         <div className='email-error'>
                             {errors.email && (
-                                <span className='error'>
-                                    {errors.email}
-                                </span>
+                                <span className='error'>{errors.email}</span>
                             )}
                         </div>
                     </div>
@@ -69,7 +62,7 @@ function Login() {
                                 id='password'
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
-                                placeholder='Enter Password'
+                                placeholder='Enter password'
                                 onChange={handlePasswordChange}
                             />
                             <button
@@ -85,9 +78,7 @@ function Login() {
                         </div>
                         <div className='password-error'>
                             {errors.password && (
-                                <span className='error'>
-                                    {errors.password}
-                                </span>
+                                <span className='error'>{errors.password}</span>
                             )}
                         </div>
                     </div>
@@ -104,7 +95,6 @@ function Login() {
                     </Link>
                 </div>
             </div>
-            
         </div>
     )
 }

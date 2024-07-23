@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import './AddBookFormComponent.css'
 import { useDropzone } from 'react-dropzone'
 import { Upload } from 'lucide-react'
+import axios from 'axios'
+import ModalComponent from '../ModalComponent/ModalComponent'
+import greenTick from '../../assets/img/accept.png'
+import yellowWarning from '../../assets/img/warning.png'
+import redWarning from '../../assets/img/mark.png'
 
 function AddBookFormComponent() {
     const [formData, setFormData] = useState({
@@ -12,30 +17,33 @@ function AddBookFormComponent() {
         publicationDate: '',
         genre: '',
         language: '',
-        pages: '',
         coverImage: null,
         description: '',
         availableCopies: '',
-        location: '',
     })
     const [imagePreview, setImagePreview] = useState(null)
     const [errors, setErrors] = useState({})
+    const [popupMessageBody, setPopupMessageBody] = useState('')
+    const [popupMessageTitle, setPopupMessageTitle] = useState('')
+    const [popupImageSrc, setPopupImageSrc] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
+    console.log(formData)
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData({
-            ...formData,
+        setFormData((prevData) => ({
+            ...prevData,
             [name]: value,
-        })
+        }))
     }
 
     const handleFileChange = (acceptedFiles) => {
         const file = acceptedFiles[0]
         if (file) {
-            setFormData({
-                ...formData,
+            setFormData((prevData) => ({
+                ...prevData,
                 coverImage: file,
-            })
+            }))
             const previewUrl = URL.createObjectURL(file)
             setImagePreview(previewUrl)
         }
@@ -53,14 +61,75 @@ function AddBookFormComponent() {
         if (!formData.coverImage) {
             formErrors.coverImage = '* Cover image is required'
         }
+        console.log(formErrors)
         setErrors(formErrors)
         return Object.keys(formErrors).length === 0
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (validateForm()) {
-            console.log(formData)
+            const data = new FormData()
+            Object.keys(formData).forEach((key) => {
+                data.append(key, formData[key])
+            })
+
+            try {
+                const response = await axios.post(
+                    'http://localhost:3500/api/v1/book/add',
+                    data,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    }
+                )
+
+                if (response.stAtus === 201) {
+                    const bookTitle =
+                        response.data?.book?.title || 'Unknown Book'
+                    setPopupImageSrc(greenTick)
+                    setPopupMessageTitle('Book Added Successfully')
+                    setPopupMessageBody(
+                        `"${bookTitle}" has been added successfully!`
+                    )
+                } else {
+                    setPopupImageSrc(redWarning)
+                    setPopupMessageTitle('Unexpected Status Code')
+                    setPopupMessageBody(
+                        `An unexpected error occurred while submitting the form. Please try again later.`
+                    )
+                }
+
+                setIsModalOpen(true)
+            } catch (error) {
+                // console.log('Error Message:', error.message);
+                // console.log('Error Response Status:', error.response ? error.response.status : 'No response');
+                // console.log('Error Response Data:', error.response ? error.response.data : 'No response data');
+                if (error.response) {
+                    if (error.response.status === 409) {
+                        setPopupImageSrc(yellowWarning)
+                        setPopupMessageTitle('Oops.. Book Already Exists!')
+                        setPopupMessageBody(
+                            `${error.response.data?.book?.title} is already exist, kindly check Italic.`
+                        )
+                    } else {
+                        setPopupImageSrc(redWarning)
+                        setPopupMessageTitle('An Unexpected Error Occurred')
+                        setPopupMessageBody(
+                            'An unexpected error occurred while submitting the form. Please try again later.'
+                        )
+                    }
+                } else {
+                    setPopupImageSrc(redWarning)
+                    setPopupMessageTitle('An Unexpected Error Occurred')
+                    setPopupMessageBody(
+                        'An unexpected error occurred while submitting the form. Please check your network connection and try again.'
+                    )
+                }
+
+                setIsModalOpen(true)
+            }
         }
     }
 
@@ -68,6 +137,10 @@ function AddBookFormComponent() {
         onDrop: handleFileChange,
         accept: 'image/*',
     })
+
+    const closeModal = () => {
+        setIsModalOpen(false)
+    }
 
     return (
         <div className='add-book-container'>
@@ -239,50 +312,63 @@ function AddBookFormComponent() {
                                 id='book-cover-image'>
                                 <label htmlFor='coverImage'>Cover Image</label>
                                 {/* <div className='image-input-with-review'> */}
-                                    <div {...getRootProps()} className={`dropzone ${
-                                            isDragActive ? 'active' : ''
-                                        }`}>
-                                        <input
-                                            {...getInputProps()}
-                                            name='coverImage'
-                                            id='coverImage'
-                                        />
-                                        <div className='upload-and-preview'>
-                                            {imagePreview ? (
-                                                <img
-                                                    id='preview-image'
-                                                    src={imagePreview}
-                                                    alt='Image Preview'
+                                <div
+                                    {...getRootProps()}
+                                    className={`dropzone ${
+                                        isDragActive ? 'active' : ''
+                                    }`}>
+                                    <input
+                                        {...getInputProps()}
+                                        name='coverImage'
+                                        id='coverImage'
+                                    />
+                                    <div className='upload-and-preview'>
+                                        {imagePreview ? (
+                                            <img
+                                                id='preview-image'
+                                                src={imagePreview}
+                                                alt='Image Preview'
+                                            />
+                                        ) : (
+                                            <div className='drag-drop-upload'>
+                                                <Upload
+                                                    size={42}
+                                                    className='upload-icon'
                                                 />
-                                            ) : (
-                                                <div className='drag-drop-upload'>
-                                                    <Upload
-                                                        size={42}
-                                                        className='upload-icon'
-                                                    />
-                                                    <p>
-                                                        Drag 'n' drop a file
-                                                        here, or click to select
-                                                        files
-                                                    </p>
-                                                </div>
-                                            )}
-                                        </div>
+                                                <p>
+                                                    Drag 'n' drop a file here,
+                                                    or click to select files
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
-                                    {errors.coverImage && (
-                                        <span className='error'>
-                                            {errors.coverImage}
-                                        </span>
-                                    )}
+                                </div>
+                                {errors.coverImage && (
+                                    <span className='error'>
+                                        {errors.coverImage}
+                                    </span>
+                                )}
                                 {/* </div> */}
                             </div>
                         </div>
                     </div>
-                    <button className='add-book-btn' type='submit'>
+                    <button
+                        className='add-book-btn'
+                        type='submit'
+                        onClick={handleSubmit}>
                         Add Book
                     </button>
                 </div>
             </form>
+            <ModalComponent
+                // imageSrc={popupImageSrc}
+                popupImageSrc={popupImageSrc}
+                popupMessageTitle={popupMessageTitle}
+                popupMessageBody={popupMessageBody}
+                // isOpen={true}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+            />
         </div>
     )
 }

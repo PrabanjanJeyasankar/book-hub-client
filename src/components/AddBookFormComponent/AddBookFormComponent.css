@@ -11,13 +11,13 @@
 .add-book-container h2 {
     width: 100%;
     text-align: center;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem;
 }
 
 form {
     width: 100%;
     height: 100%;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 1rem;
     box-sizing: border-box;
 }
 
@@ -30,7 +30,6 @@ form {
     flex-direction: row;
     gap: 20px;
     width: 100%;
-    max-height: 100%;
     box-sizing: border-box;
     position: relative;
 }
@@ -39,10 +38,7 @@ form {
 .input-column-two,
 .input-column-three {
     width: 100%;
-    max-height: 100%;
-}
-
-.input-column-three {
+    /* max-height: 100%; */
 }
 
 .imagePreviewContainer {
@@ -68,7 +64,7 @@ form {
 #book-cover-image input {
     border: none;
     user-select: none;
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     cursor: pointer;
 }
 
@@ -86,7 +82,6 @@ form {
     border-color: #6c63ff;
 }
 
-
 .dropzone img {
     object-fit: contain;
     height: 320px;
@@ -102,8 +97,7 @@ form {
 }
 
 .drag-drop-upload {
-    /* height: 50%; */
-    margin: 6rem 2rem 6rem 2rem;
+    margin: 6rem 2rem;
 }
 
 input {
@@ -138,6 +132,7 @@ textarea:focus,
 select:focus {
     outline: none;
 }
+
 .error {
     position: absolute;
     color: red;
@@ -146,6 +141,10 @@ select:focus {
     margin-left: 4px;
     display: block;
     text-align: left;
+}
+
+.server-error{
+    color: red;
 }
 
 .add-book-btn {
@@ -160,4 +159,70 @@ select:focus {
 
 .add-book-btn:hover {
     opacity: 0.8;
+}
+
+@media (max-width: 1440px) {
+    .form-input-container {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .imagePreviewContainer img {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .form-input-container {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .imagePreviewContainer img {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-input-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .imagePreviewContainer img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px) {
+    .form-input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .imagePreviewContainer img {
+        width: 90%;
+    }
+}
+
+@media (max-width: 370px) {
+    .form-input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .imagePreviewContainer img {
+        width: 95%;
+    }
+}
+
+@media (max-width: 320px) {
+    .form-input-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .imagePreviewContainer img {
+        width: 100%;
+    }
 }

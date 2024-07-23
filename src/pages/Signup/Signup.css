@@ -3,29 +3,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
     position: relative;
 }
 
-.back-to-home-container{
+.back-to-home-container {
     margin: 1rem;
     position: absolute;
     top: 2%;
     left: 1%;
 }
 
-.back-button{
+.back-button {
     color: black;
-    /* text-decoration: none; */
 }
 
 .signup-content {
     max-width: 500px;
     width: 300px;
-    margin: 0 auto;
-    padding: 20px;
+    padding: 28px;
     text-align: center;
-    border: 1px solid black;
+    border: 1.2px solid black;
     border-radius: 16px;
 }
 
@@ -48,7 +45,6 @@ input {
     border: 1px solid black;
     border-radius: 4px;
     padding: 0.4rem;
-    /* min-width: 300px; */
 }
 
 input:focus {
@@ -56,11 +52,12 @@ input:focus {
 }
 
 .error {
+    text-align: left;
     color: red;
     font-size: 12px;
 }
 
-.first-name-error,
+.name-error,
 .email-error,
 .password-error {
     display: flex;
@@ -69,8 +66,7 @@ input:focus {
     box-sizing: border-box;
 }
 
-.first-name-input,
-.last-name-input,
+.name-input,
 .email-input,
 .password-input {
     position: relative;
@@ -104,7 +100,6 @@ input:focus {
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    /* margin: 0.5rem; */
     width: 300px;
     max-width: 100%;
 }
@@ -127,3 +122,27 @@ input:focus {
     text-decoration: underline;
 }
 
+@media (max-width: 600px) {
+    .signup-content {
+        padding: 20px;
+    }
+
+    .inputContainer {
+        margin-bottom: 10px;
+        padding: 0;
+    }
+
+    .sign-up-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+
+    .existing-user {
+        margin: 0.5rem 0 0.2rem 0;
+    }
+
+    .loginButton {
+        margin: 0.5rem 0 0 0.5rem;
+        font-size: 12px;
+    }
+}

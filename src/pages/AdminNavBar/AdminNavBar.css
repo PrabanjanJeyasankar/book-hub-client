@@ -1,15 +1,27 @@
+.admin-page-content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* background-color: aqua; */
+    height: 100%;
+    /* border: 1px solid; */
+}
+
 .navbar-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: space-between;
-    padding: 1rem 2rem;
-    height: 60px;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
 }
 
 .app-logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 1rem;
 }
 
 .app-name {
@@ -29,10 +41,33 @@
     color: black;
 }
 
-.page-links a {
+.page-links{
+    margin: 1rem 0 0 0 ;
+}
+
+.page-links a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     text-decoration: none;
     color: black;
-    padding: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.page-links a:hover{
+    background-color: #f0f0f0;
+    border-radius: 10rem;
+}
+
+.page-links a p {
+    margin-left: 4px;
+}
+
+.logout-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
 }
 
 .signup-login-links a {

@@ -1,19 +1,21 @@
 import React from 'react'
-// import NavBarComponent from './components/NavBarComponent/NavBarComponent'
-// import { BrowserRouter } from 'react-router-dom'
-import AdminPage from './pages/AdminPage/AdminPage'
+import NavBarComponent from './components/NavBarComponent/NavBarComponent'
+import { BrowserRouter } from 'react-router-dom'
+import AdminDashBoardComponent from './components/AdminDashBoardComponent/AdminDashBoardComponent'
+import AddBookFormComponent from './components/AddBookFormComponent/AddBookFormComponent'
+
 
 function App() {
     return (
         <>
-
-            <AdminPage />
+        {/* <AddBookFormComponent/> */}
+        {/* <AdminDashBoardComponent/> */}
+            <BrowserRouter>
+                <NavBarComponent />
+            </BrowserRouter>
         </>
-        // <BrowserRouter>
-        /* <NavBarComponent /> */
-
-        // </BrowserRouter>
     )
 }
 
 export default App
+
