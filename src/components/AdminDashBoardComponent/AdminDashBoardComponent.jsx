@@ -85,7 +85,21 @@ function AdminDashBoardComponent() {
     }
 
     const [dateTime, setDateTime] = useState(new Date())
-
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const response = await axios.get(
+                    'http://localhost:3500/api/v1/book/'
+                )
+                setBooks(response.data.books)
+                setFilteredBooks(response.data.books)
+            } catch (error) {
+                console.error('Error fetching books:', error)
+            }
+        }
+        fetchBooks()
+    }, [])
+    
     useEffect(() => {
         const timerId = setInterval(() => {
             setDateTime(new Date())

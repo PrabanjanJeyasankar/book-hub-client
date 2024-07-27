@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './AddBookFormComponent.css'
 import { useDropzone } from 'react-dropzone'
 import { Upload } from 'lucide-react'
@@ -9,24 +9,27 @@ import yellowWarning from '../../assets/img/warning.png'
 import redWarning from '../../assets/img/mark.png'
 
 function AddBookFormComponent() {
-    const [formData, setFormData] = useState({
+    const initialFormState = {
         title: '',
         author: '',
-        isbn: '',
-        publisher: '',
-        publicationDate: '',
         genre: '',
+        publisher: '',
+        isbn: '',
+        publicationDate: '',
         language: '',
-        coverImage: null,
         description: '',
         availableCopies: '',
-    })
+    }
+
+    const [formData, setFormData] = useState(initialFormState)
+    const [isClearing, setIsClearing] = useState(false)
     const [imagePreview, setImagePreview] = useState(null)
     const [errors, setErrors] = useState({})
     const [popupMessageBody, setPopupMessageBody] = useState('')
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [popupImageSrc, setPopupImageSrc] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const publicationDateRef = useRef(null)
 
     console.log(formData)
     const handleChange = (e) => {
@@ -35,6 +38,15 @@ function AddBookFormComponent() {
             ...prevData,
             [name]: value,
         }))
+    }
+
+    const handleClear = (e) => {
+        e.preventDefault()
+        setIsClearing(true)
+        setFormData(initialFormState)
+        setErrors({})
+        setImagePreview(null)
+        setTimeout(() => setIsClearing(false), 100)
     }
 
     const handleFileChange = (acceptedFiles) => {
@@ -49,7 +61,13 @@ function AddBookFormComponent() {
         }
     }
 
+    const handleDateFocus = () => {
+        publicationDateRef.current.showPicker()
+    }
+
     const validateForm = () => {
+        if (isClearing) return true
+
         let formErrors = {}
         Object.keys(formData).forEach((key) => {
             if (!formData[key] && key !== 'coverImage') {
@@ -61,7 +79,6 @@ function AddBookFormComponent() {
         if (!formData.coverImage) {
             formErrors.coverImage = '* Cover image is required'
         }
-        console.log(formErrors)
         setErrors(formErrors)
         return Object.keys(formErrors).length === 0
     }
@@ -85,7 +102,7 @@ function AddBookFormComponent() {
                     }
                 )
 
-                if (response.stAtus === 201) {
+                if (response.status === 201) {
                     const bookTitle =
                         response.data?.book?.title || 'Unknown Book'
                     setPopupImageSrc(greenTick)
@@ -103,9 +120,15 @@ function AddBookFormComponent() {
 
                 setIsModalOpen(true)
             } catch (error) {
-                // console.log('Error Message:', error.message);
-                // console.log('Error Response Status:', error.response ? error.response.status : 'No response');
-                // console.log('Error Response Data:', error.response ? error.response.data : 'No response data');
+                console.log('Error Message:', error.message)
+                console.log(
+                    'Error Response Status:',
+                    error.response ? error.response.status : 'No response'
+                )
+                console.log(
+                    'Error Response Data:',
+                    error.response ? error.response.data : 'No response data'
+                )
                 if (error.response) {
                     if (error.response.status === 409) {
                         setPopupImageSrc(yellowWarning)
@@ -144,7 +167,7 @@ function AddBookFormComponent() {
 
     return (
         <div className='add-book-container'>
-            <h2>Add New Book</h2>
+            {/* <h2>Add New Book</h2> */}
             <form className='form' onSubmit={handleSubmit}>
                 <div className='form-container'>
                     <div className='form-input-container'>
@@ -186,22 +209,15 @@ function AddBookFormComponent() {
                                     id='genre'
                                     value={formData.genre}
                                     onChange={handleChange}>
-                                    <option value='' disabled>
-                                        Select Genre
-                                    </option>
+                                    <option value='' disabled>Select Genre
+</option>
                                     <option value='Fiction'>Fiction</option>
-                                    <option value='Non-Fiction'>
-                                        Non-Fiction
-                                    </option>
-                                    <option value='Science Fiction'>
-                                        Science Fiction
-                                    </option>
+                                    <option value='Non Fiction'>Non Fiction</option>
+                                    <option value='Science Fiction'>Science Fiction</option>
                                     <option value='Fantasy'>Fantasy</option>
                                     <option value='Mystery'>Mystery</option>
                                     <option value='Biography'>Biography</option>
-                                    <option value='Historical'>
-                                        Historical
-                                    </option>
+                                    <option value='Historical'>Historical</option>
                                     <option value='Romance'>Romance</option>
                                     <option value='Thriller'>Thriller</option>
                                     <option value='Self-Help'>Self-Help</option>
@@ -253,6 +269,8 @@ function AddBookFormComponent() {
                                     id='publicationDate'
                                     value={formData.publicationDate}
                                     onChange={handleChange}
+                                    onFocus={handleDateFocus}
+                                    ref={publicationDateRef}
                                 />
                                 {errors.publicationDate && (
                                     <span className='error'>
@@ -311,7 +329,6 @@ function AddBookFormComponent() {
                                 className='inputContainer'
                                 id='book-cover-image'>
                                 <label htmlFor='coverImage'>Cover Image</label>
-                                {/* <div className='image-input-with-review'> */}
                                 <div
                                     {...getRootProps()}
                                     className={`dropzone ${
@@ -348,24 +365,26 @@ function AddBookFormComponent() {
                                         {errors.coverImage}
                                     </span>
                                 )}
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>
-                    <button
-                        className='add-book-btn'
-                        type='submit'
-                        onClick={handleSubmit}>
-                        Add Book
-                    </button>
+                    <div className='action-btns'>
+                        <button className='clear-field' onClick={handleClear}>
+                            Clear
+                        </button>
+                        <button
+                            className='add-book-btn'
+                            type='submit'
+                            onClick={handleSubmit}>
+                            Add Book
+                        </button>
+                    </div>
                 </div>
             </form>
             <ModalComponent
-                // imageSrc={popupImageSrc}
                 popupImageSrc={popupImageSrc}
                 popupMessageTitle={popupMessageTitle}
                 popupMessageBody={popupMessageBody}
-                // isOpen={true}
                 isOpen={isModalOpen}
                 onClose={closeModal}
             />
