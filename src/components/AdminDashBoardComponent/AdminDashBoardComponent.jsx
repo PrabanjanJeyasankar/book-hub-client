@@ -1,52 +1,117 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './AdminDashBoardComponent.css'
 import DataTable from 'react-data-table-component'
 import { BookUp2, Hourglass, Users, BookImage } from 'lucide-react'
+import axios from 'axios'
+import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
 
 function AdminDashBoardComponent() {
-    const sampleBooks = [
-        {
-            id: 1,
-            title: 'The Great Gatsby',
-            author: 'F. Scott Fitzgerald',
-            availableCopies: 35,
-        },
-        {
-            id: 2,
-            title: 'To Kill a Mockingbird',
-            author: 'Harper Lee',
-            availableCopies: 55,
-        },
-        {
-            id: 3,
-            title: '1984',
-            author: 'George Orwell',
-            availableCopies: 64,
-        },
-    ]
+    const [books, setBooks] = useState([])
+    const [users, setUsers] = useState([])
+    const [dateTime, setDateTime] = useState(new Date())
+    const [totalCopies, setTotalCopies] = useState(0)
+    const [selectedBook, setSelectedBook] = useState(null)
+    const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+    const overlayRef = useRef(null)
 
-    const sampleUsers = [
-        {
-            id: 1,
-            name: 'John Doe',
-            bookIssued: '6',
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const response = await axios.get(
+                    'http://localhost:3500/api/v1/book/'
+                )
+                setBooks(response.data.books)
+                calculateTotalCopies(response.data.books)
+            } catch (error) {
+                console.error('Error fetching books:', error)
+            }
+        }
+        fetchBooks()
+    }, [])
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get(
+                    'http://localhost:3500/api/v1/users/'
+                )
+                setUsers(response.data.users)
+            } catch (error) {
+                console.error('Error fetching users:', error)
+            }
+        }
+        fetchUsers()
+    }, [])
+
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            setDateTime(new Date())
+        }, 1000)
+
+        return () => clearInterval(timerId)
+    }, [])
+
+    const calculateTotalCopies = (books) => {
+        const total = books.reduce((acc, book) => acc + book.availableCopies, 0)
+        setTotalCopies(total)
+    }
+
+    const formatDateTime = (date) => {
+        const optionsDate = { month: 'short', day: '2-digit', year: 'numeric' }
+        const optionsTime = {
+            weekday: 'long',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        }
+
+        const formattedDate = date.toLocaleDateString('en-US', optionsDate)
+        const formattedTime = date.toLocaleTimeString('en-US', optionsTime)
+
+        return `${formattedDate} | ${formattedTime}`
+    }
+
+    const customTableStyle = {
+        headCells: {
+            style: {
+                fontSize: '14px',
+            },
         },
-        {
-            id: 2,
-            name: 'Jane Smith',
-            bookIssued: '2',
-        },
-        {
-            id: 3,
-            name: 'Bob Johnson',
-            bookIssued: '5',
-        },
-    ]
+    }
+
+    const handleRowClick = (row) => {
+        setSelectedBook(row)
+        setIsOverlayVisible(true)
+    }
+
+    const handleClickOutside = (event) => {
+        if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+            handleCloseOverlay()
+        }
+    }
+
+    useEffect(() => {
+        if (isOverlayVisible) {
+            document.addEventListener('mousedown', handleClickOutside)
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isOverlayVisible])
+
+    const handleCloseOverlay = () => {
+        setIsOverlayVisible(false)
+        setSelectedBook(null)
+    }
 
     const booksColumns = [
         {
             name: 'Book id',
-            selector: (row) => row.id,
+            selector: (row) => row.isbn,
         },
         {
             name: 'Title',
@@ -79,57 +144,6 @@ function AdminDashBoardComponent() {
             selector: (row) => row.bookIssued,
         },
     ]
-    const handleRowClick = (row) => {
-        alert(`You clicked on: ${row.title}`)
-        // You can add more functionality here, such as navigating to a detailed view or opening a modal
-    }
-
-    const [dateTime, setDateTime] = useState(new Date())
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await axios.get(
-                    'http://localhost:3500/api/v1/book/'
-                )
-                setBooks(response.data.books)
-                setFilteredBooks(response.data.books)
-            } catch (error) {
-                console.error('Error fetching books:', error)
-            }
-        }
-        fetchBooks()
-    }, [])
-    
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            setDateTime(new Date())
-        }, 1000)
-
-        return () => clearInterval(timerId)
-    }, [])
-
-    const formatDateTime = (date) => {
-        const optionsDate = { month: 'short', day: '2-digit', year: 'numeric' }
-        const optionsTime = {
-            weekday: 'long',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true,
-        }
-
-        const formattedDate = date.toLocaleDateString('en-US', optionsDate)
-        const formattedTime = date.toLocaleTimeString('en-US', optionsTime)
-
-        return `${formattedDate} | ${formattedTime}`
-    }
-
-    const customTableStyle = {
-        headCells: {
-            style: {
-                fontSize: '14px',
-            },
-        },
-    }
 
     return (
         <div className='admin-dash-board-container'>
@@ -140,7 +154,7 @@ function AdminDashBoardComponent() {
             <div className='statistics'>
                 <div className='statistics-box' id='total-books'>
                     <div className='stats-child'>
-                        <span>1223</span>
+                        <span>{totalCopies}</span>
                         <p>Total Books</p>
                     </div>
                     <div className='stats-icon'>
@@ -179,12 +193,12 @@ function AdminDashBoardComponent() {
                 <div className='book-list-container'>
                     <div className='book-list-header'>
                         <h3>Books List</h3>
-                        <button>Add book</button>
+                        <Link to='/addbook' className='add-book-btn'>Add book</Link>
                     </div>
                     <div className='books-table'>
                         <DataTable
                             columns={booksColumns}
-                            data={sampleBooks}
+                            data={books}
                             fixedHeader
                             pagination
                             highlightOnHover
@@ -194,7 +208,7 @@ function AdminDashBoardComponent() {
                         />
                     </div>
                 </div>
-                <div className='users-list-container'>
+                {/* <div className='users-list-container'>
                     <div className='users-list-header'>
                         <h3>Users List</h3>
                         <button>Add user</button>
@@ -202,7 +216,7 @@ function AdminDashBoardComponent() {
                     <div className='user-table'>
                         <DataTable
                             columns={userColumns}
-                            data={sampleUsers}
+                            data={users}
                             fixedHeader
                             pagination
                             highlightOnHover
@@ -210,9 +224,17 @@ function AdminDashBoardComponent() {
                             customStyles={customTableStyle}
                         />
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className='new-arrival-books'></div>
+
+            {isOverlayVisible && selectedBook && (
+                <OverlayABookComponent
+                    bookData={selectedBook}
+                    onClose={handleCloseOverlay}
+                    ref={overlayRef}
+                />
+            )}
         </div>
     )
 }

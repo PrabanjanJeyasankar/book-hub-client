@@ -167,9 +167,10 @@ function AddBookFormComponent() {
 
     return (
         <div className='add-book-container'>
-            {/* <h2>Add New Book</h2> */}
+           
             <form className='form' onSubmit={handleSubmit}>
                 <div className='form-container'>
+                {/* <h2 className='form-title'>Add New Book</h2> */}
                     <div className='form-input-container'>
                         <div className='input-column-one'>
                             <div className='inputContainer'>
@@ -368,12 +369,12 @@ function AddBookFormComponent() {
                             </div>
                         </div>
                     </div>
-                    <div className='action-btns'>
-                        <button className='clear-field' onClick={handleClear}>
-                            Clear
+                    <div className='action-buttons'>
+                        <button className='clear-field-button' onClick={handleClear}>
+                            Clear form
                         </button>
                         <button
-                            className='add-book-btn'
+                            className='add-book-button'
                             type='submit'
                             onClick={handleSubmit}>
                             Add Book

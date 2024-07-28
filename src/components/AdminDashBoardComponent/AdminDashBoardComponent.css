@@ -1,102 +1,105 @@
 .admin-dash-board-container {
-    /* margin-left: 14rem; */
-    padding: 1rem;
-    /* margin-top: 1rem; */
-    background-color:#f5f5f5;
+    margin-top: 1rem;
+    background-color: #EFF3F4;
     color: var(--color-black);
-  }
-  
-  .statistics {
+}
+
+.admin-info {
+    padding: 1rem;
+}
+
+.statistics {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin: 1rem;
     gap: 2rem;
-  }
-  
-  .statistics-box {
+}
+
+.statistics-box {
     display: flex;
     background-color: white;
     /* border: 1px solid black; */
     padding: 2rem;
     border-radius: 6px;
     gap: 2rem;
-  }
+}
 
-  .statistics-box span{
+.statistics-box span {
     font-size: 24px;
     font-weight: 600;
-  }
+}
 
-  .statistics-box p{
+.statistics-box p {
     font-size: 14px;
     font-weight: 500;
-  }
+}
 
-  .books-and-members {
+.books-and-members {
     display: flex;
     /* margin: 1rem; */
-  }
-  
-  .book-list-container {
+}
+
+.book-list-container {
     background-color: white;
     margin: 1rem;
     flex-grow: 1;
-  }
-  
-  .book-list-header {
+}
+
+.book-list-header {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
     /* border-bottom: 1px solid #ddd; */
-  }
-  
-  .book-list-header button {
+}
+
+.add-book-btn {
     padding: 0.5rem 1rem;
-    background-color: var(--color-black);
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .books-table {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.books-table {
     width: 100%;
-  }
-  
-  
-  .action-btn {
+}
+
+.action-btn {
     background: none;
     border: none;
     cursor: pointer;
-  }
-  
-  .users-list-container {
+}
+
+.users-list-container {
     background-color: white;
     margin: 1rem;
     flex-grow: 1;
-  }
-  
-  .users-list-header {
+}
+
+.users-list-header {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .users-list-header button {
+}
+
+.users-list-header button {
     padding: 0.5rem 1rem;
-    background-color: var(--color-black);
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
+    font-size: 14px;
+}
 
-  @media (max-width:768px){
-    .books-and-members{
+@media (max-width: 768px) {
+    .books-and-members {
         display: flex;
         flex-direction: column;
     }
-  }
+}
