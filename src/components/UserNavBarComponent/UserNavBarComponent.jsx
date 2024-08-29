@@ -6,7 +6,7 @@ import Signup from '../../pages/Signup/Signup'
 import Login from '../../pages/Login/Login'
 import HeroComponent from '../HeroComponent/HeroComponent'
 
-function NavBarComponent() {
+function UserNavBarComponent() {
     return (
         <nav className='navbar' id='navbar'>
             <div className='navbar-container'>
@@ -39,4 +39,4 @@ function NavBarComponent() {
     )
 }
 
-export default NavBarComponent
+export default UserNavBarComponent

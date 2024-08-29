@@ -62,10 +62,10 @@ aside {
     align-items: center;
     gap: 8px;
     padding: 1rem;
+    text-decoration: none;
 }
 
 .app-name {
-    text-decoration: none;
     color: black;
     font-size: 18px;
     font-weight: 600;
