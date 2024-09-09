@@ -11,8 +11,6 @@ import {
     LibraryBig,
     UsersRound,
     UserRoundPlus,
-    ChevronLeft,
-    ChevronRight,
 } from 'lucide-react';
 import AllBooksComponent from '../../components/AllBooksComponent/AllBooksComponent';
 
@@ -33,24 +31,40 @@ function AdminNavBar() {
                             {isExpanded && <div className='app-name'>Book hub</div>}
                         </NavLink>
                     </div>
+                    
                     <div className='page-links'>
-                        <NavLink to='/' className='page-link' activeClassName='active'>
+                        <NavLink
+                            to='/'
+                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                        >
                             <LayoutDashboard size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Dashboard</p>
                         </NavLink>
-                        <NavLink to='/allbooks' className='page-link' activeClassName='active'>
+                        <NavLink
+                            to='/allbooks'
+                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                        >
                             <LibraryBig size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>All Books</p>
                         </NavLink>
-                        <NavLink to='/addbook' className='page-link' activeClassName='active'>
+                        <NavLink
+                            to='/addbook'
+                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                        >
                             <BookPlus size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Add Books</p>
                         </NavLink>
-                        <NavLink to='/allusers' className='page-link' activeClassName='active'>
+                        <NavLink
+                            to='/allusers'
+                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                        >
                             <UsersRound size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>All Users</p>
                         </NavLink>
-                        <NavLink to='/adduser' className='page-link' activeClassName='active'>
+                        <NavLink
+                            to='/adduser'
+                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                        >
                             <UserRoundPlus size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Add Users</p>
                         </NavLink>

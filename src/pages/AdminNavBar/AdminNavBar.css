@@ -4,7 +4,7 @@
     height: 100vh;
     box-sizing: border-box;
     overflow: auto;
-    background-color: #EFF3F4;
+    background-color: #F6F8FA;
 }
 .navbar-container {
     display: flex;
@@ -19,7 +19,7 @@
     box-sizing: border-box;
     border-radius: 12px;
     transition: width 0.3s ease-in-out;
-    overflow: hidden;
+    overflow-y: auto;
     user-select: none;
 }
 
@@ -136,8 +136,7 @@ aside {
 }
 
 .page-link.active {
-    /* color: ; */
-    background-color: #EFF3F4; /* optional: background color for active link */
+    background-color: #EFF3F4; 
 }
 
 .admin-logout-button {
@@ -147,7 +146,6 @@ aside {
     gap: 0.5rem;
     width: 100%;
     padding: 1rem 1rem 1rem 2rem;
-    /* margin-left: 1rem; */
     margin-bottom: 1rem;
     box-sizing: border-box;
 }

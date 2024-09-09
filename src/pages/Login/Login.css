@@ -20,15 +20,14 @@
     padding: 1rem 1rem 1.5rem 1rem;
 }
 
-
-.back-btn-container{
+.back-btn-container {
     margin: 1rem;
     position: absolute;
     top: 2%;
     left: 1%;
 }
 
-.back-btn{
+.back-btn {
     color: black;
 }
 

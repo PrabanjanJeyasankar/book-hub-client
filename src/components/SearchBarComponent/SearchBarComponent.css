@@ -1,33 +1,14 @@
-.search-form {
-    padding: 12px 0;
-  }
-  
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .search-form-content {
+.search-form-elem {
     display: flex;
-    justify-content: center;
-  }
-  
-  .search-form form {
-    width: 60%;
-  }
-  
-  .search-form-elem {
-    display: flex;
-    align-items: center;
+    align-items: left;
+    justify-content: flex-start;
     background-color: #ffffff;
-    padding: 10px;
-    padding-left: 18px;
-    border-radius: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px; 
-    margin: 0 auto;
+    margin-top: 0.5rem;
+    padding: 2px;
+    border-radius: 8px;
+    border: rgb(228, 228, 228) solid 0.01rem;
+    box-shadow: 0 2px 4px rgba(111, 111, 111, 0.1);
+    max-width: 60%;
 }
 
 input.form-control {
@@ -40,64 +21,53 @@ input.form-control {
     width: 0;
     min-width: 0;
 }
-  .form-control {
+
+.form-control {
     flex: 1;
     border: none;
     outline: none;
     font-size: 16px;
-  }
-  
-  .form-control::placeholder {
-    color: #aaaaaa;
-  }
-  
-  .search-form-elem button {
+}
+
+.form-control::placeholder {
+    color: #a1a1a1;
+}
+
+.search-icon {
     background-color: transparent;
+    padding-right: 0.3rem;
     border: none;
     cursor: pointer;
     outline: none;
     margin: 0 0.5rem 0 0;
-  }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .flex-sb {
-    justify-content: space-between;
-  }
-  
-  .flex-c {
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .text-purple {
-    color: #6b46c1;
-  }
-  
+}
 
-
-  @media (max-width: 1440px) {
-    .search-form form {
+@media (max-width: 1700px) {
+    .search-form-elem {
         width: 70%;
     }
 }
 
+@media (max-width: 1440px) {
+    .search-form-elem {
+        width: 60%;
+    }
+}
+
 @media (max-width: 1200px) {
-    .search-form form {
+    .search-form-elem {
         width: 80%;
     }
 }
 
 @media (max-width: 992px) {
-    .search-form form {
+    .search-form-elem {
         width: 90%;
     }
 }
 
 @media (max-width: 768px) {
-    .search-form form {
+    .search-form-elem {
         width: 70%;
     }
     .search-form-elem {
@@ -123,16 +93,15 @@ input.form-control {
 @media (max-width: 480px) {
     .form-control {
         font-size: 12px;
-
     }
-    .search-form form {
-      width: 70%;
-  }
     .search-form-elem {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+        width: 70%;
+    }
+    .search-form-elem {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         padding: 6px;
         padding-left: 8px;
     }

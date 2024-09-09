@@ -1,9 +1,4 @@
 import React from 'react'
-// import NavBarComponent from './components/NavBarComponent/NavBarComponent'
-import { BrowserRouter } from 'react-router-dom'
-// import AdminDashBoardComponent from './components/AdminDashBoardComponent/AdminDashBoardComponent'
-// import AddBookFormComponent from './components/AddBookFormComponent/AddBookFormComponent'
-import AdminNavBar from '../src/pages/AdminNavBar/AdminNavBar'
 import Home from './pages/Home/Home'
 
 function App() {
@@ -14,8 +9,8 @@ function App() {
             {/* <BrowserRouter> */}
                 {/* <NavBarComponent /> */}
                 {/* <AdminDashBoardComponent/> */}
-                <AdminNavBar/>
-                {/* <Home/> */}
+                {/* <AdminNavBar/> */}
+                <Home/>
             {/* </BrowserRouter> */}
         </>
     )

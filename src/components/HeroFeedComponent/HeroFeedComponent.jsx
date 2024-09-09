@@ -90,7 +90,16 @@ function HeroFeedComponent() {
 
     return (
         <div className='book-list'>
-            {popularBooks.map((book) => (
+            {/* {popularBooks.map((book) => (
+                <BookCardComponent key={book.id} book={book} />
+            ))} */}
+            {data.map((book) => (
+                <BookCardComponent key={book.id} book={book} />
+            ))}
+            {data.map((book) => (
+                <BookCardComponent key={book.id} book={book} />
+            ))}
+            {data.map((book) => (
                 <BookCardComponent key={book.id} book={book} />
             ))}
         </div>

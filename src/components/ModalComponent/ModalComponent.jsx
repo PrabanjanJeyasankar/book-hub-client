@@ -1,19 +1,28 @@
 import React from 'react'
-import './ModalComponent.css'
-function ModalComponent({ popupImageSrc, popupMessageTitle, popupMessageBody, isOpen, onClose }) {
-    if (!isOpen) return null
+import './ModalComponent.css' // Adjust the path as needed
+import greenTickImagePath from '../../assets/img/accept.png'
 
+const ModalComponent = ({ title, imageSrc, messageBody, isOpen, onClose }) => {
+    if (!isOpen) return null // If not open, render nothing
+    console.log('ModalComponent props:', {
+        title,
+        imageSrc,
+        messageBody,
+        isOpen,
+    })
     return (
-        <div className='modal-overlay' onClick={onClose}>
-            <div className='modal-content' onClick={(e) => e.stopPropagation()}>
-            <span className='modal-close' onClick={onClose}>
-                &times;
-                </span>
-                <img src={popupImageSrc} alt="" />
-                <div className='message-title'>{popupMessageTitle}</div>
-                <div className='message-body'>{popupMessageBody}</div>
-                <button className='modal-close-btn' onClick={onClose}>
-                close
+        <div className='modal-overlay'>
+            <div className='modal-content'>
+                <button className='modal-close-button' onClick={onClose}>
+                    &times;
+                </button>
+                {imageSrc && (
+                    <img src={imageSrc} alt='Popup' className='popup-image' />
+                )}
+                <h2 className='message-title'>{title}</h2>
+                <p className='message-body'>{messageBody}</p>
+                <button className='modal-close-bottom-button' onClick={onClose}>
+                    Close
                 </button>
             </div>
         </div>

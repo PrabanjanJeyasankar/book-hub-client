@@ -11,6 +11,7 @@ function AllBooksComponent() {
     const [genres, setGenres] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
     const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+    const overlayRef = useRef(null);
 
     useEffect(() => {
         const fetchBooks = async () => {

@@ -148,7 +148,7 @@ function AdminDashBoardComponent() {
     return (
         <div className='admin-dash-board-container'>
             <div className='admin-info'>
-                <h2>Hello, Admin!</h2>
+                <h2 className='admin-greeting'>Bonjour, Admin!</h2>
                 <div className='clock'>{formatDateTime(dateTime)}</div>
             </div>
             <div className='statistics'>
@@ -157,8 +157,8 @@ function AdminDashBoardComponent() {
                         <span>{totalCopies}</span>
                         <p>Total Books</p>
                     </div>
-                    <div className='stats-icon'>
-                        <BookImage size={32} />
+                    <div className='statistics-icon'>
+                        <BookImage />
                     </div>
                 </div>
                 <div className='statistics-box' id='borrowed-books'>
@@ -166,8 +166,8 @@ function AdminDashBoardComponent() {
                         <span>180</span>
                         <p>Borrowed Books</p>
                     </div>
-                    <div className='stats-icon'>
-                        <BookUp2 size={32} />
+                    <div className='statistics-icon'>
+                        <BookUp2 />
                     </div>
                 </div>
                 <div className='statistics-box' id='overdue-books'>
@@ -175,8 +175,8 @@ function AdminDashBoardComponent() {
                         <span>16</span>
                         <p>Overdue Books</p>
                     </div>
-                    <div className='stats-icon'>
-                        <Hourglass size={32} />
+                    <div className='statistics-icon'>
+                        <Hourglass />
                     </div>
                 </div>
                 <div className='statistics-box' id='total-members'>
@@ -184,8 +184,8 @@ function AdminDashBoardComponent() {
                         <span>356</span>
                         <p>Total Members</p>
                     </div>
-                    <div className='stats-icon'>
-                        <Users size={32} />
+                    <div className='statistics-icon'>
+                        <Users />
                     </div>
                 </div>
             </div>
@@ -193,7 +193,9 @@ function AdminDashBoardComponent() {
                 <div className='book-list-container'>
                     <div className='book-list-header'>
                         <h3>Books List</h3>
-                        <Link to='/addbook' className='add-book-btn'>Add book</Link>
+                        <Link to='/addbook' className='add-book-btn'>
+                            Add book
+                        </Link>
                     </div>
                     <div className='books-table'>
                         <DataTable

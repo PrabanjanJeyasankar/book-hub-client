@@ -10,7 +10,6 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    
 }
 
 .modal-content {
@@ -25,19 +24,20 @@
     position: relative;
 }
 
-modal-close img{
+.popup-image {
     /* height: 0%; */
     width: 20%;
     margin-bottom: 0.5rem;
 }
 
-.message-title{
+.message-title {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 0.1rem;
+    text-align: center;
 }
 
-.message-body{
+.message-body {
     text-align: center;
     font-size: 12px;
     margin-bottom: 1rem;
@@ -45,14 +45,24 @@ modal-close img{
 
 .modal-close {
     margin: 0.4rem;
-    /* padding: 1rem; */
     position: absolute;
     top: 8px;
     right: 14px;
     font-size: 28px;
     cursor: pointer;
 }
-.modal-close-btn{
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-close-bottom-button {
     margin-top: 0.5rem;
     color: white;
     background-color: black;

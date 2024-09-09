@@ -167,10 +167,9 @@ function AddBookFormComponent() {
 
     return (
         <div className='add-book-container'>
-           
             <form className='form' onSubmit={handleSubmit}>
                 <div className='form-container'>
-                {/* <h2 className='form-title'>Add New Book</h2> */}
+                    <h2 className='form-title'>Add a new book</h2>
                     <div className='form-input-container'>
                         <div className='input-column-one'>
                             <div className='inputContainer'>
@@ -210,15 +209,22 @@ function AddBookFormComponent() {
                                     id='genre'
                                     value={formData.genre}
                                     onChange={handleChange}>
-                                    <option value='' disabled>Select Genre
-</option>
+                                    <option value='' disabled>
+                                        Select Genre
+                                    </option>
                                     <option value='Fiction'>Fiction</option>
-                                    <option value='Non Fiction'>Non Fiction</option>
-                                    <option value='Science Fiction'>Science Fiction</option>
+                                    <option value='Non Fiction'>
+                                        Non Fiction
+                                    </option>
+                                    <option value='Science Fiction'>
+                                        Science Fiction
+                                    </option>
                                     <option value='Fantasy'>Fantasy</option>
                                     <option value='Mystery'>Mystery</option>
                                     <option value='Biography'>Biography</option>
-                                    <option value='Historical'>Historical</option>
+                                    <option value='Historical'>
+                                        Historical
+                                    </option>
                                     <option value='Romance'>Romance</option>
                                     <option value='Thriller'>Thriller</option>
                                     <option value='Self-Help'>Self-Help</option>
@@ -370,7 +376,9 @@ function AddBookFormComponent() {
                         </div>
                     </div>
                     <div className='action-buttons'>
-                        <button className='clear-field-button' onClick={handleClear}>
+                        <button
+                            className='clear-field-button'
+                            onClick={handleClear}>
                             Clear form
                         </button>
                         <button

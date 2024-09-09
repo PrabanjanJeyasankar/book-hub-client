@@ -1,15 +1,19 @@
 .add-book-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
     width: 100%;
+    /* min-height: 100vh; */
     height: 100vh;
-    padding-top: 1rem;
+    /* padding: 2rem; */
+    /* padding: 3rem; */
     /* margin-right: 1rem; */
     box-sizing: border-box;
-    overflow:hidden;
+    overflow-y: auto;
+    /* overflow-x: hidden; */
+    /* overflow: hidden; */
 }
 
 .add-book-container h2 {
@@ -21,18 +25,21 @@ form {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    /* min-width: 100%; */
+    margin: 0; 
+    padding: 0;
 }
 
 .form-container {
     width: 100%;
     background-color: white;
-    padding: 1rem 2rem 2rem 2rem;
+    /* padding: 1rem 2rem 2rem 2rem; */
+    padding: 3rem;
     border-radius: 0.8rem;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
-.form-title{
-    margin-bottom: 1rem;
-}
 
 .form-input-container {
     display: grid;
@@ -41,8 +48,15 @@ form {
     width: 100%;
     box-sizing: border-box;
     margin: 1rem 0 1rem 0;
-    
 }
+
+.form-title {
+    margin: 0rem 0 2.2rem 0;
+    font-size: 3.5rem;
+    text-align: left;
+    display: flex;
+}
+
 
 .input-column-one,
 .input-column-two,
@@ -204,16 +218,87 @@ select:focus {
 .add-book-button:hover {
     opacity: 0.8;
 }
+@media (min-width: 1801px) {
+    form {
+        margin: 2rem;
+    }
+    .form-input-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .upload-and-preview,
+    .drag-drop-upload {
+        width: 20vw;
+    }
+}
 
+@media (max-width: 1800px) {
+    form {
+        /* margin: 2rem; */
+    }
+    .form-input-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .upload-and-preview,
+    .drag-drop-upload {
+        width: 25vw;
+    }
+}
+
+@media (max-width: 1440px) {
+    /* form {
+        margin: 1.5rem;
+    }
+    .form-input-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .upload-and-preview,
+    .drag-drop-upload {
+        width: 30vw;
+    } */
+    .add-book-container {
+       
+        overflow-y: auto; /* Ensure that overflow is handled properly */
+    }
+
+    .form-container {
+        margin: 2rem; /* Ensure there's margin around the form */
+    }
+    .form-input-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "input-column-one input-column-two"
+            "input-column-three input-column-three";
+    }
+
+    .input-column-one {
+        grid-area: input-column-one;
+    }
+
+    .input-column-two {
+        grid-area: input-column-two;
+    }
+
+    .input-column-three {
+        grid-area: input-column-three;
+        /* Ensure it covers the remaining space */
+        width: 100%;
+    }
+
+    .upload-and-preview,
+    .drag-drop-upload {
+        width: 100%;
+        max-width: none;
+    }
+}
 
 @media (max-width: 1200px) {
-    form{
+    
+    form {
         height: 100vh;
     }
     .form-input-container {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .upload-and-preview,
     .drag-drop-upload {
         width: 30vw;
@@ -221,35 +306,29 @@ select:focus {
 }
 
 @media (max-width: 1024px) {
-    form{
+    form {
         margin: 1rem;
     }
     .form-input-container {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
-
 
 @media (max-width: 768px) {
     .form-container {
         margin: 0 1rem;
     }
-
     .form-input-container {
         grid-template-columns: 1fr;
         gap: 8px;
     }
-
     .upload-and-preview,
     .drag-drop-upload {
         width: 50vw;
     }
-
     .dropzone {
         height: 250px;
     }
-
     .imagePreviewContainer img {
         width: 70%;
     }
@@ -259,17 +338,15 @@ select:focus {
     .add-book-container {
         width: 100%;
     }
-
     .upload-and-preview,
     .drag-drop-upload {
         width: 80vw;
     }
-
     .dropzone {
         height: 200px;
     }
-
     .imagePreviewContainer img {
         width: 80%;
     }
 }
+
