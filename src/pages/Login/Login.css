@@ -37,17 +37,17 @@
     align-items: center;
 }
 
-.inputContainer {
+.input-container-login {
     margin-bottom: 15px;
     padding: 0 0 1rem 0;
 }
-
+/* 
 input {
     border: 1px solid black;
     border-radius: 4px;
     padding: 0.4rem;
     min-width: 300px;
-}
+} */
 
 input:focus {
     outline: none;
@@ -61,8 +61,9 @@ input:focus {
 .email-error,
 .password-error {
     display: flex;
-    padding: 4px 0 0 4px;
+    /* padding: 4px 0 0 4px; */
     position: absolute;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -73,6 +74,10 @@ input:focus {
 
 .email-input input,
 .password-input input {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 0.4rem;
+    min-width: 300px;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;

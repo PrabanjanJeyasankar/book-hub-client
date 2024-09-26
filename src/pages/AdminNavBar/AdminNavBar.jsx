@@ -24,46 +24,46 @@ function AdminNavBar() {
     return (
         <div className={`admin-page-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
             <BrowserRouter>
-                <aside className={`navbar-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
-                    <div className='navbar-brand'>
+                <aside className={`admin-navbar-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                    <div className='admin-navbar-brand'>
                         <NavLink to='/' className='app-logo'>
                             <img src={LogoImage} alt='Book hub logo' />
                             {isExpanded && <div className='app-name'>Book hub</div>}
                         </NavLink>
                     </div>
                     
-                    <div className='page-links'>
+                    <div className='admin-page-links'>
                         <NavLink
                             to='/'
-                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `admin-page-link ${isActive ? 'active' : ''}`}
                         >
                             <LayoutDashboard size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Dashboard</p>
                         </NavLink>
                         <NavLink
                             to='/allbooks'
-                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `admin-page-link ${isActive ? 'active' : ''}`}
                         >
                             <LibraryBig size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>All Books</p>
                         </NavLink>
                         <NavLink
                             to='/addbook'
-                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `admin-page-link ${isActive ? 'active' : ''}`}
                         >
                             <BookPlus size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Add Books</p>
                         </NavLink>
                         <NavLink
                             to='/allusers'
-                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `admin-page-link ${isActive ? 'active' : ''}`}
                         >
                             <UsersRound size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>All Users</p>
                         </NavLink>
                         <NavLink
                             to='/adduser'
-                            className={({ isActive }) => `page-link ${isActive ? 'active' : ''}`}
+                            className={({ isActive }) => `admin-page-link ${isActive ? 'active' : ''}`}
                         >
                             <UserRoundPlus size={18} className="icon" />
                             <p className={isExpanded ? '' : 'collapsed'}>Add Users</p>

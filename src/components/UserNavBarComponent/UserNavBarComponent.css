@@ -1,13 +1,13 @@
-.navbar-container {
+.user-navbar-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     /* max-width: 1200px; */
     margin: 0rem 0.3rem;
 }
 
-.navbar-brand {
+.user-navbar-brand {
     flex: 1;
 }
 
@@ -87,7 +87,7 @@
 }
 
 @media (max-width: 768px) {
-    .navbar-container {
+    .user-navbar-container {
         flex-direction: column;
         align-items: flex-start;
     }

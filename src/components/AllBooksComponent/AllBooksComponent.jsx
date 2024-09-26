@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import './AllBooksComponent.css'
+import BookCardComponent from '../BookCardComponent/BookCardComponent'
 import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
 
 function AllBooksComponent() {
     const [books, setBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedGenre, setSelectedGenre] = useState('All')
-    const [genres, setGenres] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
     const [isOverlayVisible, setIsOverlayVisible] = useState(false)
     const overlayRef = useRef(null);
@@ -16,9 +14,7 @@ function AllBooksComponent() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axios.get(
-                    'http://localhost:3500/api/v1/book/'
-                )
+                const response = await axios.get('http://localhost:3500/api/v1/book/')
                 setBooks(response.data.books)
                 setFilteredBooks(response.data.books)
             } catch (error) {
@@ -63,14 +59,13 @@ function AllBooksComponent() {
                             key={book.isbn}
                             className='book-item'
                             onClick={() => handleClick(book)}>
-                            <img
-                                src={`http://localhost:3500/api/v1/${book.coverImage}`}
-                                alt={book.title}
+                            <BookCardComponent
+                                book={{
+                                    bookCoverImage: `http://localhost:3500/api/v1/${book.coverImage}`,
+                                    bookTitle: book.title,
+                                    bookAuthor: book.author
+                                }}
                             />
-                            <div className='book-details'>
-                                <h3>{book.title}</h3>
-                                <p>{book.author}</p>
-                            </div>
                         </div>
                     ))
                 ) : (
@@ -78,7 +73,7 @@ function AllBooksComponent() {
                 )}
             </div>
             {isOverlayVisible && selectedBook && (
-                <div>
+                <div ref={overlayRef}>
                     <OverlayABookComponent
                         bookData={selectedBook}
                         onClose={handleCloseOverlay}

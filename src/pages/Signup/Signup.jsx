@@ -44,11 +44,11 @@ function Signup() {
     return (
         <div className='signup-container'>
             <div className='signup-content'>
-                <h2>Sign Up</h2>
+                <h2 className='sign-up-title'>Sign Up</h2>
                 <form onSubmit={handleSubmit} className='form'>
-                    <div className='form-container'>
-                        <div className='inputContainer'>
-                            <div className='name-input'>
+                    <div className='sign-up-form-container'>
+                        <div className='input-container-signup'>
+                            <div className='sign-up-name'>
                                 <input
                                     id='name'
                                     type='text'
@@ -57,14 +57,14 @@ function Signup() {
                                     onChange={handleNameChange}
                                 />
                             </div>
-                            <div className='name-error'>
+                            <div className='signup-name-error'>
                                 {errors.name && (
                                     <span className='error'>{errors.name}</span>
                                 )}
                             </div>
                         </div>
-                        <div className='inputContainer'>
-                            <div className='email-input'>
+                       <div className='input-container-signup'>
+                            <div className='sign-up-name'>
                                 <input
                                     id='email'
                                     type='email'
@@ -73,7 +73,7 @@ function Signup() {
                                     onChange={handleEmailChange}
                                 />
                             </div>
-                            <div className='email-error'>
+                            <div className='signup-email-error'>
                                 {errors.email && (
                                     <span className='error'>
                                         {errors.email}
@@ -81,8 +81,8 @@ function Signup() {
                                 )}
                             </div>
                         </div>
-                        <div className='inputContainer'>
-                            <div className='password-input'>
+                        <div className='input-container-signup'>
+                            <div className='sign-up-password'>
                                 <input
                                     id='password'
                                     type={showPassword ? 'text' : 'password'}
@@ -101,7 +101,7 @@ function Signup() {
                                     )}
                                 </button>
                             </div>
-                            <div className='password-error'>
+                            <div className='signup-password-error'>
                                 {errors.password && (
                                     <span className='error'>
                                         {errors.password}

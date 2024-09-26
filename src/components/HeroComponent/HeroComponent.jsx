@@ -4,6 +4,7 @@ import { Search } from 'lucide-react'
 import SearchFormComponent from '../SearchBarComponent/SearchBarComponent'
 import HeroFeedComponent from '../HeroFeedComponent/HeroFeedComponent'
 import book3DAsset from '../../assets/img/book_3d_assets_2.png'
+import HorizontalSliderComponent from '../HorizontalSliderComponent/HorizontalSliderComponent'
 
 function HeroComponent() {
     useEffect(() => {
@@ -42,8 +43,8 @@ function HeroComponent() {
                                 Search effortlessly, Start Reading.
                             </div>
                         </div>
-                        <div>
-                            <SearchFormComponent />
+                        <div className='search-component'>
+                            <SearchFormComponent stlyingClassName='hero-search-bar' />
                         </div>
                     </div>
                     <div className='hero-content-right'>
@@ -56,6 +57,7 @@ function HeroComponent() {
                 </div>
             </div>
             <div className='hero-feed'>
+            <HorizontalSliderComponent/>
                 <HeroFeedComponent />
             </div>
         </React.Fragment>

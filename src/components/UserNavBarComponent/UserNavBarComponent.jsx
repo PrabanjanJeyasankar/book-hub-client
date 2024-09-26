@@ -5,19 +5,20 @@ import logoImage from '../../assets/img/open_book_logo.png'
 import Signup from '../../pages/Signup/Signup'
 import Login from '../../pages/Login/Login'
 import HeroComponent from '../HeroComponent/HeroComponent'
+import AboutUsComponent from '../AboutUsComponent/AboutUsComponent'
 import SearchPageComponent from '../SearchPageComponent/SearchPageComponent'
 
 function UserNavBarComponent() {
     return (
         <nav className='navbar' id='navbar'>
-            <div className='navbar-container'>
-                <div className='navbar-brand'>
+            <div className='user-navbar-container'>
+                <div className='user-navbar-brand'>
                     <Link to='/' className='app-logo'>
                         <img src={logoImage} alt='Book hub logo' />
                         <span className='app-name'>Book hub</span>
                     </Link>
                 </div>
-                <div className='navbar-center'>
+                <div className='user-navbar-center'>
                     <div className='page-links'>
                         <Link to='/'>Home</Link>
                         <Link to='/about'>About</Link>
@@ -35,6 +36,7 @@ function UserNavBarComponent() {
 
             <Routes>
                 <Route path='/' element={<HeroComponent />} />
+                <Route path='/about' element={<AboutUsComponent />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/search' element={<SearchPageComponent/>} />

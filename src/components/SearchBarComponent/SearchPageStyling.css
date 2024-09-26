@@ -1,0 +1,38 @@
+.search-page-bar .search-form {
+    /* width: 100%; */
+    margin: 0 0 0.5rem 0;
+
+}
+
+.search-page-bar .search-form-elem {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #f0f0f0;
+    margin-top: 0.5rem;
+    padding: 6px;
+    border-radius: 16px;
+    border: 0.01rem solid #c9c9c9;
+    box-shadow: 0 2px 4px rgba(111, 111, 111, 0.1);
+    width: 100%;
+    
+}
+
+.search-page-bar .form-control {
+    border: none;
+    outline: none;
+    background-color: #f0f0f0;
+}
+
+.search-page-bar .form-control::placeholder {
+    color: #8e8e8e;
+    font-size: 1rem;
+}
+
+.search-page-bar .search-icon {
+    border:none;
+}
+
+.search-page-bar .search-icon svg {
+    width: 18px;
+}

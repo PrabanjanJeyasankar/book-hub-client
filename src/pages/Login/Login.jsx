@@ -40,7 +40,7 @@ function Login() {
             <div className='login-content'>
                 <h2>Log In</h2>
                 <form onSubmit={handleSubmit} className='form'>
-                    <div className='inputContainer'>
+                    <div className='input-container-login '>
                         <div className='email-input'>
                             <input
                                 id='email'
@@ -56,7 +56,7 @@ function Login() {
                             )}
                         </div>
                     </div>
-                    <div className='inputContainer'>
+                    <div className='input-container-login '>
                         <div className='password-input'>
                             <input
                                 id='password'

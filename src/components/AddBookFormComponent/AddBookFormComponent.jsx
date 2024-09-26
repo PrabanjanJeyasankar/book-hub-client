@@ -31,7 +31,7 @@ function AddBookFormComponent() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const publicationDateRef = useRef(null)
 
-    console.log(formData)
+    // console.log(formData)
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData((prevData) => ({
@@ -134,7 +134,7 @@ function AddBookFormComponent() {
                         setPopupImageSrc(yellowWarning)
                         setPopupMessageTitle('Oops.. Book Already Exists!')
                         setPopupMessageBody(
-                            `${error.response.data?.book?.title} is already exist, kindly check Italic.`
+                            `${error.response.data?.book?.title} is already exist, kindly check.`
                         )
                     } else {
                         setPopupImageSrc(redWarning)

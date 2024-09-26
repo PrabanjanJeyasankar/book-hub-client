@@ -1,35 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
-import { useNavigate } from 'react-router-dom' // Import useNavigate
-import './SearchBarComponent.css'
+import { useNavigate } from 'react-router-dom'
+import './HeroPageStyling.css'
+import './SearchPageStyling.css'
 
-function SearchBarComponent() {
-    const [searchQuery, setSearchQuery] = useState('')
+function SearchBarComponent({ stlyingClassName, initialQuery = '' }) {
+    const [searchQuery, setSearchQuery] = useState(initialQuery)
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
-        e.preventDefault() // Prevent the form from refreshing the page
+    useEffect(() => {
+        setSearchQuery(initialQuery)
+    }, [initialQuery])
 
-        // Navigate to the SearchPageComponent with the search query as a state
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
         if (searchQuery.trim()) {
             navigate('/search', { state: { query: searchQuery } })
         }
     }
 
+    const handleSearchQuery = (e) => {
+        setSearchQuery(e.target.value)
+    }
+
     return (
-        <div className='search-container'>
+        <div className={`search-container ${stlyingClassName}`}>
             <form className='search-form' onSubmit={handleSubmit}>
                 <div className='search-form-elem'>
+                    <button type='submit' className='search-icon'>
+                        <Search />
+                    </button>
                     <input
                         type='text'
                         className='form-control'
                         placeholder='books, authors, or genres...'
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)} // Update the searchQuery state
+                        onChange={handleSearchQuery}
                     />
-                    <button type='submit' className='search-icon'>
-                        <Search />
-                    </button>
                 </div>
             </form>
         </div>

@@ -8,7 +8,7 @@
     overflow: hidden;
 }
 
-.book-cover {
+.book-card img {
     height: 250px;
     object-fit: fill;
     width: 100%;
@@ -34,8 +34,8 @@
     padding: 0rem 0.8rem 0rem 0.8rem;
 }
 
-.book-list {
+/* .book-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
+} */
