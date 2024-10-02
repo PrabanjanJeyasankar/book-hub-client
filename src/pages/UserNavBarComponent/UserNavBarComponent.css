@@ -3,7 +3,6 @@
     justify-content: space-around;
     align-items: center;
     padding: 1rem;
-    /* max-width: 1200px; */
     margin: 0rem 0.3rem;
 }
 
@@ -60,18 +59,19 @@
 .login-btn,
 .signup-btn {
     text-decoration: none;
-    padding: 0.5rem 0rem;
     border-radius: 4px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .login-btn {
     color: black;
+    padding: 0.5rem 1.5rem;
 }
 
 .signup-btn {
     color: white;
     font-weight: 500;
+    padding: 0.5rem 0rem;
     background-color: black;
     margin-left: 24px;
     border: 1px solid black;

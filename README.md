@@ -1,7 +1,7 @@
 # Book Hub
 The Book hub is a full-featured web application designed to manage library operations efficiently. Built with the MERN stack (MongoDB, Express, React, Node.js), it provides separate panels for administrators and users, each tailored to their specific needs.
 
-![Landing Page](image-1.png)
+![Landing Page](image-2.png)
 
 ### User Panel
 - **Recent Searches**: Easily access recently searched books.

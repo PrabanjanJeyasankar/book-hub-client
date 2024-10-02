@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100vh - 20vh);
 }
 
 .login-content {
@@ -12,7 +12,7 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid var(--gray-400);
     border-radius: 16px;
 }
 
@@ -74,7 +74,7 @@ input:focus {
 
 .email-input input,
 .password-input input {
-    border: 1px solid black;
+    border: 1px solid var(--gray-400);
     border-radius: 4px;
     padding: 0.4rem;
     min-width: 300px;
@@ -106,7 +106,7 @@ input:focus {
 }
 
 .new-user {
-    margin: 0.8rem 0 0.4rem 0;
+    margin: 1.3rem 0 0.4rem 0;
 }
 
 .new-user span {

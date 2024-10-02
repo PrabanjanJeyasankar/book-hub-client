@@ -199,6 +199,7 @@ function AdminDashBoardComponent() {
                     </div>
                     <div className='books-table'>
                         <DataTable
+                        className='book-table'
                             columns={booksColumns}
                             data={books}
                             fixedHeader

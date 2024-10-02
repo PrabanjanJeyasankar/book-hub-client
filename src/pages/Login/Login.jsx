@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Login.css'
 import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -21,6 +22,24 @@ function Login() {
         if (Object.keys(newErrors).length === 0) {
             console.log({ email, password })
         }
+
+        axios
+        .post(
+            'http://localhost:3500/api/v1/user/login', 
+            {
+                email,
+                password,
+            },
+            {
+                withCredentials: true,
+            }
+        )
+        .then((response) => {
+            console.log(response)
+        })
+        .then((error) => {
+            console.log(error)
+        })
     }
 
     const handleEmailChange = (e) => {

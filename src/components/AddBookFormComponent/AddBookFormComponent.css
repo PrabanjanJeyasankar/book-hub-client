@@ -4,6 +4,7 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
+    
     width: 100%;
     /* min-height: 100vh; */
     height: 100vh;
@@ -21,7 +22,7 @@
     text-align: center;
 }
 
-form {
+.add-book-form {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -35,6 +36,7 @@ form {
     background-color: white;
     /* padding: 1rem 2rem 2rem 2rem; */
     padding: 3rem;
+    border: 1.5px solid var(--gray-250);
     border-radius: 0.8rem;
     overflow-y: auto;
     box-sizing: border-box;
@@ -96,7 +98,7 @@ form {
 
 .dropzone {
     flex: 1;
-    border: 2px dashed #cccccc;
+    border:2px dashed  var(--gray-250);
     background-color: white;
     border-radius: 4px;
     padding: 16px;
@@ -138,7 +140,8 @@ form {
     max-width: 300px;
 }
 
-input {
+.inputContainer input {
+    border-color: var(--gray-450);
     width: 100%;
     /* padding-bottom: 1rem; */
 }
@@ -154,7 +157,7 @@ label {
 input,
 textarea,
 select {
-    border: 1px solid black;
+    border: 1px solid  var(--gray-450);
     border-radius: 4px;
     padding: 0.4rem;
     width: 100%;
@@ -218,8 +221,9 @@ select:focus {
 .add-book-button:hover {
     opacity: 0.8;
 }
+
 @media (min-width: 1801px) {
-    form {
+    .add-book-form {
         margin: 2rem;
     }
     .form-input-container {
@@ -232,9 +236,6 @@ select:focus {
 }
 
 @media (max-width: 1800px) {
-    form {
-        /* margin: 2rem; */
-    }
     .form-input-container {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -245,23 +246,15 @@ select:focus {
 }
 
 @media (max-width: 1440px) {
-    /* form {
-        margin: 1.5rem;
+    .form-title {
+        font-size: 2.5rem;
     }
-    .form-input-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .upload-and-preview,
-    .drag-drop-upload {
-        width: 30vw;
-    } */
     .add-book-container {
-       
-        overflow-y: auto; /* Ensure that overflow is handled properly */
+        overflow-y: auto;
     }
 
     .form-container {
-        margin: 2rem; /* Ensure there's margin around the form */
+        margin: 2rem; 
     }
     .form-input-container {
         grid-template-columns: repeat(2, 1fr);
@@ -280,7 +273,6 @@ select:focus {
 
     .input-column-three {
         grid-area: input-column-three;
-        /* Ensure it covers the remaining space */
         width: 100%;
     }
 
@@ -293,7 +285,7 @@ select:focus {
 
 @media (max-width: 1200px) {
     
-    form {
+    .add-book-form {
         height: 100vh;
     }
     .form-input-container {
@@ -306,7 +298,7 @@ select:focus {
 }
 
 @media (max-width: 1024px) {
-    form {
+    .add-book-form {
         margin: 1rem;
     }
     .form-input-container {

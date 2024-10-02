@@ -2,9 +2,9 @@
     border: 1px solid #ddd;
     border-radius: 0.5rem;
     box-shadow: -2px 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
     text-align: left;
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     overflow: hidden;
 }
 
@@ -26,16 +26,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0.4rem 0.8rem 0rem 0.8rem;
+    user-select: none;
 }
 
 .book-author {
     color: #777;
     font-size: 0.875em;
     padding: 0rem 0.8rem 0rem 0.8rem;
+    user-select: none;
 }
-
-/* .book-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-} */

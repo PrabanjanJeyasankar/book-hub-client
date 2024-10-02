@@ -1,85 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
+import React from 'react'
 import './AllBooksComponent.css'
-import BookCardComponent from '../BookCardComponent/BookCardComponent'
-import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
+import SearchPageComponent from '../SearchPageComponent/SearchPageComponent'
 
 function AllBooksComponent() {
-    const [books, setBooks] = useState([])
-    const [filteredBooks, setFilteredBooks] = useState([])
-    const [selectedBook, setSelectedBook] = useState(null)
-    const [isOverlayVisible, setIsOverlayVisible] = useState(false)
-    const overlayRef = useRef(null);
-
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await axios.get('http://localhost:3500/api/v1/book/')
-                setBooks(response.data.books)
-                setFilteredBooks(response.data.books)
-            } catch (error) {
-                console.error('Error fetching books:', error)
-            }
-        }
-        fetchBooks()
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                overlayRef.current &&
-                !overlayRef.current.contains(event.target)
-            ) {
-                handleCloseOverlay()
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [])
-
-    const handleClick = (book) => {
-        setSelectedBook(book)
-        setIsOverlayVisible(true)
-    }
-
-    const handleCloseOverlay = () => {
-        setIsOverlayVisible(false)
-        setSelectedBook(null)
-    }
-
     return (
         <div className='all-books-container'>
-            <div className='books-list'>
-                {filteredBooks.length > 0 ? (
-                    filteredBooks.map((book) => (
-                        <div
-                            key={book.isbn}
-                            className='book-item'
-                            onClick={() => handleClick(book)}>
-                            <BookCardComponent
-                                book={{
-                                    bookCoverImage: `http://localhost:3500/api/v1/${book.coverImage}`,
-                                    bookTitle: book.title,
-                                    bookAuthor: book.author
-                                }}
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <p>No books found.</p>
-                )}
-            </div>
-            {isOverlayVisible && selectedBook && (
-                <div ref={overlayRef}>
-                    <OverlayABookComponent
-                        bookData={selectedBook}
-                        onClose={handleCloseOverlay}
-                    />
-                </div>
-            )}
+            <SearchPageComponent />
         </div>
     )
 }

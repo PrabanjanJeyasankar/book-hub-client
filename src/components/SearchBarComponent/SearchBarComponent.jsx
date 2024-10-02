@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import './HeroPageStyling.css'
 import './SearchPageStyling.css'
 
-function SearchBarComponent({ stlyingClassName, initialQuery = '' }) {
+function SearchBarComponent({
+    stlyingClassName,
+    initialQuery = '',
+    onSearchChange,
+}) {
     const [searchQuery, setSearchQuery] = useState(initialQuery)
     const navigate = useNavigate()
 
@@ -21,7 +25,9 @@ function SearchBarComponent({ stlyingClassName, initialQuery = '' }) {
     }
 
     const handleSearchQuery = (e) => {
-        setSearchQuery(e.target.value)
+        const value = e.target.value
+        setSearchQuery(value)
+        onSearchChange(value)
     }
 
     return (

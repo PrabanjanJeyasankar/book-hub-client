@@ -3,7 +3,6 @@ import axios from 'axios'
 import ModalComponent from '../ModalComponent/ModalComponent'
 import greenTick from '../../assets/img/accept.png'
 import redWarning from '../../assets/img/warning.png'
-// import yellowWarning from '../../assets/img/warning.png'
 
 function DeleteBookComponent({ bookData, onClose, onBookDeleted }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -20,8 +19,8 @@ function DeleteBookComponent({ bookData, onClose, onBookDeleted }) {
                 setPopupMessageTitle('Book Deleted Successfully')
                 setPopupMessageBody(`"${bookData.title}" has been deleted successfully!`)
                 
-                onBookDeleted() // Notify parent component about the deletion
-                onClose() // Close the overlay
+                onBookDeleted()
+                onClose()
             } else {
                 setPopupImageSrc(redWarning)
                 setPopupMessageTitle('Unexpected Status Code')

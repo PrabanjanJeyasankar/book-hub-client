@@ -1,9 +1,23 @@
 .hero-outer-container {
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     align-items: center;
+    /* z-index: -1; */
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 2rem 0rem 2rem;
+    border-radius: 16px;
+    padding: 0rem 1rem 2.8rem 1rem;
+    background-color: var(--gray-150);
+    /* height: 100vh; */
 }
 
 .nav-bar {
@@ -26,16 +40,6 @@
     font-weight: 600;
 }
 
-.hero-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0rem 2rem 0rem 2rem;
-    border-radius: 16px;
-    padding: 0rem 1rem 1rem 1rem;
-    background-color: #eeeeee;
-}
 
 .hero-section-left {
     flex: 1;
@@ -56,10 +60,12 @@
 }
 
 .hero-title {
+    /* font-size: 3rem; */
     font-size: 3rem;
     font-weight: bold;
     letter-spacing: -0.03em;
     text-align: left;
+    /* line-height: 58px; */
     user-select: none;
 }
 
@@ -67,6 +73,7 @@
     margin: 0.5rem;
     color: #6c757d;
     font-size: 1.1rem;
+    user-select: none;
 }
 
 .hero-content-right {
@@ -79,11 +86,12 @@
 
 .hero-book-3d-asset {
     width: 90%;
-    margin-top: 11rem;
-    margin-right: 4rem;
+    margin-top: 5rem;
+    margin-right: 5rem;
     transition: transform 0.1s ease-out;
     transform: translate(0, 0);
-    z-index: 1000;
+    /* z-index: 1000; */
+    /* z-index: 1; */
 }
 
 .search-button {
@@ -99,6 +107,12 @@
 
 .search-icon-button {
     width: 1.2rem;
+}
+
+.hero-feed {
+    /* position: absolute; */
+    /* top: 32rem; */
+
 }
 
 @media (min-width: 480px) {
@@ -152,12 +166,14 @@
 @media (min-width: 1200px) {
     .hero-title {
         font-size: 3.5rem;
-        line-height: 64px;
         width: 95%;
     }
     .hero-text {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
+    /* .hero-description{
+        font-size: 1.29rem;
+    } */
     .hero-section {
         margin: 12rem 0 8rem 0rem;
     }
@@ -181,7 +197,7 @@
     .hero-book-3d-asset {
         margin-right: 3rem;
         width: 100%;
-        margin-top: 18rem;
+        margin-top: 1rem;
     }
 }
 
@@ -192,7 +208,7 @@
     }
     .hero-title {
         font-size: 5rem;
-        line-height: 72px;
+        line-height: 92px;
         width: 90%;
         
     }
@@ -204,6 +220,6 @@
     .hero-book-3d-asset {
         margin-right: 5rem;
         width: 100%;
-        margin-top: 18rem;
+        margin-top: 12rem;
     }
 }

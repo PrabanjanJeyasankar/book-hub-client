@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Signup.css'
 import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 function Signup() {
     const [name, setName] = useState('')
@@ -23,6 +24,25 @@ function Signup() {
         if (Object.keys(newErrors).length === 0) {
             console.log({ name, email, password })
         }
+
+        axios
+            .post(
+                'http://localhost:3500/api/v1/user/signup', 
+                {
+                    name,
+                    email,
+                    password,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((response) => {
+                console.log(response)
+            })
+            .then((error) => {
+                console.log(error)
+            })
     }
 
     const handleNameChange = (e) => {
@@ -63,7 +83,7 @@ function Signup() {
                                 )}
                             </div>
                         </div>
-                       <div className='input-container-signup'>
+                        <div className='input-container-signup'>
                             <div className='sign-up-name'>
                                 <input
                                     id='email'
@@ -115,13 +135,13 @@ function Signup() {
                             </button>
                         </div>
                     </div>
+                    <div className='existing-user'>
+                        <span>Existing User?</span>
+                        <Link className='loginButton' to='/login'>
+                            Log In
+                        </Link>
+                    </div>
                 </form>
-                <div className='existing-user'>
-                    <span>Existing User?</span>
-                    <Link className='loginButton' to='/login'>
-                        Log In
-                    </Link>
-                </div>
             </div>
         </div>
     )

@@ -1,20 +1,14 @@
 import React from 'react'
 import Home from './pages/Home/Home'
+import AdminNavBar from './pages/AdminNavBar/AdminNavBar'
 
 function App() {
     return (
         <>
-        {/* <AddBookFormComponent/> */}
-        {/* <AdminDashBoardComponent/> */}
-            {/* <BrowserRouter> */}
-                {/* <NavBarComponent /> */}
-                {/* <AdminDashBoardComponent/> */}
-                {/* <AdminNavBar/> */}
-                <Home/>
-            {/* </BrowserRouter> */}
+            {/* <AdminNavBar /> */}
+            <Home/>
         </>
     )
 }
 
 export default App
-

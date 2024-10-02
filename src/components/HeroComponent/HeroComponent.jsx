@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import './HeroComponent.css'
-import { Search } from 'lucide-react'
 import SearchFormComponent from '../SearchBarComponent/SearchBarComponent'
 import HeroFeedComponent from '../HeroFeedComponent/HeroFeedComponent'
 import book3DAsset from '../../assets/img/book_3d_assets_2.png'
-import HorizontalSliderComponent from '../HorizontalSliderComponent/HorizontalSliderComponent'
 
 function HeroComponent() {
     useEffect(() => {
@@ -14,8 +12,8 @@ function HeroComponent() {
             const windowWidth = window.innerWidth
             const windowHeight = window.innerHeight
 
-            const offsetX = (x / windowWidth - 0.5) * 25
-            const offsetY = (y / windowHeight - 0.5) * 25
+            const offsetX = (0.5 - x / windowWidth) * 50
+            const offsetY = (0.5 - y / windowHeight) * 50
 
             const image = document.querySelector('.hero-book-3d-asset')
             if (image) {
@@ -57,7 +55,6 @@ function HeroComponent() {
                 </div>
             </div>
             <div className='hero-feed'>
-            <HorizontalSliderComponent/>
                 <HeroFeedComponent />
             </div>
         </React.Fragment>

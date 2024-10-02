@@ -9,12 +9,28 @@
 
 :root{
     --color-black: #1B2023;
+    --gray-100: #f7f7f7;
+    --gray-150: #efefef;
+    --gray-200: #e1e1e1;
+    --gray-250: #d6d6d6;
+    --gray-300: #c0c0c0;
+    --gray-350: #b0b0b0;
+    --gray-400: #a0a0a0;
+    --gray-450: #909090;
+    --gray-500: #7f7f7f;
+    --gray-550: #6f6f6f;
+    --gray-600: #4f4f4f;
+    --gray-650: #3f3f3f;
+    --gray-700: #2f2f2f;
 }
 
 body, html{
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 

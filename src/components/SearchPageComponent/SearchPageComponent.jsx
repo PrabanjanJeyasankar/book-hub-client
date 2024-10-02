@@ -4,17 +4,38 @@ import './SearchPageComponent.css'
 import SearchBarComponent from '../SearchBarComponent/SearchBarComponent'
 import axios from 'axios'
 import BookCardComponent from '../BookCardComponent/BookCardComponent'
-// import searchIconImage from '../../assets/img/search_img-3d-asset.png'
-// import Lottie from 'lottie-web'
-// import BookLoadingAnimation from '../../assets/animation/book_loading_animation.json'
 import LottieBookAnimation from '../AnimationComponents/LottieBookAnimation'
 import LottieSearchNotFound from '../AnimationComponents/SearchNotFoundAnimation'
+
 function SearchPageComponent() {
     const location = useLocation()
     const [searchQuery, setSearchQuery] = useState('')
-    const [searchResults, setSearchResults] = useState([])
+    const [allBooks, setAllBooks] = useState([])
+    const [filteredBooks, setFilteredBooks] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [searchCriteria, setSearchCriteria] = useState({
+        genre: '',
+        language: '',
+        publisher: '',
+    })
+
+    useEffect(() => {
+        const fetchAllBooks = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios.get(
+                    `http://localhost:3500/api/v1/book`
+                )
+                setAllBooks(response.data.books)
+                setFilteredBooks(response.data.books)
+            } catch (err) {
+                console.error('Error fetching books:', err)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        fetchAllBooks()
+    }, [])
 
     useEffect(() => {
         if (location.state?.query) {
@@ -23,28 +44,91 @@ function SearchPageComponent() {
     }, [location.state])
 
     useEffect(() => {
-        if (searchQuery) {
-            const fetchData = async () => {
-                setIsLoading(true)
-                setError(null)
+        const applyFilters = () => {
+            let updatedFilteredBooks = [...allBooks]
 
-                try {
-                    // Replace with your backend API endpoint
-                    const response = await axios.get(
-                        `http://localhost:3500/api/v1/book/search?query=${searchQuery}`
-                    )
-                    setSearchResults(response.data.books) // Set search results
-                    console.log(response.data)
-                } catch (err) {
-                    setError('Error fetching search results.')
-                } finally {
-                    setIsLoading(false)
-                }
+            if (searchQuery) {
+                updatedFilteredBooks = updatedFilteredBooks.filter(
+                    (book) =>
+                        book.title
+                            .toLowerCase()
+                            .includes(searchQuery.toLowerCase()) ||
+                        book.author
+                            .toLowerCase()
+                            .includes(searchQuery.toLowerCase())
+                )
             }
 
-            fetchData()
+            if (searchCriteria.genre) {
+                updatedFilteredBooks = updatedFilteredBooks.filter(
+                    (book) => book.genre === searchCriteria.genre
+                )
+            }
+
+            if (searchCriteria.language) {
+                updatedFilteredBooks = updatedFilteredBooks.filter(
+                    (book) => book.language === searchCriteria.language
+                )
+            }
+
+            if (searchCriteria.publisher) {
+                updatedFilteredBooks = updatedFilteredBooks.filter(
+                    (book) => book.publisher === searchCriteria.publisher
+                )
+            }
+
+            setFilteredBooks(updatedFilteredBooks)
         }
-    }, [searchQuery])
+
+        applyFilters()
+    }, [searchQuery, searchCriteria, allBooks])
+
+    const handleGenreChange = (e) => {
+        const value = e.target.value
+        setSearchCriteria((prev) => ({ ...prev, genre: value }))
+    }
+
+    const handleLanguageChange = (e) => {
+        const value = e.target.value
+        setSearchCriteria((prev) => ({ ...prev, language: value }))
+    }
+
+    const handlePublisherChange = (e) => {
+        const value = e.target.value
+        setSearchCriteria((prev) => ({ ...prev, publisher: value }))
+    }
+
+    const debounce = (func, delay) => {
+        let timeoutId
+        return function (...args) {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(() => func.apply(this, args), delay)
+        }
+    }
+
+    const debouncedSearch = debounce((query) => {
+        setSearchQuery(query)
+        applyFilters()
+    }, 300)
+
+    const handleSearchChange = (query) => {
+        if (query.trim()) {
+            debouncedSearch(query)
+        } else {
+            setSearchQuery('')
+            setFilteredBooks(allBooks)
+        }
+    }
+
+    const clearAllFilters = () => {
+        setSearchQuery('')
+        setSearchCriteria({
+            genre: '',
+            language: '',
+            publisher: '',
+        })
+        setFilteredBooks(allBooks) 
+    }
 
     return (
         <div className='search-page-outer-container'>
@@ -59,35 +143,68 @@ function SearchPageComponent() {
             <SearchBarComponent
                 stlyingClassName='search-page-bar'
                 initialQuery={searchQuery}
+                onSearchChange={handleSearchChange}
             />
-
+            <div className='filter-controls'>
+                <div className='filter-container'>
+                    <select
+                        className='filter-select'
+                        onChange={handleGenreChange}>
+                        <option value=''>Select Genre</option>
+                        <option value='Fiction'>Fiction</option>
+                        <option value='Non Fiction'>Non-Fiction</option>
+                    </select>
+                    <select
+                        className='filter-select'
+                        onChange={handleLanguageChange}>
+                        <option value=''>Select Language</option>
+                        <option value='English'>English</option>
+                        <option value='Tamil'>Tamil</option>
+                        <option value='Spanish'>Spanish</option>
+                    </select>
+                    <select
+                        className='filter-select'
+                        onChange={handlePublisherChange}>
+                        <option value=''>Select Publisher</option>
+                        <option value='Penguin'>Penguin</option>
+                        <option value='HarperCollins'>HarperCollins</option>
+                    </select>
+                </div>
+                <div className='clear-button'>
+                    <button
+                        onClick={clearAllFilters}
+                        className='clear-filters-button'>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
             <div className='search-result'>
                 {isLoading ? (
                     <div className='loading-animation'>
                         <LottieBookAnimation className='book-animation' />
                         <p className='loading-text'>Loading...</p>
                     </div>
-                ) : null}
-
-                <div
-                    className={`book-results ${
-                        searchResults && searchResults.length > 0
-                            ? 'results-grid-layout'
-                            : 'results-flex-layout'
-                    }`}>
-                    {searchResults && searchResults.length > 0
-                        ? searchResults.map((book, index) => (
-                              <BookCardComponent key={index} book={book} />
-                          ))
-                        : !isLoading && (
-                              <div className='search-not-found-Animation'>
-                                  <LottieSearchNotFound className='not-found-animation' />
-                                  <p className='not-found-text'>
-                                      Couldn't find anything for "{searchQuery}"
-                                  </p>
-                              </div>
-                          )}
-                </div>
+                ) : (
+                    <div
+                        className={`book-results ${
+                            filteredBooks.length > 0
+                                ? 'results-grid-layout'
+                                : 'results-flex-layout'
+                        }`}>
+                        {filteredBooks.length > 0 ? (
+                            filteredBooks.map((book, index) => (
+                                <BookCardComponent key={index} book={book} />
+                            ))
+                        ) : (
+                            <div className='search-not-found-Animation'>
+                                <LottieSearchNotFound className='not-found-animation' />
+                                <p className='not-found-text'>
+                                    Oops...Couldn't find anything...
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     )

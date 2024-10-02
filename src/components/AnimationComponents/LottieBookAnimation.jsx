@@ -1,4 +1,3 @@
-// LottieAnimation.jsx
 import React from 'react'
 import Lottie from 'lottie-react'
 import BookLoadingAnimation from '../../assets/animation/book_loading_animation.json'

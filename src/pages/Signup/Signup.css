@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100vh - 20vh);
 }
 
 .signup-content {
@@ -12,7 +12,7 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid var(--gray-400);
     border-radius: 16px;
 }
 
@@ -49,6 +49,11 @@ input:focus {
 .error {
     color: red;
     font-size: 12px;
+    width: 200%;
+}
+
+span.error {
+    width: max-content;
 }
 
 .signup-name-error,
@@ -57,7 +62,6 @@ input:focus {
     display: flex;
     padding: 2px 0 0 0;
     position: absolute;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -70,7 +74,7 @@ input:focus {
 .sign-up-name input,
 .sign-up-email input,
 .sign-up-password input {
-    border: 1px solid black;
+    border: 1px solid var(--gray-400);
     border-radius: 4px;
     padding: 0.4rem;
     min-width: 300px;
@@ -97,8 +101,8 @@ input:focus {
 .sign-up-btn {
     color: white;
     background-color: black;
+    border: none;
     padding: 12px 24px;
-    border: 1px solid black;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
@@ -107,16 +111,16 @@ input:focus {
 }
 
 .existing-user {
-    margin: 0.8rem 0 0.4rem 0;
+    margin: 1rem 0 0.4rem 0;
 }
 
 .existing-user span {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .loginButton {
     margin: 0 0 0 0.5rem;
-    font-size: 12px;
+    font-size: 14px;
     color: black;
     background: none;
     border: none;

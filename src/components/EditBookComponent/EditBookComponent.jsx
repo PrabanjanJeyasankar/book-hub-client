@@ -124,9 +124,9 @@ function EditBookComponent({ bookId, onClose, onEditSuccess }) {
                 `"${response.data.book.title}" has been updated successfully!`
             )
             setPopupImageSrc(greenTick)
-            console.log('Setting isModalOpen to true');
-            setIsModalOpen(true);
-            console.log('Modal should open now');
+            console.log('Setting isModalOpen to true')
+            setIsModalOpen(true)
+            console.log('Modal should open now')
             console.log('Modal should open')
             if (onEditSuccess) {
                 onEditSuccess()
@@ -382,7 +382,6 @@ function EditBookComponent({ bookId, onClose, onEditSuccess }) {
                 title={popupMessageTitle}
                 isOpen={isModalOpen}
                 imageSrc={popupImageSrc}
-                // imageSrc={greenTick}
                 messageBody={popupMessageBody}
                 onClose={closeModal}
             />

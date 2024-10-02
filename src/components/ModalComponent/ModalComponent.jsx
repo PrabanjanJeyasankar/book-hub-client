@@ -1,9 +1,13 @@
 import React from 'react'
-import './ModalComponent.css' // Adjust the path as needed
-
-const ModalComponent = ({ popupMessageTitle, popupImageSrc, popupMessageBody, isOpen, onClose }) => {
-    if (!isOpen) return null // If not open, render nothing
-
+import './ModalComponent.css'
+const ModalComponent = ({
+    popupMessageTitle,
+    popupImageSrc,
+    popupMessageBody,
+    isOpen,
+    onClose,
+}) => {
+    if (!isOpen) return null
     return (
         <div className='modal-overlay'>
             <div className='modal-content'>
@@ -11,7 +15,11 @@ const ModalComponent = ({ popupMessageTitle, popupImageSrc, popupMessageBody, is
                     &times;
                 </button>
                 {popupImageSrc && (
-                    <img src={popupImageSrc} alt='Popup' className='popup-image' />
+                    <img
+                        src={popupImageSrc}
+                        alt='Popup'
+                        className='popup-image'
+                    />
                 )}
                 <h2 className='message-title'>{popupMessageTitle}</h2>
                 <p className='message-body'>{popupMessageBody}</p>

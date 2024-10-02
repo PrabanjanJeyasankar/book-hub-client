@@ -2,25 +2,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 2rem 3.5rem 0rem 3.5rem;
+    margin: 2rem 2.5rem 0rem 2.5rem;
 }
 
 .search-heading {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.search-icon-image {
-    width: 7.5rem;
-    height: 10.125rem;
-    max-width: 6rem;
-    max-height: 8.1rem;
-    object-fit: contain;
+    margin-bottom: 0.5rem;
 }
 
 .search-title {
+    user-select: none;
     font-size: 6rem;
     font-weight: 600;
     letter-spacing: -2px;
@@ -28,13 +21,70 @@
 
 .search-sub-heading {
     color: #8e8e8e;
+    user-select: none;
+}
+
+/* ---------- Filter Dropdown ----------- */
+
+.filter-controls {
+    display: flex;
+}
+
+.clear-button {
+    display: flex;
+    margin: 0.35rem;
+}
+
+.clear-filters-button {
+    background-color: #fff;
+    border: 1px solid #b3b3b3;
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #4b4b4b;
+    font-size: 14px;
+    position: relative;
+    padding: 0 1.3rem;
+}
+
+.clear-filters-button:hover {
+    background-color: #f3f3f3;
+    opacity: 0.9;
+}
+
+.filter-container {
+    display: flex;
+    gap: 1rem;
+    margin: 0.3rem 0;
+    width: 50%;
+}
+
+.filter-select {
+    appearance: none;
+    color: #4b4b4b;
+    background-color: #f0f0f0;
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-width="2" d="M7 10l5 5 5-5"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
 }
 
 .search-result {
     display: flex;
-    justify-content: center;
-    align-items: center; 
+    align-items: center;
     margin-top: 1rem;
+    width: 100%;
+}
+
+.book-results {
+    width: 100%;
 }
 
 .loading-animation {
@@ -58,12 +108,11 @@
     position: relative;
 }
 
-
 .not-found-text {
-    color: #616161;
+    color: #888888;
     position: absolute;
     z-index: 100;
-    bottom: 2rem;
+    bottom: 2.3rem;
 }
 
 .results-flex-layout {
@@ -71,91 +120,25 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%; 
-  }
+    height: 100%;
+}
 
 .results-grid-layout {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-
-@media (max-width: 2000px) {
-    .search-icon-image {
-        width: 7rem;
-        height: 9.75rem;
-        max-width: 5.6rem;
-        max-height: 8rem;
-    }
-
-    .results-grid-layout {
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-    }
-}
-@media (max-width: 1800px) {
-    .search-icon-image {
-        width: 7rem;
-        height: 9.75rem;
-        max-width: 5.6rem;
-        max-height: 8rem;
-    }
-
-    .results-grid-layout {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-    }
-}
-
-@media (max-width: 1440px) {
-    .search-icon-image {
-        width: 6.5rem;
-        height: 9.25rem;
-        max-width: 5.2rem;
-        max-height: 7.5rem;
-    }
-}
-
-@media (max-width: 1200px) {
-    .search-icon-image {
-        width: 6rem;
-        height: 8.75rem;
-        max-width: 4.8rem;
-        max-height: 7rem;
-    }
-}
-
-@media (max-width: 992px) {
-    .search-icon-image {
-        width: 5.5rem;
-        height: 8.25rem;
-        max-width: 4.4rem;
-        max-height: 6.5rem;
-    }
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 5px;
 }
 
 @media (max-width: 768px) {
-    .search-icon-image {
-        width: 5rem;
-        height: 7.75rem;
-        max-width: 4rem;
-        max-height: 6rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .search-icon-image {
-        width: 4.5rem;
-        height: 7.25rem;
-        max-width: 3.6rem;
-        max-height: 5.5rem;
+    .results-grid-layout {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    .search-icon-image {
-        width: 4rem;
-        height: 6.75rem;
-        max-width: 3.2rem;
-        max-height: 5rem;
+    .results-grid-layout {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
     }
 }

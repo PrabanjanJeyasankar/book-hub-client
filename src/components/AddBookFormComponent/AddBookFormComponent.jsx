@@ -31,7 +31,6 @@ function AddBookFormComponent() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const publicationDateRef = useRef(null)
 
-    // console.log(formData)
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData((prevData) => ({
@@ -167,7 +166,7 @@ function AddBookFormComponent() {
 
     return (
         <div className='add-book-container'>
-            <form className='form' onSubmit={handleSubmit}>
+            <form className='add-book-form' onSubmit={handleSubmit}>
                 <div className='form-container'>
                     <h2 className='form-title'>Add a new book</h2>
                     <div className='form-input-container'>
