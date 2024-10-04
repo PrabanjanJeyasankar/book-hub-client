@@ -18,12 +18,8 @@
     padding: 10px;
     box-sizing: border-box;
     width: 200px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.slide:hover {
-    transform: scale(1.05);
-}
 
 .nav-button {
     position: absolute;

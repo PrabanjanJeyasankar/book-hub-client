@@ -5,7 +5,7 @@ import BookCardComponent from '../BookCardComponent/BookCardComponent'
 
 function CardSliderComponent({ books }) {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const cardWidth = 200
+    const cardWidth = 250
     const [booksToShow, setBooksToShow] = useState(3)
     const sliderRef = useRef(null)
 

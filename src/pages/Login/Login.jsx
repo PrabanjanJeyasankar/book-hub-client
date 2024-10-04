@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Login.css'
 import { Eye, EyeOff } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { UserContext } from '../../context/UserContext/UserContext'
 
 function Login() {
+    const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [errors, setErrors] = useState({})
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,22 +27,30 @@ function Login() {
         }
 
         axios
-        .post(
-            'http://localhost:3500/api/v1/user/login', 
-            {
-                email,
-                password,
-            },
-            {
-                withCredentials: true,
-            }
-        )
-        .then((response) => {
-            console.log(response)
-        })
-        .then((error) => {
-            console.log(error)
-        })
+            .post(
+                'http://localhost:3500/api/v1/user/login',
+                {
+                    email,
+                    password,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((response) => {
+                console.log(response.data.userProfile)
+                setIsLoggedIn(true)
+                setUserProfile(response.data.userProfile)
+                localStorage.setItem(
+                    'userProfile',
+                    JSON.stringify(response.data.userProfile)
+                )
+                localStorage.setItem('isLoggedIn', 'true')
+                navigate('/') 
+            })
+            .catch((error) => {
+                console.error('Login error:', error)
+            })
     }
 
     const handleEmailChange = (e) => {
@@ -57,7 +68,7 @@ function Login() {
     return (
         <div className='login-container'>
             <div className='login-content'>
-                <h2>Log In</h2>
+                <h2 className='login-title'>Log In</h2>
                 <form onSubmit={handleSubmit} className='form'>
                     <div className='input-container-login '>
                         <div className='email-input'>

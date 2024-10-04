@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './AdminDashBoardComponent.css'
-import DataTable from 'react-data-table-component'
-import { BookUp2, Hourglass, Users, BookImage } from 'lucide-react'
-import axios from 'axios'
 import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
+import DataTable from 'react-data-table-component'
+import axios from 'axios'
+import { BookUp2, Hourglass, Users, BookImage } from 'lucide-react'
 
 function AdminDashBoardComponent() {
     const [books, setBooks] = useState([])
@@ -189,6 +189,7 @@ function AdminDashBoardComponent() {
                     </div>
                 </div>
             </div>
+
             <div className='books-and-members'>
                 <div className='book-list-container'>
                     <div className='book-list-header'>
@@ -199,7 +200,7 @@ function AdminDashBoardComponent() {
                     </div>
                     <div className='books-table'>
                         <DataTable
-                        className='book-table'
+                            className='book-table'
                             columns={booksColumns}
                             data={books}
                             fixedHeader

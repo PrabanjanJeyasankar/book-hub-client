@@ -1,28 +1,72 @@
-import React, { useEffect } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext/UserContext'
+import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
-import logoImage from '../../assets/img/open_book_logo.png'
+
 import Signup from '../Signup/Signup'
 import Login from '../Login/Login'
 import HeroComponent from '../../components/HeroComponent/HeroComponent'
 import AboutUsComponent from '../../components/AboutUsComponent/AboutUsComponent'
 import SearchPageComponent from '../../components/SearchPageComponent/SearchPageComponent'
+import UserProfileComponent from '../../components/UserProfileComponent/UserProfileComponent'
+
+import logoImage from '../../assets/img/open_book_logo.png'
+import DummyProfileImage from '../../assets/img/img1.png'
 import axios from 'axios'
 
 function UserNavBarComponent() {
+    const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
+        useContext(UserContext)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const dropdownRef = useRef(null)
+
+    const navigate = useNavigate()
+
     useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (
+                isDropdownOpen &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setIsDropdownOpen(false)
+            }
+        }
+
+        document.addEventListener('click', handleOutsideClick)
+        return () => {
+            document.removeEventListener('click', handleOutsideClick)
+        }
+    }, [isDropdownOpen])
+
+    const handleLogout = () => {
+        console.log('first')
         axios
-            .get('http://localhost:3500/api/v1/user/authenticate', {
+            .get('http://localhost:3500/api/v1/user/logout', {
                 withCredentials: true,
             })
-            .then((response) => console.log(response))
-    })
+            .then((response) => {
+                console.log(response.data.message)
+                if(response.status == 200) {
+                    setIsLoggedIn(false)
+                    setUserProfile(null)
+                    localStorage.removeItem('userProfile')
+                    localStorage.removeItem('isLoggedIn')
+                    navigate('/')
+                }
+                
+            })
+            .catch((error) => {
+                console.error('Logout error:', error)
+            })
+    }
 
     return (
         <nav className='user-navbar'>
             <div className='user-navbar-container'>
                 <div className='user-navbar-brand'>
-                    <Link to='/' className='app-logo'>
+                    <Link to='/' className='user-page-app-logo'>
                         <img src={logoImage} alt='Book hub logo' />
                         <span className='app-name'>Book hub</span>
                     </Link>
@@ -34,14 +78,64 @@ function UserNavBarComponent() {
                         <Link to='/about'>About us</Link>
                     </div>
                 </div>
-                <div className='signup-login-links'>
-                    <Link className='login-btn' to='/login'>
-                        Login
-                    </Link>
-                    <Link className='signup-btn' to='/signup'>
-                        Sign up
-                    </Link>
-                </div>
+
+                {isLoggedIn ? (
+                    <div className='signup-login-links'>
+                        <div className='user-profile-btn' ref={dropdownRef}>
+                            <img
+                                src={DummyProfileImage}
+                                alt='Profile'
+                                className='user-nav-profile-icon'
+                                onClick={() =>
+                                    setIsDropdownOpen((prev) => !prev)
+                                }
+                            />
+                            {isDropdownOpen && (
+                                <div className='user-profile-dropdown-menu open'>
+                                    <div className='user-profile-dropdown-header'>
+                                        <img
+                                            src={DummyProfileImage}
+                                            alt='Profile'
+                                            className='user-profile-dropdown-image'
+                                        />
+                                        <span className='user-profile-dropdown-name'>
+                                            {userProfile.name}
+                                        </span>
+                                    </div>
+                                    <ul className='user-profile-dropdown-list'>
+                                        <li>
+                                            <Link to='/user-profile'>
+                                                <CircleUserRound
+                                                    strokeWidth={1.5}
+                                                    size={18}
+                                                />
+                                                <p>Profile</p>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a onClick={handleLogout}>
+                                                <LogOut
+                                                    strokeWidth={1.5}
+                                                    size={18}
+                                                />
+                                                <p>Log out</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ) : (
+                    <div className='signup-login-links'>
+                        <Link className='login-btn' to='/login'>
+                            Login
+                        </Link>
+                        <Link className='signup-btn' to='/signup'>
+                            Sign up
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <Routes>
@@ -50,6 +144,10 @@ function UserNavBarComponent() {
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/search' element={<SearchPageComponent />} />
+                <Route
+                    path='/user-profile'
+                    element={<UserProfileComponent />}
+                />
             </Routes>
         </nav>
     )

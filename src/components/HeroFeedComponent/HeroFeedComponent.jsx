@@ -5,7 +5,7 @@ function HeroFeedComponent() {
     return (
         <div className='hero-feed-container'>
             <div className='popular-books-component'>
-                <PopularBooksComponent />
+                <PopularBooksComponent  />
             </div>
         </div>
     )

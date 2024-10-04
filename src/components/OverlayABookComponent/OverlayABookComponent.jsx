@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { X, CirclePlus, Heart, Pencil, Trash } from 'lucide-react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
+import { X, Bookmark, Heart, Pencil, Trash } from 'lucide-react'
 import EditBookComponent from '../EditBookComponent/EditBookComponent'
 import DeleteABookComponent from '../DeleteABookComponent/DeleteABookComponent'
 import './OverlayABookComponent.css'
 import ModalComponent from '../ModalComponent/ModalComponent'
+import { UserContext } from '../../context/UserContext/UserContext'
 
 function OverlayABookComponent({ book, onClose }) {
     const overlayRef = useRef(null)
@@ -15,6 +16,8 @@ function OverlayABookComponent({ book, onClose }) {
         imageSrc: '',
         body: '',
     })
+
+    const { userProfile } = useContext(UserContext)
 
     const handleClickOutside = (event) => {
         if (overlayRef.current && !overlayRef.current.contains(event.target)) {
@@ -88,8 +91,37 @@ function OverlayABookComponent({ book, onClose }) {
                                         </p>
                                     </div>
                                     <div className='overlay-actions'>
-                                        <CirclePlus size={28} strokeWidth={2} />
-                                        <Heart size={28} strokeWidth={2} />
+                                        {userProfile?.role === 'admin' ? (
+                                            <>
+                                                <Bookmark
+                                                    className='bookmark-icon'
+                                                    size={28}
+                                                    strokeWidth={2}
+                                                />
+                                                <Heart
+                                                    className='heart-icon'
+                                                    size={28}
+                                                    strokeWidth={2}
+                                                />
+                                            </>
+                                        ) : userProfile?.role === 'user' ? (
+                                            /* <div className='edit-details'> */
+                                            <>
+                                                <Trash
+                                                    className='delete-icon'
+                                                    size={26}
+                                                    onClick={handleDeleteClick}
+                                                    strokeWidth={2}
+                                                />
+                                                <Pencil
+                                                    className='edit-icon'
+                                                    onClick={handleEditClick}
+                                                    size={26}
+                                                    strokeWidth={2}
+                                                />
+                                            </>
+                                        ) : /* </div> */
+                                        null}
                                     </div>
                                 </div>
                                 <div className='overlay-book-details'>
@@ -130,20 +162,6 @@ function OverlayABookComponent({ book, onClose }) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='edit-details'>
-                                <button
-                                    className='delete-button'
-                                    onClick={handleDeleteClick}>
-                                    <Trash size={14} />
-                                    Delete Book
-                                </button>
-                                <button
-                                    className='edit-button'
-                                    onClick={handleEditClick}>
-                                    <Pencil size={14} />
-                                    Edit Book
-                                </button>
                             </div>
                         </div>
                     </div>

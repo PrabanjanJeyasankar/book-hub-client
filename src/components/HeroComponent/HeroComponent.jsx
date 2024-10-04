@@ -12,8 +12,8 @@ function HeroComponent() {
             const windowWidth = window.innerWidth
             const windowHeight = window.innerHeight
 
-            const offsetX = (0.5 - x / windowWidth) * 50
-            const offsetY = (0.5 - y / windowHeight) * 50
+            const offsetX = (0.5 - (x / windowWidth)) * 50;
+            const offsetY = (0.5 - (y / windowHeight)) * 50;
 
             const image = document.querySelector('.hero-book-3d-asset')
             if (image) {

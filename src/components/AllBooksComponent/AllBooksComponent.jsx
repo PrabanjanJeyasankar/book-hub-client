@@ -5,7 +5,7 @@ import SearchPageComponent from '../SearchPageComponent/SearchPageComponent'
 function AllBooksComponent() {
     return (
         <div className='all-books-container'>
-            <SearchPageComponent />
+            <SearchPageComponent  />
         </div>
     )
 }

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 
 function BookCardComponent({ book }) {
     const [showOverlay, setShowOverlay] = useState(false)
+
     const handleCardClick = () => {
         setShowOverlay(true)
     }
@@ -23,7 +24,7 @@ function BookCardComponent({ book }) {
                 />
                 <div className='book-details'>
                     <h3 className='book-title'>{book.title}</h3>
-                    <p className='book-author'>{book.author}</p>
+                    <p className='book-author'>by {book.author}</p>
                 </div>
             </div>
             {showOverlay &&

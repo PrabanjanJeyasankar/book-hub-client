@@ -1,20 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Search } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './HeroPageStyling.css'
 import './SearchPageStyling.css'
 
-function SearchBarComponent({
-    stlyingClassName,
-    initialQuery = '',
-    onSearchChange,
-}) {
+function SearchBarComponent({ initialQuery = '', onSearchChange }) {
     const [searchQuery, setSearchQuery] = useState(initialQuery)
     const navigate = useNavigate()
+    const searchInputRef = useRef(null)
+    const location = useLocation()
+
+    const isSearchPage =
+        location.pathname === '/search' || location.pathname === '/allbooks'
+    const containerClass = isSearchPage ? 'search-page-bar' : 'hero-search-bar'
 
     useEffect(() => {
         setSearchQuery(initialQuery)
     }, [initialQuery])
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === '/') {
+                e.preventDefault()
+                searchInputRef.current.focus()
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -31,7 +48,7 @@ function SearchBarComponent({
     }
 
     return (
-        <div className={`search-container ${stlyingClassName}`}>
+        <div className={`search-container ${containerClass}`}>
             <form className='search-form' onSubmit={handleSubmit}>
                 <div className='search-form-elem'>
                     <button type='submit' className='search-icon'>
@@ -43,7 +60,13 @@ function SearchBarComponent({
                         placeholder='books, authors, or genres...'
                         value={searchQuery}
                         onChange={handleSearchQuery}
+                        ref={searchInputRef}
                     />
+                    {isSearchPage && (
+                        <div className='search-slash-hint'>
+                            <kbd>/</kbd>
+                        </div>
+                    )}
                 </div>
             </form>
         </div>
