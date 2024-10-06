@@ -28,7 +28,7 @@ function SearchPageComponent() {
                 )
                 setAllBooks(response.data.books)
                 setFilteredBooks(response.data.books)
-                console.log('All Books', setAllBooks)
+                // console.log('All Books', setAllBooks)
             } catch (err) {
                 console.error('Error fetching books:', err)
             } finally {

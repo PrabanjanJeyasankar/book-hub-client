@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import AllBooksComponent from '../../components/AllBooksComponent/AllBooksComponent'
 import AddUserComponent from '../../components/AddUserComponent/AddUserComponent'
+import SearchPageComponent from '../../components/SearchPageComponent/SearchPageComponent'
 
 function AdminNavBar() {
     const [isExpanded, setIsExpanded] = useState(true)
@@ -108,7 +109,7 @@ function AdminNavBar() {
                         <Route path='/' element={<AdminDashBoardComponent />} />
                         <Route
                             path='/allbooks'
-                            element={<AllBooksComponent />}
+                            element={<SearchPageComponent/>}
                         />
                         <Route
                             path='/addbook'

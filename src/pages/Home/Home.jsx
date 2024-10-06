@@ -7,7 +7,6 @@ import { UserProvider } from '../../context/UserContext/UserContext'
 function Home() {
     return (
         <>
-                    {/* <AdminNavBar /> */}
 
             <BrowserRouter>
                 <UserProvider>

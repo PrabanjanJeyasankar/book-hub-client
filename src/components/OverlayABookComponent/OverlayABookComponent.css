@@ -7,6 +7,7 @@
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+    /* align-items: center; */
     align-items: flex-start;
     z-index: 1000;
     padding: 2rem 0;
@@ -146,44 +147,6 @@
     margin-left: 1rem;
     text-align: left;
 }
-
-/* .edit-details {
-    display: flex;
-    flex-direction: row;
-    margin: 1rem;
-    gap: 0.5rem;
-}
-
-.edit-details button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-}
-
-.delete-button {
-    background-color: rgb(255, 255, 255);
-    color: #ff2727;
-    border: 1.4px solid #ff2727;
-    border-radius: 5px;
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1.5rem;
-    font-size: 1rem;
-}
-
-.edit-button {
-    font-size: 1rem;
-    background-color: rgb(32, 32, 32);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1.5rem;
-} */
 
 .close-button {
     position: absolute;

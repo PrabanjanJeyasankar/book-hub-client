@@ -63,7 +63,7 @@ function SearchBarComponent({ initialQuery = '', onSearchChange }) {
                         ref={searchInputRef}
                     />
                     {isSearchPage && (
-                        <div className='search-slash-hint'>
+                        <div className='search-slash'>
                             <kbd>/</kbd>
                         </div>
                     )}

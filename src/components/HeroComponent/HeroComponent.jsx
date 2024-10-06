@@ -35,7 +35,9 @@ function HeroComponent() {
                     <div className='hero-section-left'>
                         <div className='hero-content'>
                             <div className='hero-title'>
-                                Discover the Book That Won&#8217;t Judge You.
+                                Discover the Book That  <span className='hero-hightlight-text'>Won&#8217;t Judge You.</span>
+                                {/* Discover  <span className='hero-hightlight-text'>the Book</span> That Won&#8217;t Judge You. */}
+
                             </div>
                             <div className='hero-description'>
                                 Search effortlessly, Start Reading.

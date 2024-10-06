@@ -24,22 +24,6 @@
     user-select: none;
 }
 
-.search-slash-hint {
-    background-color: #f0f0f0;
-    border: 1px solid #adadad;
-    border-radius: 4px;
-    padding: 6px 10px;
-    margin-left: 10px;
-    font-size: 0.85rem;
-    color: #333;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.kbd {
-    font-size: 0.85rem;
-    /* font-weight: 700; */
-}
 
 /* ---------- Filter Dropdown ----------- */
 
@@ -96,6 +80,7 @@
 .search-result {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 1rem;
     width: 100%;
 }

@@ -80,6 +80,12 @@
     color: white;
     font-weight: 500;
     padding: 0.5rem 0rem;
+    /* background: linear-gradient(
+        -30deg,
+        #8d560f 10%,
+        #df9d3a 60%,
+        #df9d3a 85%
+    ); */
     background-color: black;
     margin-left: 24px;
     border: 1px solid black;
