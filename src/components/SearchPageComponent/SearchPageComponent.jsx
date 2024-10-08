@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import './SearchPageComponent.css'
+// import SearchPageStyle from './SearchPageComponent.module.css'
 import SearchBarComponent from '../SearchBarComponent/SearchBarComponent'
 import axios from 'axios'
 import BookCardComponent from '../BookCardComponent/BookCardComponent'
 import LottieBookAnimation from '../AnimationComponents/LottieBookAnimation'
 import LottieSearchNotFound from '../AnimationComponents/SearchNotFoundAnimation'
+import { User } from 'lucide-react'
+import { UserContext } from '../../context/UserContext/UserContext'
 
 function SearchPageComponent() {
     const location = useLocation()
@@ -19,6 +22,9 @@ function SearchPageComponent() {
         publisher: '',
     })
 
+    const {userProfile} = useContext(UserContext)
+    console.log(userProfile)
+
     useEffect(() => {
         const fetchAllBooks = async () => {
             setIsLoading(true)
@@ -26,9 +32,10 @@ function SearchPageComponent() {
                 const response = await axios.get(
                     `http://localhost:3500/api/v1/book`
                 )
+                
                 setAllBooks(response.data.books)
                 setFilteredBooks(response.data.books)
-                // console.log('All Books', setAllBooks)
+                console.log('All Books', allBooks)
             } catch (err) {
                 console.error('Error fetching books:', err)
             } finally {
@@ -132,7 +139,7 @@ function SearchPageComponent() {
     }
 
     return (
-        <div className='search-page-outer-container'>
+        <div className='search_page_outer_container'>
             <div className='search-heading'>
                 <h1 className='search-title'>Search</h1>
             </div>

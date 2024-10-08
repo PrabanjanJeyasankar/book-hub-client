@@ -1,249 +1,202 @@
-import React, { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import React, { useState, useEffect } from 'react'
 import './BookFormComponent.css'
+import InputField from './InputField/InputField'
+import FileUpload from './FileUpload/FileUpload'
+import handleFileChange from '../../utils/handleFileChange'
+import handleInputChange from '../../utils/handleInputChange'
+import validateBookForm from '../../utils/formValidation'
+import ButtonComponent from '../ButtonComponent/ButtonComponent'
 
-const BookFormComponent = ({ formData, setFormData, handleSubmit, title }) => {
-    const [imagePreview, setImagePreview] = useState(null)
+const BookFormComponent = ({
+    formData,
+    setFormData,
+    handleSubmit,
+    title,
+    imagePreview,
+    setImagePreview,
+}) => {
     const [errors, setErrors] = useState({})
 
-    const handleFileChange = (acceptedFiles) => {
-        const file = acceptedFiles[0]
-        if (file) {
-            const validMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-            if (validMimeTypes.includes(file.type)) {
-                setFormData((prevData) => ({ ...prevData, coverImage: file }))
-                const previewUrl = URL.createObjectURL(file)
-                setImagePreview(previewUrl)
-                return () => URL.revokeObjectURL(previewUrl)
-            } else {
-                setErrors((prevErrors) => ({
-                    ...prevErrors,
-                    coverImage:
-                        '* Invalid file type. Please upload an image file (jpg, png, gif).',
-                }))
-            }
-        }
-    }
-
-    const { getRootProps, getInputProps } = useDropzone({
-        onDrop: handleFileChange,
-    })
-
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-        setErrors((prevErrors) => ({ ...prevErrors, [name]: '' })) // Clear error when user types
-    }
-
-    const validateForm = () => {
-        let formErrors = {}
-        Object.keys(formData).forEach((key) => {
-            if (!formData[key] && key !== 'coverImage') {
-                formErrors[key] = `* ${
-                    key.charAt(0).toUpperCase() + key.slice(1)
-                } is required`
-            }
-        })
-        if (!formData.coverImage) {
-            formErrors.coverImage = '* Cover image is required'
-        }
-        setErrors(formErrors)
-        return Object.keys(formErrors).length === 0
+    const onFileChange = (acceptedFiles) => {
+        handleFileChange(acceptedFiles, setFormData, setImagePreview, setErrors)
     }
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        if (validateForm()) {
-            handleSubmit() // Call the external submit handler if validation passes
+
+        const formErrors = validateBookForm(formData, imagePreview)
+        setErrors(formErrors)
+
+        if (Object.keys(formErrors).length === 0) {
+            handleSubmit(e)
         }
     }
+
+    const handleClearField = () => {
+        setFormData({
+            title: '',
+            author: '',
+            genre: '',
+            publisher: '',
+            isbn: '',
+            publicationDate: '',
+            language: '',
+            description: '',
+            availableCopies: '',
+            coverImage: null,
+        })
+        setErrors('')
+    }
+
+    const handleFormInputChange = (e) => {
+        handleInputChange(e, formData, setFormData, setErrors)
+    }
+
+    useEffect(() => {
+        return () => {
+            if (imagePreview) {
+                URL.revokeObjectURL(imagePreview)
+            }
+        }
+    }, [imagePreview])
 
     return (
         <div className='book-form-container'>
             <form className='book-form' onSubmit={handleFormSubmit}>
                 <h2 className='book-form-title'>{title}</h2>
                 <div className='book-form-wrapper'>
-                    {/* Left Side Container */}
                     <div className='book-form-input-container'>
                         <div className='book-form-left-column'>
+                            <InputField
+                                outerDivClassName='book-input-column'
+                                label='Book Title'
+                                name='title'
+                                className='book-text-input'
+                                value={formData.title}
+                                onChange={handleFormInputChange}
+                                error={errors.title}
+                            />
                             <div className='book-input-column'>
-                                <label className='book-label'>Book Title</label>
-                                <input
-                                    type='text'
-                                    name='title'
-                                    className='book-text-input'
-                                    value={formData.title}
-                                    onChange={handleChange}
-                                />
-                                {errors.title && (
-                                    <span className='book-error'>
-                                        {errors.title}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>Author</label>
-                                <input
-                                    type='text'
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Author'
                                     name='author'
                                     className='book-text-input'
                                     value={formData.author}
-                                    onChange={handleChange}
+                                    onChange={handleFormInputChange}
+                                    error={errors.author}
                                 />
-                                {errors.author && (
-                                    <span className='book-error'>
-                                        {errors.author}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>Genre</label>
-                                <select
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Genre'
                                     name='genre'
                                     className='book-select-input'
                                     value={formData.genre}
-                                    onChange={handleChange}>
-                                    <option value=''>Select Genre</option>
-                                    <option value='Fiction'>Fiction</option>
-                                    <option value='Non-Fiction'>
-                                        Non-Fiction
-                                    </option>
-                                    <option value='Mystery'>Mystery</option>
-                                    <option value='Fantasy'>Fantasy</option>
-                                    <option value='Science Fiction'>
-                                        Science Fiction
-                                    </option>
-                                </select>
-                                {errors.genre && (
-                                    <span className='book-error'>
-                                        {errors.genre}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>Publisher</label>
-                                <input
-                                    type='text'
+                                    onChange={handleFormInputChange}
+                                    error={errors.genre}
+                                    type='select'
+                                    options={[
+                                        { value: '', label: 'Select Genre' },
+                                        { value: 'Fiction', label: 'Fiction' },
+                                        {
+                                            value: 'Non-Fiction',
+                                            label: 'Non-Fiction',
+                                        },
+                                        { value: 'Mystery', label: 'Mystery' },
+                                        { value: 'Fantasy', label: 'Fantasy' },
+                                        {
+                                            value: 'Science Fiction',
+                                            label: 'Science Fiction',
+                                        },
+                                    ]}
+                                />
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Publisher'
                                     name='publisher'
                                     className='book-text-input'
                                     value={formData.publisher}
-                                    onChange={handleChange}
+                                    onChange={handleFormInputChange}
+                                    error={errors.publisher}
                                 />
-                                {errors.publisher && (
-                                    <span className='book-error'>
-                                        {errors.publisher}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>ISBN</label>
-                                <input
-                                    type='text'
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='ISBN'
                                     name='isbn'
                                     className='book-text-input'
                                     value={formData.isbn}
-                                    onChange={handleChange}
+                                    onChange={handleFormInputChange}
+                                    error={errors.isbn}
+                                    type='text'
                                 />
-                                {errors.isbn && (
-                                    <span className='book-error'>
-                                        {errors.isbn}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>
-                                    Publication Date
-                                </label>
-                                <input
-                                    type='date'
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Publication Date'
                                     name='publicationDate'
                                     className='book-text-input'
                                     value={formData.publicationDate}
-                                    onChange={handleChange}
+                                    onChange={handleFormInputChange}
+                                    error={errors.publicationDate}
+                                    type='date'
                                 />
-                                {errors.publicationDate && (
-                                    <span className='book-error'>
-                                        {errors.publicationDate}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-column'>
-                                <label className='book-label'>Language</label>
-                                <input
-                                    type='text'
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Language'
                                     name='language'
                                     className='book-text-input'
                                     value={formData.language}
-                                    onChange={handleChange}
+                                    onChange={handleFormInputChange}
+                                    error={errors.language}
                                 />
-                                {errors.language && (
-                                    <span className='book-error'>
-                                        {errors.language}
-                                    </span>
-                                )}
+                                <InputField
+                                    outerDivClassName='book-input-column'
+                                    label='Available Copies'
+                                    name='availableCopies'
+                                    className='book-text-input'
+                                    value={formData.availableCopies}
+                                    onChange={handleFormInputChange}
+                                    error={errors.availableCopies}
+                                    type='text'
+                                />
                             </div>
                         </div>
                         <div className='book-form-right-column'>
+                            <InputField
+                                outerDivClassName='book-input-column'
+                                label='Description'
+                                name='description'
+                                className='book-textarea-input'
+                                value={formData.description}
+                                onChange={handleFormInputChange}
+                                error={errors.description}
+                                type='textarea'
+                            />
                             <div className='book-input-column'>
-                                <label className='book-label'>
-                                    Description
-                                </label>
-                                <textarea
-                                    name='description'
-                                    className='book-textarea-input'
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                />
-                                {errors.description && (
-                                    <span className='book-error'>
-                                        {errors.description}
-                                    </span>
-                                )}
-                            </div>
-                            <div className='book-input-cover-image'>
                                 <label className='book-label'>
                                     Cover Image
                                 </label>
-                                <div
-                                    {...getRootProps({
-                                        className: 'book-dropzone',
-                                    })}>
-                                    <input {...getInputProps()} />
-                                    {!imagePreview && (
-                                        <p>
-                                            Drag 'n' drop a file here, or click
-                                            to select files
-                                        </p>
-                                    )}
-                                    {imagePreview && (
-                                        <div className='book-image-preview-container'>
-                                            <img
-                                                src={imagePreview}
-                                                alt='Preview'
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                                {errors.coverImage && (
-                                    <span className='book-error'>
-                                        {errors.coverImage}
-                                    </span>
-                                )}
+                                <FileUpload
+                                    onFileChange={onFileChange}
+                                    imagePreview={imagePreview}
+                                    error={errors.coverImage}
+                                    coverImage={formData.coverImage}
+                                />
                             </div>
                         </div>
                     </div>
-                </div>
-                {/* Action Buttons */}
-                <div className='book-action-buttons'>
-                    <button
-                        type='button'
-                        className='book-clear-field-button'
-                        onClick={() => setFormData({})}>
-                        Clear Fields
-                    </button>
-                    <button type='submit' className='book-add-button'>
-                        {title === 'Add New Book' ? 'Add Book' : 'Update Book'}
-                    </button>
+                    <div className='book-action-buttons'>
+                        <ButtonComponent
+                            type='button'
+                            className='book-clear-field-button'
+                            onClick={handleClearField}>
+                            Clear Fields
+                        </ButtonComponent>
+                        <ButtonComponent
+                            type='submit'
+                            className='add-book-button'>
+                            Submit
+                        </ButtonComponent>
+                    </div>
                 </div>
             </form>
         </div>

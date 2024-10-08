@@ -1,53 +1,84 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { X, Bookmark, Heart, Pencil, Trash } from 'lucide-react';
-import EditBookComponent from '../../components/EditBookComponent/EditBookComponent';
-import DeleteBookComponent from '../../components/DeleteABookComponent/DeleteABookComponent';
-import './OverlayABookComponent.css';
-import ConfirmationPopupComponent from '../PopupComponents/ConfirmationPopupComponent/ConfirmationPopupComponent';
-import { UserContext } from '../../context/UserContext/UserContext';
+import React, { useState, useRef, useEffect, useContext } from 'react'
+import { X, Bookmark, Heart, Pencil, Trash } from 'lucide-react'
+import EditBookComponent from '../../components/EditBookComponent/EditBookComponent'
+import DeleteBookComponent from '../../components/DeleteABookComponent/DeleteABookComponent'
+import './OverlayABookComponent.css'
+import ConfirmationPopupComponent from '../PopupComponents/ConfirmationPopupComponent/ConfirmationPopupComponent'
+import { UserContext } from '../../context/UserContext/UserContext'
+import axios from 'axios'
 
 function OverlayABookComponent({ book, onClose }) {
-    const overlayRef = useRef(null);
-    const [isEditing, setIsEditing] = useState(false);
-    const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false);
-    const [bookToDelete, setBookToDelete] = useState(null);
-    const [confirmDeletionProceed, setConfirmDeletionProceed] = useState(false);
-    const { userProfile } = useContext(UserContext);
+    const overlayRef = useRef(null)
+    const [isEditing, setIsEditing] = useState(false)
+    const [isLiked, setIsLiked] = useState(false)
+    const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] =
+        useState(false)
+    const [bookToDelete, setBookToDelete] = useState(null)
+    const [confirmDeletionProceed, setConfirmDeletionProceed] = useState(false)
+    const { userProfile } = useContext(UserContext)
 
     const handleClickOutside = (event) => {
-        if (overlayRef.current && !overlayRef.current.contains(event.target) && !isConfirmationPopupOpen) {
-            onClose();
+        if (
+            overlayRef.current &&
+            !overlayRef.current.contains(event.target) &&
+            !isConfirmationPopupOpen
+        ) {
+            onClose()
         }
-    };
+    }
 
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside)
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isConfirmationPopupOpen]);
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isConfirmationPopupOpen])
 
     const handleEditClick = () => {
-        setIsEditing(true);
-    };
+        setIsEditing(true)
+    }
 
     const handleEditClose = () => {
-        setIsEditing(false);
-    };
+        setIsEditing(false)
+    }
 
     const handleTrashClick = () => {
-        setBookToDelete(book);
-        setIsConfirmationPopupOpen(true);
-    };
+        setBookToDelete(book)
+        setIsConfirmationPopupOpen(true)
+    }
 
     const handleCancelDeletion = () => {
-        setIsConfirmationPopupOpen(false);
-    };
+        setIsConfirmationPopupOpen(false)
+    }
 
     const handleConfirmDeletion = () => {
-        setIsConfirmationPopupOpen(false);
-        setConfirmDeletionProceed(true);
-    };
+        setIsConfirmationPopupOpen(false)
+        setConfirmDeletionProceed(true)
+    }
+
+    const handleLikeClick = async () => {
+        console.log(userProfile)
+        const isUserLiked = !isLiked
+        setIsLiked(!isLiked)
+        console.log(book._id)
+        try {
+            const response = await axios.post(
+                `http://localhost:3500/api/v1/book/like`,
+                { bookId: book._id, isLiked: isUserLiked },
+                { withCredentials: true }
+            )
+            if (response.status == 200) {
+                console.log('Toast')
+            }
+            console.log(response.data.likedCollections)
+        } catch (error) {
+            if (error.response.status == 401) {
+                alert(`Error : ${error.response.data.message}`)
+            }
+            console.error('Error liking book:', error)
+            setIsLiked(!newLikedState)
+        }
+    }
 
     return (
         <div className='overlay'>
@@ -56,7 +87,10 @@ function OverlayABookComponent({ book, onClose }) {
                     <X size={24} />
                 </button>
                 {isEditing ? (
-                    <EditBookComponent bookId={book.isbn} onClose={handleEditClose} />
+                    <EditBookComponent
+                        bookId={book.isbn}
+                        onClose={handleEditClose}
+                    />
                 ) : (
                     <div className='overlay-book-container'>
                         <img
@@ -67,11 +101,32 @@ function OverlayABookComponent({ book, onClose }) {
                             <div className='overlay-book-info'>
                                 <div className='overlay-header'>
                                     <div className='overlay-title-author'>
-                                        <h3 className='overlay-header-title'>{book.title}</h3>
-                                        <p className='overlay-header-author'>by {book.author}</p>
+                                        <h3 className='overlay-header-title'>
+                                            {book.title}
+                                        </h3>
+                                        <p className='overlay-header-author'>
+                                            by {book.author}
+                                        </p>
                                     </div>
                                     <div className='overlay-actions'>
-                                        {userProfile?.role !== 'admin' && (
+                                        {userProfile?.role === 'user' && (
+                                            <>
+                                                <Bookmark
+                                                    className='bookmark-icon'
+                                                    size={26}
+                                                    strokeWidth={2}
+                                                />
+                                                <Heart
+                                                    className={`heart-icon ${
+                                                        isLiked ? 'liked' : ''
+                                                    }`}
+                                                    size={26}
+                                                    strokeWidth={2}
+                                                    onClick={handleLikeClick}
+                                                />
+                                            </>
+                                        )}
+                                        {userProfile?.role === 'admin' && (
                                             <>
                                                 <Trash
                                                     className='delete-icon'
@@ -108,7 +163,11 @@ function OverlayABookComponent({ book, onClose }) {
                                                 <p>Publisher</p>
                                             </div>
                                             <div className='overlay-book-details-grid'>
-                                                <h3>{new Date(book.publicationDate).getFullYear()}</h3>
+                                                <h3>
+                                                    {new Date(
+                                                        book.publicationDate
+                                                    ).getFullYear()}
+                                                </h3>
                                                 <p>Year</p>
                                             </div>
                                             <div className='overlay-book-details-grid'>
@@ -135,16 +194,15 @@ function OverlayABookComponent({ book, onClose }) {
                     bookData={bookToDelete}
                 />
             )}
-            {/* Render DeleteBookComponent when confirmed */}
             {confirmDeletionProceed && (
                 <DeleteBookComponent
                     bookData={bookToDelete}
                     onClose={onClose}
-                    onDelete={() => setConfirmDeletionProceed(false)} // Reset after deletion
+                    onDelete={() => setConfirmDeletionProceed(false)}
                 />
             )}
         </div>
-    );
+    )
 }
 
-export default OverlayABookComponent;
+export default OverlayABookComponent

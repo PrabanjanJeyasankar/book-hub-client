@@ -15,8 +15,15 @@ function Signup() {
             })
             .then((response) => {
                 console.log(response)
+                // setIsLoggedIn(true)
+                // setUserProfile(response.data.user)
                 setIsLoggedIn(true)
-                setUserProfile(response.data.user)
+                setUserProfile(response.data.userProfile)
+                localStorage.setItem(
+                    'userProfile',
+                    JSON.stringify(response.data.userProfile)
+                )
+                localStorage.setItem('isLoggedIn', 'true')
                 navigate('/')
             })
             .catch((error) => {

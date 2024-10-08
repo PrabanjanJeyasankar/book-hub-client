@@ -1,10 +1,8 @@
-// src/components/AddBookFormComponent/AddBookFormComponent.js
 import React, { useState } from 'react'
-import axios from 'axios'
-import ModalComponent from '../PopupComponents/InformationPopupComponent/InformationPopupComponent'
+import InformationPopupComponent from '../PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import BookFormComponent from '../BookFormComponent/BookFormComponent'
-import greenTick from '../../assets/img/accept.png'
-import redWarning from '../../assets/img/mark.png'
+import validateBookForm from '../../utils/formValidation.js'
+import addBookService from '../../services/addBookService.js'
 
 function AddBookFormComponent() {
     const initialFormState = {
@@ -27,60 +25,62 @@ function AddBookFormComponent() {
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const validateForm = () => {
-        let formErrors = {}
-        Object.keys(formData).forEach((key) => {
-            if (!formData[key] && key !== 'coverImage') {
-                formErrors[key] = `* ${
-                    key.charAt(0).toUpperCase() + key.slice(1)
-                } is required`
-            }
-        })
-        if (!formData.coverImage) {
-            formErrors.coverImage = '* Cover image is required'
-        }
-        setErrors(formErrors)
-        return Object.keys(formErrors).length === 0
-    }
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if (validateForm()) {
-            const data = new FormData()
-            Object.keys(formData).forEach((key) => {
-                data.append(key, formData[key])
-            })
 
-            try {
-                const response = await axios.post(
-                    'http://localhost:3500/api/v1/book/add',
-                    data,
-                    { headers: { 'Content-Type': 'multipart/form-data' } }
-                )
+        const formErrors = validateBookForm(formData)
+        setErrors(formErrors)
 
-                if (response.status === 201) {
-                    const bookTitle =
-                        response.data?.book?.title || 'Unknown Book'
-                    setPopupImageSrc(successImage)
-                    setPopupMessageTitle('Book Added Successfully')
-                    setPopupMessageBody(
-                        `"${bookTitle}" has been added successfully!`
-                    )
-                } else {
-                    setPopupImageSrc(errorImage)
-                    setPopupMessageTitle('Error')
-                    setPopupMessageBody(
-                        'An error occurred while adding the book.'
-                    )
-                }
-                setIsModalOpen(true)
-            } catch (error) {
-                console.error('Error adding book:', error)
-                setPopupImageSrc(errorImage)
-                setPopupMessageTitle('Error')
-                setPopupMessageBody('An error occurred while adding the book.')
-                setIsModalOpen(true)
-            }
+        if (Object.keys(formErrors).length === 0) {
+            addBookService(formData)
+                .then((response) => {
+                    console.log(response.status)
+                    if (response.status == 201) {
+                        setPopupMessageTitle('Success')
+                        setPopupMessageBody(
+                            `"${
+                                response.data?.book?.title || 'Unknown Book'
+                            }" has been added successfully!`
+                        )
+                        setPopupImageSrc('successImage')
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.response.status)
+                    switch (error.response.status) {
+                        case 400:
+                            setPopupMessageTitle('Validation Error')
+                            setPopupMessageBody(
+                                'Please check your input and try again.'
+                            )
+                            setPopupImageSrc('errorImage')
+                            break
+                        case 409:
+                            setPopupMessageTitle('Book Already Exist')
+                            setPopupMessageBody(
+                                'This Book has already been added!'
+                            )
+                            setPopupImageSrc('errorImage')
+                            break
+                        case 500:
+                            setPopupMessageTitle('Server Error')
+                            setPopupMessageBody(
+                                'There was a server error. Please try again later.'
+                            )
+                            setPopupImageSrc('errorImage')
+                            break
+                        default:
+                            setPopupMessageTitle('Unknown Error')
+                            setPopupMessageBody(
+                                'An unexpected error occurred. Please try again.'
+                            )
+                            setPopupImageSrc('errorImage')
+                            break
+                    }
+                })
+                .finally(() => {
+                    setIsModalOpen(true)
+                })
         }
     }
 
@@ -97,11 +97,11 @@ function AddBookFormComponent() {
                 errors={errors}
                 title='Add New Book'
             />
-            <ModalComponent
-                title={popupMessageTitle}
+            <InformationPopupComponent
+                popupMessageTitle={popupMessageTitle}
+                popupMessageBody={popupMessageBody}
+                popupImageSrc={popupImageSrc}
                 isOpen={isModalOpen}
-                imageSrc={popupImageSrc}
-                messageBody={popupMessageBody}
                 onClose={closeModal}
             />
         </div>

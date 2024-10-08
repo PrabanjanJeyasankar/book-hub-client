@@ -6,9 +6,9 @@ import TrashCanImage from '../../../assets/img/trash-can.png'
 import { X } from 'lucide-react'
 
 const images = {
-    success: ThumbsUpImage,
-    error: RepairImage,
-    delete: TrashCanImage,
+    successImage: ThumbsUpImage,
+    errorImage: RepairImage,
+    deleteImage: TrashCanImage,
 }
 
 function InformationPopupComponent({

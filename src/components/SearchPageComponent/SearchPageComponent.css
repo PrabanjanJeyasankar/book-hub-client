@@ -1,4 +1,4 @@
-.search-page-outer-container {
+.search_page_outer_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,6 @@
     color: #8e8e8e;
     user-select: none;
 }
-
 
 /* ---------- Filter Dropdown ----------- */
 
@@ -136,8 +135,9 @@
 @media (max-width: 1880px) {
     .results-grid-layout {
         /* grid-template-columns: repeat(6, 1fr); */
-    
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));}
+
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    }
 }
 
 @media (max-width: 1600px) {
