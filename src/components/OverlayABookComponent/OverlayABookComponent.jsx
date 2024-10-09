@@ -1,21 +1,47 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
-import { X, Bookmark, Heart, Pencil, Trash } from 'lucide-react'
+import { X, Bookmark, Pencil, Trash } from 'lucide-react'
 import EditBookComponent from '../../components/EditBookComponent/EditBookComponent'
 import DeleteBookComponent from '../../components/DeleteABookComponent/DeleteABookComponent'
 import './OverlayABookComponent.css'
 import ConfirmationPopupComponent from '../PopupComponents/ConfirmationPopupComponent/ConfirmationPopupComponent'
 import { UserContext } from '../../context/UserContext/UserContext'
+import LikeButtonComponent from '../LikeButtonComponent/LikeButtonComponent'
 import axios from 'axios'
 
 function OverlayABookComponent({ book, onClose }) {
     const overlayRef = useRef(null)
     const [isEditing, setIsEditing] = useState(false)
-    const [isLiked, setIsLiked] = useState(false)
     const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] =
         useState(false)
     const [bookToDelete, setBookToDelete] = useState(null)
     const [confirmDeletionProceed, setConfirmDeletionProceed] = useState(false)
     const { userProfile } = useContext(UserContext)
+    const [isUserLiked, setIsUserLiked] = useState(false)
+
+    const bookId = book._id
+
+    useEffect(() => {
+        if (userProfile) {
+            axios
+                .get(
+                    `http://localhost:3500/api/v1/book/user-preference/${bookId}`,
+                    { withCredentials: true }
+                )
+                .then((response) => {
+                    if (response.status == 200) {
+                        setIsUserLiked(response.data.liked)
+                        console.log(response.data.liked)
+                        console.log(response.data.message)
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        'Error fetching liked status:',
+                        error.response
+                    )
+                })
+        }
+    }, [bookId, userProfile])
 
     const handleClickOutside = (event) => {
         if (
@@ -56,30 +82,6 @@ function OverlayABookComponent({ book, onClose }) {
         setConfirmDeletionProceed(true)
     }
 
-    const handleLikeClick = async () => {
-        console.log(userProfile)
-        const isUserLiked = !isLiked
-        setIsLiked(!isLiked)
-        console.log(book._id)
-        try {
-            const response = await axios.post(
-                `http://localhost:3500/api/v1/book/like`,
-                { bookId: book._id, isLiked: isUserLiked },
-                { withCredentials: true }
-            )
-            if (response.status == 200) {
-                console.log('Toast')
-            }
-            console.log(response.data.likedCollections)
-        } catch (error) {
-            if (error.response.status == 401) {
-                alert(`Error : ${error.response.data.message}`)
-            }
-            console.error('Error liking book:', error)
-            setIsLiked(!newLikedState)
-        }
-    }
-
     return (
         <div className='overlay'>
             <div className='overlay-content' ref={overlayRef}>
@@ -116,13 +118,12 @@ function OverlayABookComponent({ book, onClose }) {
                                                     size={26}
                                                     strokeWidth={2}
                                                 />
-                                                <Heart
-                                                    className={`heart-icon ${
-                                                        isLiked ? 'liked' : ''
-                                                    }`}
-                                                    size={26}
-                                                    strokeWidth={2}
-                                                    onClick={handleLikeClick}
+                                                <LikeButtonComponent
+                                                    bookId={bookId}
+                                                    isUserLiked={isUserLiked}
+                                                    setIsUserLiked={
+                                                        setIsUserLiked
+                                                    }
                                                 />
                                             </>
                                         )}

@@ -23,7 +23,7 @@ function SearchPageComponent() {
     })
 
     const {userProfile} = useContext(UserContext)
-    console.log(userProfile)
+    // console.log(userProfile)
 
     useEffect(() => {
         const fetchAllBooks = async () => {

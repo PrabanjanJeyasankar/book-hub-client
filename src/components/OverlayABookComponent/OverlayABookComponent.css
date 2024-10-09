@@ -7,7 +7,6 @@
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     align-items: flex-start;
     z-index: 1000;
     padding: 2rem 0;
@@ -171,4 +170,23 @@
     border-radius: 5px;
     padding: 0.5rem;
     cursor: pointer;
+}
+
+
+@media (min-width: 600px) {
+    .overlay-book-container {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem;
+        padding: 2rem 2rem 2rem 2rem;
+        flex-wrap: wrap;
+        overflow: hidden;
+        height: auto;
+    }
+    
+    .overlay-book-container img {
+        margin-bottom: 3rem;
+    }
 }
