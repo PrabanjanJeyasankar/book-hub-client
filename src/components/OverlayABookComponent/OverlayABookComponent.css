@@ -12,6 +12,7 @@
     padding: 2rem 0;
     margin-bottom: 2rem;
     overflow-y: auto;
+    transition: background 0.3s ease;
 }
 
 .overlay-content {
@@ -27,6 +28,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: max-width 0.3s ease, width 0.3s ease;
 }
 
 .overlay-book-container {
@@ -37,9 +39,11 @@
     flex-wrap: wrap;
     overflow: hidden;
     height: auto;
+    transition: padding 0.3s ease;
 }
 
 .overlay-book-container img {
+    user-select: none;
     max-width: 400px;
     min-width: 300px;
     height: auto;
@@ -48,6 +52,7 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
         rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
         rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    transition: max-width 0.3s ease;
 }
 
 .overlay-details-action-container {
@@ -64,31 +69,9 @@
 }
 
 .overlay-actions {
-    /* margin: 1rem; */
     display: flex;
     gap: 1rem;
     color: rgb(44, 44, 44);
-}
-
-.bookmark-icon,
-.heart-icon {
-    border-radius: 50%;
-    padding: 0.8rem;
-    background-color: rgb(243, 243, 243);
-    transition: fill 0.3s ease;
-    cursor: pointer;
-}
-
-.heart-icon.liked {
-    fill: #ff4a4a;
-    stroke: #ff4a4a;
-}
-.heart-icon:hover {
-    background-color: rgba(255, 74, 74, 0.2);
-    transform: scale(1.1);
-}
-.heart-icon:active {
-    transform: scale(0.9);
 }
 
 .delete-icon,
@@ -99,6 +82,7 @@
 }
 
 .overlay-header-title {
+    user-select: none;
     margin-bottom: 0.2rem;
     line-height: 55px;
     font-size: 3rem;
@@ -106,6 +90,7 @@
 }
 
 .overlay-header-author {
+    user-select: none;
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -113,6 +98,7 @@
 }
 
 .overlay-book-other-details {
+    user-select: none;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.5rem;
@@ -130,17 +116,20 @@
 }
 
 .overlay-book-details-grid h3 {
+    user-select: none;
     font-size: 1rem;
     font-weight: 500;
     padding: 0.4rem;
 }
 
 .overlay-book-details-grid p {
+    user-select: none;
     font-size: 0.9rem;
     color: var(--gray-550);
 }
 
 .overlay-book-description {
+    user-select: none;
     margin-bottom: 1.5rem;
     text-align: justify;
 }
@@ -170,8 +159,8 @@
     border-radius: 5px;
     padding: 0.5rem;
     cursor: pointer;
+    
 }
-
 
 @media (min-width: 600px) {
     .overlay-book-container {
@@ -184,8 +173,9 @@
         flex-wrap: wrap;
         overflow: hidden;
         height: auto;
+        transition: padding 0.3s ease;
     }
-    
+
     .overlay-book-container img {
         margin-bottom: 3rem;
     }

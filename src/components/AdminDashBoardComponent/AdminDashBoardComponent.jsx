@@ -5,41 +5,28 @@ import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponen
 import DataTable from 'react-data-table-component'
 import axios from 'axios'
 import { BookUp2, Hourglass, Users, BookImage } from 'lucide-react'
+import fetchAllUsersService from '../../services/fetchAllUsersService'
+import fetchAllBooksService from '../../services/fetchAllBooksService'
 
 function AdminDashBoardComponent() {
     const [books, setBooks] = useState([])
     const [users, setUsers] = useState([])
     const [dateTime, setDateTime] = useState(new Date())
     const [totalCopies, setTotalCopies] = useState(0)
+    const [totalMembers, setTotalMembers] = useState(0)
     const [selectedBook, setSelectedBook] = useState(null)
     const [isOverlayVisible, setIsOverlayVisible] = useState(false)
     const overlayRef = useRef(null)
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await axios.get(
-                    'http://localhost:3500/api/v1/book/'
-                )
-                setBooks(response.data.books)
-                calculateTotalCopies(response.data.books)
-            } catch (error) {
-                console.error('Error fetching books:', error)
-            }
-        }
-        fetchBooks()
+        fetchAllBooksService(setBooks, calculateTotalCopies)
     }, [])
 
     useEffect(() => {
         const fetchUsers = async () => {
-            try {
-                const response = await axios.get(
-                    'http://localhost:3500/api/v1/users/'
-                )
-                setUsers(response.data.users)
-            } catch (error) {
-                console.error('Error fetching users:', error)
-            }
+            const usersData = await fetchAllUsersService()
+            setUsers(usersData)
+            setTotalMembers(usersData.length)
         }
         fetchUsers()
     }, [])
@@ -181,7 +168,7 @@ function AdminDashBoardComponent() {
                 </div>
                 <div className='statistics-box' id='total-members'>
                     <div className='stats-child'>
-                        <span>356</span>
+                        <span>{totalMembers}</span>
                         <p>Total Members</p>
                     </div>
                     <div className='statistics-icon'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Heart } from 'lucide-react'
 import useLikeBook from '../../hooks/useLikeBook.js'
+import './LikeButtonComponent.css'
 
 function LikeButtonComponent({ bookId, isUserLiked, setIsUserLiked }) {
     const { handleLikeClick, isProcessing } = useLikeBook(

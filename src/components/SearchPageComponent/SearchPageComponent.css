@@ -155,14 +155,14 @@
 
 @media (max-width: 800px) {
     .results-grid-layout {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
 }
 
 @media (max-width: 600px) {
     .results-grid-layout {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

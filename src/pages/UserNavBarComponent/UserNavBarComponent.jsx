@@ -9,7 +9,7 @@ import Login from '../Login/Login'
 import HeroComponent from '../../components/HeroComponent/HeroComponent'
 import AboutUsComponent from '../../components/AboutUsComponent/AboutUsComponent'
 import SearchPageComponent from '../../components/SearchPageComponent/SearchPageComponent'
-import UserProfileComponent from '../../components/UserProfileComponent/UserProfileComponent'
+import UserProfileComponent from '../UserProfilePageComponent/UserProfileComponent/UserProfileComponent'
 
 import logoImage from '../../assets/img/open_book_logo.png'
 import DummyProfileImage from '../../assets/img/img1.png'
@@ -41,25 +41,31 @@ function UserNavBarComponent() {
     }, [isDropdownOpen])
 
     const handleLogout = () => {
-        console.log('first')
         axios
             .get('http://localhost:3500/api/v1/user/logout', {
                 withCredentials: true,
             })
             .then((response) => {
                 console.log(response.data.message)
-                if(response.status == 200) {
+                if (response.status == 200) {
                     setIsLoggedIn(false)
                     setUserProfile(null)
                     localStorage.removeItem('userProfile')
                     localStorage.removeItem('isLoggedIn')
                     navigate('/')
                 }
-                
             })
             .catch((error) => {
                 console.error('Logout error:', error)
             })
+    }
+
+    const handleDropDownUserProfileClick = () => {
+        setIsDropdownOpen(false)
+    }
+    
+    const handleProfileClick = () => {
+        setIsDropdownOpen((prev) => !prev)
     }
 
     return (
@@ -74,8 +80,8 @@ function UserNavBarComponent() {
                 <div className='user-navbar-center'>
                     <div className='page-links'>
                         <Link to='/'>Home</Link>
-                        <Link to='/search'>Find Books</Link>
-                        <Link to='/about'>About us</Link>
+                        <Link to='/search'>Search Books</Link>
+                        {/* <Link to='/about'>About us</Link> */}
                     </div>
                 </div>
 
@@ -86,9 +92,7 @@ function UserNavBarComponent() {
                                 src={DummyProfileImage}
                                 alt='Profile'
                                 className='user-nav-profile-icon'
-                                onClick={() =>
-                                    setIsDropdownOpen((prev) => !prev)
-                                }
+                                onClick={handleProfileClick}
                             />
                             {isDropdownOpen && (
                                 <div className='user-profile-dropdown-menu open'>
@@ -98,15 +102,17 @@ function UserNavBarComponent() {
                                             alt='Profile'
                                             className='user-profile-dropdown-image'
                                         />
-                                        <span className='user-profile-dropdown-name'>
+                                        <Link
+                                            to='/user-profile'
+                                            className='user-profile-dropdown-name'>
                                             {userProfile.name}
-                                        </span>
+                                        </Link>
                                     </div>
                                     <ul className='user-profile-dropdown-list'>
-                                        <li>
+                                        <li onClick={handleDropDownUserProfileClick}>
                                             <Link to='/user-profile'>
                                                 <CircleUserRound
-                                                    strokeWidth={1.5}
+                                                    strokeWidth={2}
                                                     size={18}
                                                 />
                                                 <p>Profile</p>
@@ -115,7 +121,7 @@ function UserNavBarComponent() {
                                         <li>
                                             <a onClick={handleLogout}>
                                                 <LogOut
-                                                    strokeWidth={1.5}
+                                                    strokeWidth={2}
                                                     size={18}
                                                 />
                                                 <p>Log out</p>
@@ -128,7 +134,7 @@ function UserNavBarComponent() {
                     </div>
                 ) : (
                     <div className='signup-login-links'>
-                        <Link className='login-btn' to='/login'>
+                        <Link className='login-btn' to='/login' >
                             Login
                         </Link>
                         <Link className='signup-btn' to='/signup'>

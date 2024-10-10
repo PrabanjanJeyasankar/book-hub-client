@@ -1,0 +1,73 @@
+.toggle-reading-status {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem 0rem 0.4rem 0rem;
+}
+
+.toggle-switch {
+    display: flex;
+    position: relative;
+    background-color: #f1f1f1;
+    border-radius: 2rem;
+    width: 100%;
+}
+
+.toggle-switch span {
+    flex: 1;
+    text-align: center;
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.toggle-switch span.active {
+    color: #fff;
+}
+
+.toggle-switch .slider {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: 33.33%;
+    background-color: #290000;
+    border-radius: 30px;
+    transition: left 0.3s;
+    z-index: 0;
+}
+
+.slider.currentlyReading {
+    left: 33.33%;
+}
+
+.slider.finishedReading {
+    left: 0;
+}
+
+.slider.wantToRead {
+    left: 66.66%;
+}
+
+.blink_me_currently_reading {
+    animation: blinker 1.3s linear infinite;
+    display: inline-block;
+    color: rgb(0, 255, 0);
+}
+
+.dot_finished_reading {
+    display: inline-block;
+    color: rgb(255, 166, 0);
+}
+
+.dot_want_to_read {
+    display: inline-block;
+    color: rgb(255, 0, 255);
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

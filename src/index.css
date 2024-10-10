@@ -1,11 +1,7 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     margin: 0;
-    /* font-family: 'Space Grotesk', sans-serif; */
     font-family: 'Inter', sans-serif;
 }
 
@@ -13,7 +9,7 @@
     /* --primary-blue: #272a57; */
     /* --secondary-blue: #59a3ff; */
 
-    /* #E7F3F5  - try fromk moodle*/
+    /* #E7F3F5  - try from moodle*/
 
     --color-black: #1b2023;
     --gray-100: #f7f7f7;
@@ -72,16 +68,36 @@ html {
     }
 }
 
-/*
-on select background : #EFF0F0
-
-bakcground color : #1B2023 - black
-
-baclgroubd gray : #B3B4B5
-dark gray #8A8D8F
 
 
-$platinum: #E5E6E6ff;
-$eerie-black: #1B2023ff;
-$silver: #A7A8AAff;
+/* ---------- Screen Sizes for Responsiveness ---------- 
+
+@media (min-width: 2560px) {
+   
+}
+
+@media (min-width: 1880px) {
+   
+}
+
+@media (min-width: 1440px) {
+  
+}
+
+@media (max-width: 1024px) {
+   
+}
+
+@media (max-width: 768px) {
+    
+}
+
+@media (max-width: 425px) {
+    
+}
+
+@media (min-width: 320px) {
+    
+}
+
 */

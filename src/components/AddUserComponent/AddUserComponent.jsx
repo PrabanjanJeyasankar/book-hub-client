@@ -17,12 +17,14 @@ function AddUserComponent() {
                 withCredentials: true,
             })
             .then((response) => {
-                setModalContent({
-                    title: 'Success!',
-                    body: 'User has been created successfully.',
-                    imageSrc: 'success',
-                })
-                setIsModalOpen(true)
+                if (response.status == 201) {
+                    setModalContent({
+                        title: 'Success!',
+                        body: 'User has been created successfully.',
+                        imageSrc: 'successImage',
+                    })
+                    setIsModalOpen(true)
+                }
             })
             .catch((error) => {
                 console.error('Error adding user:', error)

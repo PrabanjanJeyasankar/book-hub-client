@@ -6,7 +6,8 @@ import './OverlayABookComponent.css'
 import ConfirmationPopupComponent from '../PopupComponents/ConfirmationPopupComponent/ConfirmationPopupComponent'
 import { UserContext } from '../../context/UserContext/UserContext'
 import LikeButtonComponent from '../LikeButtonComponent/LikeButtonComponent'
-import axios from 'axios'
+import BookmarkComponent from '../BookmarkComponent/BookmarkComponent'
+import fetchingBookStatus from '../../services/fetchingBookStatus'
 
 function OverlayABookComponent({ book, onClose }) {
     const overlayRef = useRef(null)
@@ -16,32 +17,16 @@ function OverlayABookComponent({ book, onClose }) {
     const [bookToDelete, setBookToDelete] = useState(null)
     const [confirmDeletionProceed, setConfirmDeletionProceed] = useState(false)
     const { userProfile } = useContext(UserContext)
-    const [isUserLiked, setIsUserLiked] = useState(false)
 
     const bookId = book._id
 
-    useEffect(() => {
-        if (userProfile) {
-            axios
-                .get(
-                    `http://localhost:3500/api/v1/book/user-preference/${bookId}`,
-                    { withCredentials: true }
-                )
-                .then((response) => {
-                    if (response.status == 200) {
-                        setIsUserLiked(response.data.liked)
-                        console.log(response.data.liked)
-                        console.log(response.data.message)
-                    }
-                })
-                .catch((error) => {
-                    console.error(
-                        'Error fetching liked status:',
-                        error.response
-                    )
-                })
-        }
-    }, [bookId, userProfile])
+    const {
+        isUserLiked,
+        setIsUserLiked,
+        isUserBookmarked,
+        setIsUserBookmarked,
+        bookmarkStatus,
+    } = fetchingBookStatus(bookId, userProfile)
 
     const handleClickOutside = (event) => {
         if (
@@ -111,12 +96,19 @@ function OverlayABookComponent({ book, onClose }) {
                                         </p>
                                     </div>
                                     <div className='overlay-actions'>
-                                        {userProfile?.role === 'user' && (
+                                        {userProfile?.role === 'admin' && (
                                             <>
-                                                <Bookmark
-                                                    className='bookmark-icon'
-                                                    size={26}
-                                                    strokeWidth={2}
+                                                <BookmarkComponent
+                                                    bookId={bookId}
+                                                    isUserBookmarked={
+                                                        isUserBookmarked
+                                                    }
+                                                    setIsUserBookmarked={
+                                                        setIsUserBookmarked
+                                                    }
+                                                    readingState={
+                                                        bookmarkStatus
+                                                    }
                                                 />
                                                 <LikeButtonComponent
                                                     bookId={bookId}
@@ -127,7 +119,7 @@ function OverlayABookComponent({ book, onClose }) {
                                                 />
                                             </>
                                         )}
-                                        {userProfile?.role === 'admin' && (
+                                        {userProfile?.role === 'user' && (
                                             <>
                                                 <Trash
                                                     className='delete-icon'

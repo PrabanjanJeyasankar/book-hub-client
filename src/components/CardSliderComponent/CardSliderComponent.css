@@ -20,16 +20,15 @@
     width: 200px;
 }
 
-
 .nav-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background-color: black;
     color: var(--gray-500);
     border: none;
     cursor: pointer;
-    z-index: 10;
+    z-index: 1000;
     transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
@@ -42,7 +41,7 @@
 }
 
 .nav-button:disabled {
-    opacity: 0;
+    /* opacity: 0; */
     cursor: auto;
 }
 

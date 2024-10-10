@@ -4,6 +4,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../../context/UserContext/UserContext'
+import Button from '../../components/ButtonComponent/ButtonComponent'
 
 function Login() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
@@ -46,7 +47,7 @@ function Login() {
                     JSON.stringify(response.data.userProfile)
                 )
                 localStorage.setItem('isLoggedIn', 'true')
-                navigate('/') 
+                navigate('/')
             })
             .catch((error) => {
                 console.error('Login error:', error)
@@ -113,9 +114,9 @@ function Login() {
                         </div>
                     </div>
                     <div>
-                        <button className='login-button' type='submit'>
+                        <Button className='login-button' type='submit'>
                             Log In
-                        </button>
+                        </Button>
                     </div>
                 </form>
                 <div className='new-user'>

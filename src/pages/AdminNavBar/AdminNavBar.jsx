@@ -115,10 +115,10 @@ function AdminNavBar() {
                             path='/addbook'
                             element={<AddBookFormComponent />}
                         />
-                        {/* <Route
+                        <Route
                             path='/allusers'
                             element={<AddBookFormComponent />}
-                        /> */}
+                        />
                         <Route
                             path='/adduser'
                             element={<AddUserComponent />}

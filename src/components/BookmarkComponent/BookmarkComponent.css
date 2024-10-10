@@ -1,0 +1,110 @@
+.bookmark_icon {
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-radius: 50%;
+    padding: 0.8rem;
+    background-color: rgb(243, 243, 243);
+}
+
+.bookmark_icon {
+    color: var(--gray-550);
+}
+
+.bookmark_icon:hover {
+    background-color: rgba(170, 170, 170, 0.2);
+    transform: scale(1.1);
+}
+
+.bookmark_icon:active {
+    transform: scale(0.9);
+}
+
+.bookmark_icon.bookmarked {
+    fill: skyblue;
+    stroke: skyblue;
+}
+
+.bookmark_icon.finishedReading {
+    fill: orange;
+    stroke: orange;
+}
+
+.bookmark_icon.currentlyReading {
+    fill: green;
+    stroke: green;
+}
+
+.bookmark_icon.wantToRead {
+    fill: purple;
+    stroke: purple;
+}
+
+.bookmark__dropdown {
+    position: absolute;
+    border-radius: 0.5rem;
+    right: 3.5rem;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    z-index: 1;
+    width: 200px;
+    margin-top: 0.7rem;
+    background-color: white;
+    border: 1px solid var(--gray-150);
+}
+
+.bookmark_dropdown_option {
+    cursor: pointer;
+    margin: 0.4rem;
+    border-radius: 0.3rem;
+    border: none;
+}
+
+.bookmark_dropdown_option:hover {
+    background: #f0f0f0;
+}
+
+.bookmark_dropdown_option {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bookmark_dropdown_option:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.bookmark_dropdown_option.finishedReading.selected {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}
+
+.bookmark_dropdown_option.selected.currentlyReading {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+.bookmark_dropdown_option.selected.wantToRead {
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+}
+
+#finished_reading_option {
+    color: orange;
+    background-color: rgba(255, 154, 3, 0.116);
+    border: 1px solid rgba(128, 77, 0, 0.164);
+}
+
+#currently_reading_option {
+    color: green;
+    background-color: rgba(0, 128, 0, 0.116);
+    border: 1px solid rgba(0, 128, 0, 0.134);
+}
+
+#want_to_read_option {
+    color: purple;
+    background-color: rgba(255, 0, 221, 0.116);
+    border: 1px solid rgba(255, 0, 221, 0.116);
+}

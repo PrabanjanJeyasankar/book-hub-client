@@ -6,11 +6,11 @@ import { UserProvider } from './context/UserContext/UserContext'
 function App() {
     return (
         <>
-            {/* <UserProvider>
+            <UserProvider>
                 <AdminNavBar />
-            </UserProvider> */}
+            </UserProvider>
 
-            <Home/>
+            {/* <Home/> */}
         </>
     )
 }

@@ -4,7 +4,6 @@
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .profile-header {
@@ -59,6 +58,10 @@
     gap: 10px;
 }
 
+.profile-content {
+    width: 100%;
+}
+
 .edit-profile-btn,
 .more-options-btn {
     padding: 8px 16px;
@@ -109,4 +112,16 @@
 .profile-nav .active a {
     color: #000;
     border-bottom: 2px solid #000;
+}
+
+.bookmark-list, .liked-books-list{
+   
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    
+}
+
+.liked-books-list {
+    margin-top: 1rem;
 }

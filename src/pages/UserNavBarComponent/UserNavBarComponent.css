@@ -7,7 +7,7 @@
     background-color: white;
     position: sticky;
     top: 0;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .user-navbar-brand {
@@ -121,9 +121,9 @@
     right: 1.4rem;
     width: 250px;
     background-color: #ffffff;
+    border: 1px solid var(--gray-200);
     border-radius: 0.5rem;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
-    z-index: 2000;
+    box-shadow: rgba(0, 0, 0, 0.082) 0px 48px 100px 0px;
     overflow: hidden;
     animation: fadeIn 0.3s ease-in-out;
 }
@@ -178,6 +178,8 @@
     font-size: 1rem;
     font-weight: 600;
     color: #000000;
+    padding: 1rem 0rem;
+    /* width: 100%; */
 }
 
 .user-profile-dropdown-list {
