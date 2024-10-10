@@ -1,0 +1,201 @@
+.admin-page-container {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    height: 100vh;
+    box-sizing: border-box;
+    /* overflow-x: auto; */
+    /* background-color: #F6F8FA; */
+    /* background-color: #eeeeee; */
+}
+
+aside {
+    width: 200px;
+}
+
+.admin-navbar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0.55rem;
+    margin: 1rem;
+    height: calc(100vh - 2rem);
+    width: 300px;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 12px;
+    transition: width 0.3s ease-in-out;
+    overflow-y: auto;
+    user-select: none;
+    /* position: sticky; */
+    /* height: 100%; */
+
+    box-shadow: 
+    /* rgba(50, 50, 93, 0.175) 0px 50px 100px -20px, */ rgba(
+                0,
+                0,
+                0,
+                0.21
+            )
+            0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.245) 0px -2px 6px 0px inset;
+}
+
+.main-content {
+    /* flex: 1; */
+    margin-left: 1.2rem;
+    /* transition: margin-left 0.3s ease-in-out; */
+    overflow-y: auto;
+}
+
+.admin-navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-navbar-container.expanded {
+    width: 180px;
+}
+
+.navbar-container.collapsed {
+    width: 50px;
+}
+
+.navbar-brand.collapsed {
+    display: none;
+}
+
+aside {
+    /* position: relative; */
+}
+
+.navbar-brand {
+    margin-bottom: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 0;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.admin-app-logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+.app-name {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.admin-app-logo img {
+    width: 28px;
+    margin: 0;
+}
+
+.admin-page-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.admin-page-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 1rem;
+    border-radius: 0.7rem;
+    box-sizing: border-box;
+    transition: padding-left 0.3s ease-in-out;
+}
+
+.admin-page-links a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(19, 19, 19);
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out,
+        transform 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+.admin-page-links a:hover {
+    background-color: var(--gray-150);
+}
+
+.admin-page-links a p {
+    margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.admin-page-links a p.collapsed {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.admin-page-links .icon {
+    min-width: 24px;
+}
+
+.admin-page-link.active {
+    background-color: var(--gray-150);
+    /* border-left: 2px solid black; */
+}
+
+#NavLink .active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px; /* Thickness of the vertical line */
+    background-color: black; /* Color of the vertical line */
+    border-radius: 0; /* No border radius on the line */
+    transition: background-color 0.3s ease;
+}
+
+.admin-logout {
+    display: flex;
+    justify-content: left;
+    border: none;
+    align-items: center;
+    gap: 0.2rem;
+    width: 100%;
+    padding: 1rem 1rem 1rem 2rem;
+    margin-bottom: 1rem;
+    /* box-sizing: border-box; */
+}
+
+.admin_logout_button {
+    border: none;
+    background: none;
+    font-size: 1rem;
+}
