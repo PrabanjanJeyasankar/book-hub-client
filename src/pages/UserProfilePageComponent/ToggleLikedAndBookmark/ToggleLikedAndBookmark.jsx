@@ -1,5 +1,4 @@
 import React from 'react'
-import './ToggleLikedAndBookmark.css'
 
 const ToggleLikedAndBookmark = ({ showLikedBooks, setShowLikedBooks }) => {
     return (
