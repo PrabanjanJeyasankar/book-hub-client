@@ -165,12 +165,14 @@
     
 }
 
+
 @media (min-width: 600px) {
     .overlay-book-container {
         display: flex;
         text-align: center;
         justify-content: center;
         align-items: center;
+        gap: 1rem;
         margin: 1rem;
         padding: 2rem 2rem 2rem 2rem;
         flex-wrap: wrap;

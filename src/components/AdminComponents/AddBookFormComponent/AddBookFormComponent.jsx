@@ -1,30 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import InformationPopupComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent.jsx'
 import BookFormComponent from '../BookFormComponent/BookFormComponent'
 import validateBookForm from '../../../utils/formValidation.js'
 import addBookService from '../../../services/addBookService.js'
+import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
 
 function AddBookFormComponent() {
-    const initialFormState = {
-        title: '',
-        author: '',
-        genre: '',
-        publisher: '',
-        isbn: '',
-        publicationDate: '',
-        language: '',
-        description: '',
-        availableCopies: '',
-        coverImage: null,
-    }
-
-    const [formData, setFormData] = useState(initialFormState)
+    const { formData, setFormData } = useContext(FormDataContext)
     const [errors, setErrors] = useState({})
     const [popupImageSrc, setPopupImageSrc] = useState(null)
     const [popupMessageBody, setPopupMessageBody] = useState('')
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -91,9 +78,10 @@ function AddBookFormComponent() {
     return (
         <div>
             <BookFormComponent
-                formData={formData}
-                setFormData={setFormData}
+                // formData={formData}
+                // setFormData={setFormData}
                 handleSubmit={handleSubmit}
+                // setImagePreview={setImagePreview}
                 errors={errors}
                 title='Add New Book'
             />

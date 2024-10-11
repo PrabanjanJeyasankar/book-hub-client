@@ -20,9 +20,9 @@ function DeleteBookComponent({ bookData, onDelete }) {
             )
             console.log('Delete response:', response)
             if (response.status === 200) {
-                console.log('200')
-                console.log('Delete triggered')
-                setPopupImageSrc('success')
+                // console.log('200')
+                // console.log('Delete triggered')
+                setPopupImageSrc('deleteImage')
                 setPopupMessageTitle('Book Deleted Successfully')
                 setPopupMessageBody(
                     `"${bookData.title}" has been deleted successfully!`
@@ -30,7 +30,7 @@ function DeleteBookComponent({ bookData, onDelete }) {
 
                 setIsModalOpen(true)
             } else {
-                setPopupImageSrc('error')
+                setPopupImageSrc('errorImage')
                 setPopupMessageTitle('Unexpected Status Code')
                 setPopupMessageBody(
                     'An unexpected error occurred while deleting the book. Please try again later.'
@@ -41,20 +41,20 @@ function DeleteBookComponent({ bookData, onDelete }) {
             console.error('Error Message:', error.message)
             if (error.response) {
                 if (error.response.status === 404) {
-                    setPopupImageSrc('redWarning.png')
+                    setPopupImageSrc('errorImage')
                     setPopupMessageTitle('Book Not Found')
                     setPopupMessageBody(
                         `The book "${bookData.title}" could not be found.`
                     )
                 } else {
-                    setPopupImageSrc('error')
+                    setPopupImageSrc('errorImage')
                     setPopupMessageTitle('An Unexpected Error Occurred')
                     setPopupMessageBody(
                         'An unexpected error occurred while deleting the book. Please try again later.'
                     )
                 }
             } else {
-                setPopupImageSrc('error')
+                setPopupImageSrc('errorImage')
                 setPopupMessageTitle('An Unexpected Error Occurred')
                 setPopupMessageBody(
                     'An unexpected error occurred while deleting the book. Please check your network connection and try again.'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import axios from 'axios'
+import { useBooks } from '../../../context/BooksContext/BooksContext'
 import './SearchPageComponent.css'
 // import SearchPageStyle from './SearchPageComponent.module.css'
 import SearchBarComponent from '../SearchBarComponent/SearchBarComponent'
@@ -14,7 +14,7 @@ import Button from '../ButtonComponent/ButtonComponent'
 function SearchPageComponent() {
     const location = useLocation()
     const [searchQuery, setSearchQuery] = useState('')
-    const [allBooks, setAllBooks] = useState([])
+    const { allBooks } = useBooks()
     const [filteredBooks, setFilteredBooks] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [searchCriteria, setSearchCriteria] = useState({
@@ -24,24 +24,8 @@ function SearchPageComponent() {
     })
 
     useEffect(() => {
-        const fetchAllBooks = async () => {
-            setIsLoading(true)
-            try {
-                const response = await axios.get(
-                    `http://localhost:3500/api/v1/book`
-                )
-
-                setAllBooks(response.data.books)
-                setFilteredBooks(response.data.books)
-                console.log('All Books', allBooks)
-            } catch (error) {
-                console.error('Error fetching books:', error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-        fetchAllBooks()
-    }, [])
+        setFilteredBooks(allBooks) // Initialize filteredBooks with allBooks when they change
+    }, [allBooks])
 
     useEffect(() => {
         if (location.state?.query) {

@@ -19,7 +19,13 @@ function AdminDashBoardComponent() {
     const overlayRef = useRef(null)
 
     useEffect(() => {
-        fetchAllBooksService(setBooks, calculateTotalCopies)
+        const fetchBooks = async () => {
+            const booksData = await fetchAllBooksService()
+            setBooks(booksData)
+            calculateTotalCopies(booksData)
+        }
+
+        fetchBooks()
     }, [])
 
     useEffect(() => {
@@ -119,7 +125,7 @@ function AdminDashBoardComponent() {
     const userColumns = [
         {
             name: 'User ID',
-            selector: (row) => row.id,
+            selector: (row) => row.userId,
         },
         {
             name: 'Name',
@@ -181,7 +187,7 @@ function AdminDashBoardComponent() {
                 <div className='book-list-container'>
                     <div className='book-list-header'>
                         <h3>Books List</h3>
-                        <Link to='/addbook' className='add-book-btn'>
+                        <Link to='/admin/addbook' className='add-book-btn'>
                             Add book
                         </Link>
                     </div>
@@ -199,13 +205,16 @@ function AdminDashBoardComponent() {
                         />
                     </div>
                 </div>
-                {/* <div className='users-list-container'>
+                <div className='users-list-container'>
                     <div className='users-list-header'>
                         <h3>Users List</h3>
-                        <button>Add user</button>
+                        <Link to='/admin/adduser' className='add-book-btn'>
+                            Add user
+                        </Link>
                     </div>
-                    <div className='user-table'>
+                    <div className='users-table'>
                         <DataTable
+                            className='user-table'
                             columns={userColumns}
                             data={users}
                             fixedHeader
@@ -215,7 +224,7 @@ function AdminDashBoardComponent() {
                             customStyles={customTableStyle}
                         />
                     </div>
-                </div> */}
+                </div>
             </div>
             <div className='new-arrival-books'></div>
 

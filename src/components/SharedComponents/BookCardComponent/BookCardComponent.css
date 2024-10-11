@@ -43,7 +43,6 @@
     user-select: none;
 }
 
-
 @media (min-width: 1800px) {
     .book-card img {
         height: 350px;
@@ -55,8 +54,3 @@
         height: 320px;
     }
 }
-
-
-
-
-

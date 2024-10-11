@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
 import axios from 'axios'
 import ModalComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import BookFormComponent from '../../AdminComponents/BookFormComponent/BookFormComponent'
@@ -6,18 +7,7 @@ import validateBookForm from '../../../utils/formValidation'
 import editBookService from '../../../services/editBookService'
 
 function EditBookFormComponent({ bookId }) {
-    const [formData, setFormData] = useState({
-        title: '',
-        author: '',
-        genre: '',
-        publisher: '',
-        isbn: '',
-        publicationDate: '',
-        language: '',
-        description: '',
-        availableCopies: '',
-        coverImage: null,
-    })
+    const { formData, setFormData } = useContext(FormDataContext)
     const [errors, setErrors] = useState({})
     const [popupImageSrc, setPopupImageSrc] = useState(null)
     const [popupMessageBody, setPopupMessageBody] = useState('')
@@ -39,7 +29,9 @@ function EditBookFormComponent({ bookId }) {
                     genre: book.genre || '',
                     publisher: book.publisher || '',
                     isbn: book.isbn || '',
-                    publicationDate: book.publicationDate || '',
+                    publicationDate: book.publicationDate
+                        ? book.publicationDate.split('T')[0]
+                        : '',
                     language: book.language || '',
                     description: book.description || '',
                     availableCopies: book.availableCopies || '',
@@ -51,47 +43,54 @@ function EditBookFormComponent({ bookId }) {
                 }
             } catch (error) {
                 console.error('Error fetching book data:', error)
+                setPopupMessageTitle('Error')
+                setPopupMessageBody(
+                    'Could not fetch book data. Please try again.'
+                )
+                setPopupImageSrc('errorImage')
+                setIsModalOpen(true)
             }
         }
 
         fetchBookData()
     }, [bookId])
+
     useEffect(() => {
         return () => {
             if (imagePreview) {
-                URL.revokeObjectURL(imagePreview) // Clean up the URL
+                URL.revokeObjectURL(imagePreview) // Clean up the URL if it's a local file
             }
         }
     }, [imagePreview])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const formErrors = validateBookForm(formData)
-        console.log(formErrors)
         setErrors(formErrors)
 
         if (Object.keys(formErrors).length === 0) {
-            editBookService(formData)
-                .then((response) => {
-                    if (response.status == 200) {
-                        const bookTitle =
-                            response.data?.book?.title || 'Unknown Book'
-                        setPopupImageSrc(successImage)
-                        setPopupMessageTitle('Book Updated Successfully')
-                        setPopupMessageBody(
-                            `"${bookTitle}" has been updated successfully!`
-                        )
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error updating book:', error)
-                    setPopupImageSrc(errorImage)
-                    setPopupMessageTitle('Error')
+            try {
+                const response = await editBookService(formData, bookId)
+                if (response.status === 200) {
+                    const bookTitle =
+                        response.data?.book?.title || 'Unknown Book'
+                    setPopupImageSrc('successImage')
+                    setPopupMessageTitle('Book Updated Successfully')
                     setPopupMessageBody(
-                        'An error occurred while updating the book.'
+                        `"${bookTitle}" has been updated successfully!`
                     )
                     setIsModalOpen(true)
-                })
+                }
+            } catch (error) {
+                console.error('Error updating book:', error)
+                setPopupImageSrc('errorImage')
+                setPopupMessageTitle('Error')
+                setPopupMessageBody(
+                    'An error occurred while updating the book. Please try again.'
+                )
+                setIsModalOpen(true)
+            }
         }
     }
 
@@ -107,12 +106,14 @@ function EditBookFormComponent({ bookId }) {
                 handleSubmit={handleSubmit}
                 errors={errors}
                 title='Edit Book'
+                imagePreview={imagePreview} // Pass the imagePreview prop if needed
+                setImagePreview={setImagePreview} // Pass setImagePreview to handle file uploads
             />
             <ModalComponent
-                title={popupMessageTitle}
+                popupMessageTitle={popupMessageTitle}
+                popupImageSrc={popupImageSrc}
+                popupMessageBody={popupMessageBody}
                 isOpen={isModalOpen}
-                imageSrc={popupImageSrc}
-                messageBody={popupMessageBody}
                 onClose={closeModal}
             />
         </div>

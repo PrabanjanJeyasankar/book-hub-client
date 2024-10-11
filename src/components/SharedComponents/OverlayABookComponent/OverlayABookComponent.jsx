@@ -27,7 +27,16 @@ function OverlayABookComponent({ book, onClose }) {
         isUserBookmarked,
         setIsUserBookmarked,
         bookmarkStatus,
-    } = fetchingBookStatus(bookId, userProfile)
+    } =
+        userProfile?.role === 'user'
+            ? fetchingBookStatus(bookId, userProfile)
+            : {
+                  isUserLiked: false,
+                  setIsUserLiked: () => {},
+                  isUserBookmarked: false,
+                  setIsUserBookmarked: () => {},
+                  bookmarkStatus: null,
+              }
 
     const handleClickOutside = (event) => {
         if (
@@ -75,10 +84,12 @@ function OverlayABookComponent({ book, onClose }) {
                     <X size={24} />
                 </button>
                 {isEditing ? (
-                    <EditBookComponent
-                        bookId={book.isbn}
-                        onClose={handleEditClose}
-                    />
+                    <div className='test-div'>
+                        <EditBookComponent
+                            bookId={book.isbn}
+                            onClose={handleEditClose}
+                        />
+                    </div>
                 ) : (
                     <div className='overlay-book-container'>
                         <img

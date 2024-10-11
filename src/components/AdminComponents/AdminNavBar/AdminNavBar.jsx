@@ -18,6 +18,7 @@ import LogoImage from '../../../assets/img/open_book_logo.png';
 import Button from '../../SharedComponents/ButtonComponent/ButtonComponent';
 import axios from 'axios';
 import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent';
+import AllUsersComponent from '../AllUsersComponent/AllUsersComponent';
 
 function AdminNavBar() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext);
@@ -128,7 +129,7 @@ function AdminNavBar() {
                     <Route path='dashboard' element={<AdminDashBoardComponent />} />
                     <Route path='allbooks' element={<AllBooksComponent />} />
                     <Route path='addbook' element={<AddBookFormComponent />} />
-                    <Route path='allusers' element={<AllBooksComponent />} />
+                    <Route path='allusers' element={<AllUsersComponent />} />
                     <Route path='adduser' element={<AddUserComponent />} />
                 </Routes>
             </div>

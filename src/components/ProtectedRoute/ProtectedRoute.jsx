@@ -9,7 +9,6 @@ function ProtectedRoute({ children, role }) {
         return <Navigate to='/login' />
     }
 
-    // If a role is required and the user doesn't have it, redirect accordingly
     if (role && userProfile?.role !== role) {
         // Redirect users trying to access admin routes
         if (role === 'admin') {

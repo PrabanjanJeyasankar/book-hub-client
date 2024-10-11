@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-const fetchAllBooksService = async (setBooks, calculateTotalCopies) => {
+const fetchAllBooksService = async () => {
     try {
         const response = await axios.get('http://localhost:3500/api/v1/book/')
 
         if (response.status === 200) {
-            setBooks(response.data.books)
-            calculateTotalCopies(response.data.books)
+            return response.data.books
         } else {
             console.error('Unexpected response status:', response.status)
+            return []
         }
     } catch (error) {
         if (error.response) {
@@ -25,6 +25,7 @@ const fetchAllBooksService = async (setBooks, calculateTotalCopies) => {
         } else {
             console.error('Error:', error.message)
         }
+        return []
     }
 }
 

@@ -11,7 +11,7 @@ const handleFileChange = (
             setFormData((prevData) => ({ ...prevData, coverImage: file }))
             const previewUrl = URL.createObjectURL(file)
             setImagePreview(previewUrl)
-            return () => URL.revokeObjectURL(previewUrl)
+            return () => URL.revokeObjectURL(previewUrl) // Ensure cleanup
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,

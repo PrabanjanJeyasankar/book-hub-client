@@ -1,0 +1,72 @@
+.all_users_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.3rem;
+    padding: 1.2rem;
+}
+
+.user_card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user_profile_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_profile_image {
+    margin: 1rem;
+    width: 180px;
+    height: 180px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.user_info {
+    margin: 1rem;
+    /* padding: ; */
+}
+
+.user_name {
+    text-align: center;
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    padding: 0.4rem 0.8rem 0rem 0.2rem;
+}
+
+.user_email,
+.user_role {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: var(--gray-500);
+    user-select: none;
+    padding: 0rem 0.8rem 0rem 0.2rem;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #666;
+}

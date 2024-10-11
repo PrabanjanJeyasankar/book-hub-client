@@ -14,7 +14,9 @@ const addBookService = async (formData) => {
                 headers: { 'Content-Type': 'multipart/form-data' },
             }
         )
-        return response
+        if (response.status == 201) {
+            return response
+        }
     } catch (error) {
         throw error
     }

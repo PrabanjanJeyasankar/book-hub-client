@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { FormDataContext } from '../../../context/FormContext/FormContext'
 import './BookFormComponent.css'
 import InputField from './InputField/InputField'
 import FileUpload from './FileUpload/FileUpload'
 import handleFileChange from '../../../utils/handleFileChange'
-import handleInputChange from '../../../utils/handleInputChange'
 import validateBookForm from '../../../utils/formValidation'
 import ButtonComponent from '../../SharedComponents/ButtonComponent/ButtonComponent'
+import validateInput from '../../../utils/inputValidation'
 
 const BookFormComponent = ({
-    formData,
-    setFormData,
     handleSubmit,
     title,
     imagePreview,
     setImagePreview,
 }) => {
+    const { formData, setFormData } = useContext(FormDataContext)
     const [errors, setErrors] = useState({})
 
     const onFileChange = (acceptedFiles) => {
+        // Handle accepted files
         handleFileChange(acceptedFiles, setFormData, setImagePreview, setErrors)
     }
 
@@ -45,17 +46,29 @@ const BookFormComponent = ({
             availableCopies: '',
             coverImage: null,
         })
-        setErrors('')
+        setErrors({})
+        setImagePreview(null) // Clear the image preview when fields are cleared
     }
 
     const handleFormInputChange = (e) => {
-        handleInputChange(e, formData, setFormData, setErrors)
+        const { name, value } = e.target
+        const error = validateInput(name, value)
+
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: error,
+        }))
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }))
     }
 
     useEffect(() => {
         return () => {
             if (imagePreview) {
-                URL.revokeObjectURL(imagePreview)
+                URL.revokeObjectURL(imagePreview) // Clean up the URL if necessary
             }
         }
     }, [imagePreview])
@@ -134,7 +147,11 @@ const BookFormComponent = ({
                                     label='Publication Date'
                                     name='publicationDate'
                                     className='book-text-input'
-                                    value={formData.publicationDate}
+                                    value={
+                                        formData.publicationDate.split(
+                                            'T'
+                                        )[0] || ''
+                                    } // Ensure correct date format
                                     onChange={handleFormInputChange}
                                     error={errors.publicationDate}
                                     type='date'
