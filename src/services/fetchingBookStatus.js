@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const fetchingBookStatus = (bookId, userProfile) => {
     const [isUserLiked, setIsUserLiked] = useState(false)
@@ -8,9 +8,9 @@ const fetchingBookStatus = (bookId, userProfile) => {
 
     useEffect(() => {
         if (userProfile) {
-            axios
+            axiosInstance
                 .get(
-                    `http://localhost:3500/api/v1/book/user-preference/${bookId}`,
+                    `/book/user-preference/${bookId}`,
                     { withCredentials: true }
                 )
                 .then((response) => {

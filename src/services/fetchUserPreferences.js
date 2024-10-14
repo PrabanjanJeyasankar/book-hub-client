@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const fetchUserPreferences = async () => {
     try {
-        const response = await axios.get(
-            'http://localhost:3500/api/v1/book/users-preference',
+        const response = await axiosInstance.get(
+            '/book/users-preference',
             {
                 withCredentials: true,
             }

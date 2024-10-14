@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const fetchAllUsersService = async () => {
     try {
-        const response = await axios.get(
-            'http://localhost:3500/api/v1/user/all-users/',
+        const response = await axiosInstance.get(
+            '/user/all-users/',
             {
                 withCredentials: true,
             }

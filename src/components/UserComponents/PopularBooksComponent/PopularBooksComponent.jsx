@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './PopularBooksComponent.css'
-import axios from 'axios'
 import CardSliderComponent from '../CardSliderComponent/CardSliderComponent'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function PopularBooksComponent() {
     const [books, setBooks] = useState([])
@@ -11,8 +11,8 @@ function PopularBooksComponent() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axios.get(
-                    'http://localhost:3500/api/v1/book/'
+                const response = await axiosInstance.get(
+                    '/book/'
                 )
                 setBooks(response.data.books)
             } catch (error) {

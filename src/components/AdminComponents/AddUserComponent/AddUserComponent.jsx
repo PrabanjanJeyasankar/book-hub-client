@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import UserForm from '../../SharedComponents/UserFormComponent/UserFormComponent'
 import ModalComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function AddUserComponent() {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -12,10 +12,8 @@ function AddUserComponent() {
     })
 
     const handleAddUser = (formData) => {
-        axios
-            .post('http://localhost:3500/api/v1/admin/create-user', formData, {
-                withCredentials: true,
-            })
+        axiosInstance
+            .post('/admin/create-user', formData)
             .then((response) => {
                 if (response.status == 201) {
                     setModalContent({

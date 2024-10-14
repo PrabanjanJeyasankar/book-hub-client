@@ -19,7 +19,7 @@ function BookCardComponent({ book }) {
             <div className='book-card' onClick={handleCardClick}>
                 <img
                     className='book-cover'
-                    src={`http://localhost:3500/api/v1/${book.coverImage}`}
+                    src={`${book.coverImage}`}
                     alt={book.title}
                 />
                 <div className='book-details'>

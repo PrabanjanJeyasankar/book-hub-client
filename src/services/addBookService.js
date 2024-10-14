@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const addBookService = async (formData) => {
     const data = new FormData()
@@ -7,8 +7,8 @@ const addBookService = async (formData) => {
     })
 
     try {
-        const response = await axios.post(
-            'http://localhost:3500/api/v1/book/add',
+        const response = await axiosInstance.post(
+            '/book/add',
             data,
             {
                 headers: { 'Content-Type': 'multipart/form-data' },
