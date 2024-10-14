@@ -3,7 +3,6 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext/UserContext'
 import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
-import axios from 'axios'
 
 import Signup from '../../../Authentication/Signup/Signup'
 import Login from '../../../Authentication/Login/Login'
@@ -14,6 +13,7 @@ import UserProfileComponent from '../UserProfilePageComponent/UserProfileCompone
 
 import logoImage from '../../../assets/img/open_book_logo.png'
 import DummyProfileImage from '../../../assets/img/img1.png'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
@@ -41,8 +41,8 @@ function UserNavBarComponent() {
     }, [isDropdownOpen])
 
     const handleLogout = () => {
-        axios
-            .get('http://localhost:3500/api/v1/user/logout', {
+        axiosInstance
+            .get('/user/logout', {
                 withCredentials: true,
             })
             .then((response) => {

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const editBookService = async (formData, bookId) => {
     console.log(bookId)
@@ -8,8 +8,8 @@ const editBookService = async (formData, bookId) => {
     })
 
     try {
-        const response = await axios.put(
-            `http://localhost:3500/api/v1/book/edit/${bookId}`,
+        const response = await axiosInstance.put(
+            `/book/edit/${bookId}`,
             data,
             {
                 headers: { 'Content-Type': 'multipart/form-data' },

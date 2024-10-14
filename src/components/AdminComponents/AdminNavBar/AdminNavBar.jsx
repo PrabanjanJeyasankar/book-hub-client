@@ -16,9 +16,9 @@ import AllBooksComponent from '../../AdminComponents/AllBooksComponent/AllBooksC
 import AddUserComponent from '../../AdminComponents/AddUserComponent/AddUserComponent';
 import LogoImage from '../../../assets/img/open_book_logo.png';
 import Button from '../../SharedComponents/ButtonComponent/ButtonComponent';
-import axios from 'axios';
 import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent';
 import AllUsersComponent from '../AllUsersComponent/AllUsersComponent';
+import axiosInstance from '../../../utils/axiosInstance';
 
 function AdminNavBar() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext);
@@ -30,10 +30,8 @@ function AdminNavBar() {
     };
 
     const handleLogout = () => {
-        axios
-            .get('http://localhost:3500/api/v1/user/logout', {
-                withCredentials: true,
-            })
+        axiosInstance
+            .get('/user/logout')
             .then((response) => {
                 console.log(response.data.message);
                 if (response.status === 200) {

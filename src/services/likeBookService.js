@@ -1,8 +1,9 @@
 import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const likeBookService = async (bookId, isLiked) => {
-    const response = await axios.post(
-        `http://localhost:3500/api/v1/book/like`,
+    const response = await axiosInstance.post(
+        `/book/like`,
         { bookId, isLiked },
         { withCredentials: true }
     )

@@ -1,19 +1,17 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'
-import axios from 'axios'
 
 import UserForm from '../../components/SharedComponents/UserFormComponent/UserFormComponent'
+import axiosInstance from '../../utils/axiosInstance'
 
 function Signup() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
     const navigate = useNavigate()
 
     const handleSignup = (formData) => {
-        axios
-            .post('http://localhost:3500/api/v1/user/signup', formData, {
-                withCredentials: true,
-            })
+        axiosInstance
+            .post('/user/signup', formData)
             .then((response) => {
                 console.log(response)
                 // setIsLoggedIn(true)

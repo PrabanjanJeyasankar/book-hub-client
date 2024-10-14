@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import InformationPopupComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function DeleteBookComponent({ bookData, onDelete }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,8 +15,8 @@ function DeleteBookComponent({ bookData, onDelete }) {
             return
         }
         try {
-            const response = await axios.delete(
-                `http://localhost:3500/api/v1/book/delete/${bookData.isbn}`
+            const response = await axiosInstance.delete(
+                `/book/delete/${bookData.isbn}`
             )
             console.log('Delete response:', response)
             if (response.status === 200) {

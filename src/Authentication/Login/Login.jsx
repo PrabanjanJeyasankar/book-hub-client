@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
-import axios from 'axios'
 import './Login.css'
 
 import Button from '../../components/SharedComponents/ButtonComponent/ButtonComponent'
+import axiosInstance from '../../utils/axiosInstance'
 
 function Login() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
@@ -25,15 +25,12 @@ function Login() {
         setErrors(newErrors)
 
         if (Object.keys(newErrors).length === 0) {
-            axios
+            axiosInstance
                 .post(
-                    'http://localhost:3500/api/v1/user/login',
+                    '/user/login',
                     {
                         email,
                         password,
-                    },
-                    {
-                        withCredentials: true,
                     }
                 )
                 .then((response) => {

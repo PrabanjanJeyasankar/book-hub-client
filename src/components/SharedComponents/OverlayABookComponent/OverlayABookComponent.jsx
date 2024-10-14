@@ -93,7 +93,7 @@ function OverlayABookComponent({ book, onClose }) {
                 ) : (
                     <div className='overlay-book-container'>
                         <img
-                            src={`http://localhost:3500/api/v1/${book.coverImage}`}
+                            src={`${book.coverImage}`}
                             alt={book.title}
                         />
                         <div className='overlay-details-action-container'>

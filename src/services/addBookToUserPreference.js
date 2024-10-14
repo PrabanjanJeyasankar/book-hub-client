@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const addBookToUserPreference = (bookId, status) => {
     console.log(bookId)
-    axios
+    axiosInstance
         .post(
-            'http://localhost:3500/api/v1/book/bookmark',
+            '/book/bookmark',
             { bookId, status },
             { withCredentials: true }
         )

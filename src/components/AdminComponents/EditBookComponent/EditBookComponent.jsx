@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
-import axios from 'axios'
 import ModalComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import BookFormComponent from '../../AdminComponents/BookFormComponent/BookFormComponent'
 import validateBookForm from '../../../utils/formValidation'
 import editBookService from '../../../services/editBookService'
+import axiosInstance from '../../../utils/axiosInstance.js'
 
 function EditBookFormComponent({ bookId }) {
     const { formData, setFormData } = useContext(FormDataContext)
@@ -18,9 +18,7 @@ function EditBookFormComponent({ bookId }) {
     useEffect(() => {
         const fetchBookData = async () => {
             try {
-                const response = await axios.get(
-                    `http://localhost:3500/api/v1/book/${bookId}`
-                )
+                const response = await axiosInstance.get(`/book/${bookId}`)
                 const book = response.data.book
 
                 setFormData({

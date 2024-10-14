@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 
 const fetchAllBooksService = async () => {
     try {
-        const response = await axios.get('http://localhost:3500/api/v1/book/')
+        const response = await axiosInstance.get('/book/')
 
         if (response.status === 200) {
             return response.data.books
