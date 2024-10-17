@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Routes, Route, NavLink, useNavigate } from 'react-router-dom'; // Added useNavigate
-import './AdminNavBar.css';
+import React, { useContext, useState } from 'react'
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom' // Added useNavigate
+import './AdminNavBar.css'
 import {
     LogOut,
     LayoutDashboard,
@@ -8,52 +8,56 @@ import {
     LibraryBig,
     UsersRound,
     UserRoundPlus,
-} from 'lucide-react';
-import { UserContext } from '../../../context/UserContext/UserContext';
-import AdminDashBoardComponent from '../../AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent';
-import AddBookFormComponent from '../../AdminComponents/AddBookFormComponent/AddBookFormComponent';
-import AllBooksComponent from '../../AdminComponents/AllBooksComponent/AllBooksComponent';
-import AddUserComponent from '../../AdminComponents/AddUserComponent/AddUserComponent';
-import LogoImage from '../../../assets/img/open_book_logo.png';
-import Button from '../../SharedComponents/ButtonComponent/ButtonComponent';
-import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent';
-import AllUsersComponent from '../AllUsersComponent/AllUsersComponent';
-import axiosInstance from '../../../utils/axiosInstance';
+} from 'lucide-react'
+import { UserContext } from '../../../context/UserContext/UserContext'
+import AdminDashBoardComponent from '../../AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent'
+import AddBookFormComponent from '../../AdminComponents/AddBookFormComponent/AddBookFormComponent'
+import AllBooksComponent from '../../AdminComponents/AllBooksComponent/AllBooksComponent'
+import AddUserComponent from '../../AdminComponents/AddUserComponent/AddUserComponent'
+import LogoImage from '../../../assets/img/open_book_logo.png'
+import Button from '../../SharedComponents/ButtonComponent/ButtonComponent'
+import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent'
+import AllUsersComponent from '../AllUsersComponent/AllUsersComponent'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function AdminNavBar() {
-    const { setIsLoggedIn, setUserProfile } = useContext(UserContext);
-    const [isExpanded, setIsExpanded] = useState(true);
-    const navigate = useNavigate();
+    const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
+    const [isExpanded, setIsExpanded] = useState(true)
+    const navigate = useNavigate()
 
     const toggleNavbar = () => {
-        setIsExpanded(!isExpanded);
-    };
+        setIsExpanded(!isExpanded)
+    }
 
     const handleLogout = () => {
         axiosInstance
             .get('/user/logout')
             .then((response) => {
-                console.log(response.data.message);
+                console.log(response.data.message)
                 if (response.status === 200) {
-                    setIsLoggedIn(false);
-                    setUserProfile(null);
-                    localStorage.removeItem('userProfile');
-                    localStorage.removeItem('isLoggedIn');
-                    navigate('/');  // Redirects to the home page
+                    setIsLoggedIn(false)
+                    setUserProfile(null)
+                    localStorage.removeItem('userProfile')
+                    localStorage.removeItem('isLoggedIn')
+                    navigate('/')
                 }
             })
             .catch((error) => {
-                console.error('Logout error:', error);
-            });
-    };
+                console.error('Logout error:', error)
+            })
+    }
 
     return (
         <div
-            className={`admin-page-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
+            className={`admin-page-container ${
+                isExpanded ? 'expanded' : 'collapsed'
+            }`}>
             <aside
-                className={`admin-navbar-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                className={`admin-navbar-container ${
+                    isExpanded ? 'expanded' : 'collapsed'
+                }`}>
                 <div className='admin-navbar-brand'>
-                    <NavLink to='/' className='admin-app-logo'>
+                    <NavLink to='/admin/dashboard' className='admin-app-logo'>
                         <img src={LogoImage} alt='Book hub logo' />
                         {isExpanded && <div className='app-name'>Book hub</div>}
                     </NavLink>
@@ -61,7 +65,7 @@ function AdminNavBar() {
 
                 <div className='admin-page-links'>
                     <NavLink
-                        to='/admin/dashboard'  // Updated to '/admin/dashboard'
+                        to='/admin/dashboard' // Updated to '/admin/dashboard'
                         className={({ isActive }) =>
                             `admin-page-link ${isActive ? 'active' : ''}`
                         }>
@@ -124,7 +128,10 @@ function AdminNavBar() {
             </aside>
             <div className='main-content'>
                 <Routes>
-                    <Route path='dashboard' element={<AdminDashBoardComponent />} />
+                    <Route
+                        path='dashboard'
+                        element={<AdminDashBoardComponent />}
+                    />
                     <Route path='allbooks' element={<AllBooksComponent />} />
                     <Route path='addbook' element={<AddBookFormComponent />} />
                     <Route path='allusers' element={<AllUsersComponent />} />
@@ -132,7 +139,7 @@ function AdminNavBar() {
                 </Routes>
             </div>
         </div>
-    );
+    )
 }
 
-export default AdminNavBar;
+export default AdminNavBar

@@ -1,33 +1,33 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext/UserContext'
-
 import UserForm from '../../components/SharedComponents/UserFormComponent/UserFormComponent'
-import axiosInstance from '../../utils/axiosInstance'
+import handleSignupService from '../../services/handleSignUpService'
+import toast from 'react-hot-toast'
 
 function Signup() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
     const navigate = useNavigate()
 
-    const handleSignup = (formData) => {
-        axiosInstance
-            .post('/user/signup', formData)
-            .then((response) => {
-                console.log(response)
-                // setIsLoggedIn(true)
-                // setUserProfile(response.data.user)
-                setIsLoggedIn(true)
-                setUserProfile(response.data.userProfile)
-                localStorage.setItem(
-                    'userProfile',
-                    JSON.stringify(response.data.userProfile)
+    const handleSignup = async (formData) => {
+        try {
+            const data = await handleSignupService(formData)
+            setIsLoggedIn(true)
+            setUserProfile(data.userProfile)
+            localStorage.setItem(
+                'userProfile',
+                JSON.stringify(data.userProfile)
+            )
+            localStorage.setItem('isLoggedIn', 'true')
+            navigate('/')
+        } catch (error) {
+            if (error.response.status == 409) {
+                toast.error(
+                    'User already registered, please login to continue.'
                 )
-                localStorage.setItem('isLoggedIn', 'true')
-                navigate('/')
-            })
-            .catch((error) => {
-                console.error('Signup error:', error)
-            })
+            }
+            console.error('Error during signup:', error)
+        }
     }
 
     return (

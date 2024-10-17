@@ -3,9 +3,9 @@ import { UserContext } from '../../context/UserContext/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import './Login.css'
-
 import Button from '../../components/SharedComponents/ButtonComponent/ButtonComponent'
-import axiosInstance from '../../utils/axiosInstance'
+import handleLoginService from '../../services/handleLoginService'
+import toast from 'react-hot-toast'
 
 function Login() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
@@ -15,7 +15,7 @@ function Login() {
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const newErrors = {}
@@ -25,48 +25,35 @@ function Login() {
         setErrors(newErrors)
 
         if (Object.keys(newErrors).length === 0) {
-            axiosInstance
-                .post(
-                    '/user/login',
-                    {
-                        email,
-                        password,
-                    }
-                )
-                .then((response) => {
-                    const userProfile = response.data.userProfile
-                    setIsLoggedIn(true)
-                    setUserProfile(userProfile)
-                    localStorage.setItem(
-                        'userProfile',
-                        JSON.stringify(userProfile)
-                    )
-                    localStorage.setItem('isLoggedIn', 'true')
+            try {
+                const data = await handleLoginService(email, password)
+                const userProfile = data.userProfile
+                setIsLoggedIn(true)
+                setUserProfile(userProfile)
+                localStorage.setItem('userProfile', JSON.stringify(userProfile))
+                localStorage.setItem('isLoggedIn', 'true')
 
-                    // Role-based redirection
-                    if (userProfile.role === 'admin') {
-                        navigate('/admin')
-                    } else {
-                        navigate('/')
-                    }
-                })
-                .catch((error) => {
-                    console.error('Login error:', error)
-                })
+                // Role-based redirection
+                if (userProfile.role === 'admin') {
+                    navigate('/admin')
+                } else {
+                    navigate('/')
+                }
+            } catch (error) {
+                if (error.response.status == 404) {
+                    toast.error('User not found, please sign up.')
+                } else if (error.response.status == 401) {
+                    toast.error('Incorrect Password.')
+                }
+
+                console.error('Error during login:', error)
+            }
         }
     }
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value)
-    }
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword)
-    }
+    const handleEmailChange = (e) => setEmail(e.target.value)
+    const handlePasswordChange = (e) => setPassword(e.target.value)
+    const togglePasswordVisibility = () => setShowPassword(!showPassword)
 
     return (
         <div className='login-container'>
@@ -85,7 +72,9 @@ function Login() {
                         </div>
                         <div className='email-error'>
                             {errors.email && (
-                                <span className='error'>{errors.email}</span>
+                                <span className='login-error'>
+                                    {errors.email}
+                                </span>
                             )}
                         </div>
                     </div>
@@ -111,7 +100,9 @@ function Login() {
                         </div>
                         <div className='password-error'>
                             {errors.password && (
-                                <span className='error'>{errors.password}</span>
+                                <span className='login-error'>
+                                    {errors.password}
+                                </span>
                             )}
                         </div>
                     </div>
