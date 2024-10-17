@@ -1,6 +1,7 @@
 .admin-page-container {
-    display: grid;
-    grid-template-columns: 180px 1fr;
+    display: flex;
+    /* display: grid; */
+    /* grid-template-columns: 180px 1fr; */
     height: 100vh;
     box-sizing: border-box;
     /* overflow-x: auto; */

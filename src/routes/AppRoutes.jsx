@@ -1,9 +1,8 @@
 import React, { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
 
-// Lazy imports for components
 const AddUser = lazy(() =>
     import('../components/AdminComponents/AddUserComponent/AddUserComponent')
 )
@@ -33,67 +32,109 @@ const UserProfileComponent = lazy(() =>
 )
 import Signup from '../Authentication/Signup/Signup'
 import Login from '../Authentication/Login/Login'
-import AdminNavbar from '../components/AdminComponents/AdminNavBar/AdminNavBar'
 import AdminDashboard from '../components/AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent'
-import UserNavBarComponent from '../components/UserComponents/UserNavBarComponent/UserNavBarComponent'
 import HeroComponent from '../components/UserComponents/HeroComponent/HeroComponent'
 import NotFoundPage from '../components/SharedComponents/NotFoundPage/NotFoundPage'
+import UserLayout from '../layouts/UserLayout'
+import AdminLayout from '../layouts/AdminLayout/AdminLayout'
+import useUserContext from '../hooks/useUserContext'
 
 const AppRoutes = () => {
+    const { isLoggedIn, userProfile } = useUserContext()
+
     return (
         <ErrorBoundary>
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    {/* Public Routes */}
-                    <Route path='/signup' element={<Signup />} />
-                    <Route path='/login' element={<Login />} />
-                    
-                    {/* Anonymous and logged-in users can access Hero, Search, and About pages */}
-                    <Route
-                        path='/'
-                        exact
-                        element={
-                            <>
-                                <UserNavBarComponent />
-                                <HeroComponent />
-                            </>
-                        }
-                    />
-                    <Route path='/about' element={<AboutUs />} />
-                    <Route path='/search' element={<SearchPage />} />
+                    {/* User routes accessible by users and guests */}
+                    <Route element={<UserLayout />}>
+                        <Route
+                            path='/'
+                            element={
+                                <ProtectedRoute
+                                    element={<HeroComponent />}
+                                    allowedRoles={['user', 'guest']} // Users and guests can access
+                                />
+                            }
+                        />
+                        <Route
+                            path='/search'
+                            element={
+                                <ProtectedRoute
+                                    element={<SearchPage />}
+                                    allowedRoles={['user', 'guest']} // Users and guests can search
+                                />
+                            }
+                        />
+                        <Route
+                            path='/user-profile'
+                            element={
+                                <ProtectedRoute
+                                    element={<UserProfileComponent />}
+                                    allowedRoles={['user']} // Only users can access profile
+                                    redirectTo='/login' // Redirect unauthorized access
+                                />
+                            }
+                        />
+                        <Route path='/about' element={<AboutUs />} />
+                        <Route path='/signup' element={<Signup />} />
+                        <Route path='/login' element={<Login />} />
+                    </Route>
 
-                    {/* User Protected Routes */}
-                    <Route
-                        path='/user-profile'
-                        element={
-                            <ProtectedRoute role='user'>
-                                <UserNavBarComponent />
-                                <UserProfileComponent />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    {/* Admin Protected Routes */}
-                    <Route
-                        path='/admin/*'
-                        element={
-                            <ProtectedRoute role='admin'>
-                                <AdminNavbar />
-                            </ProtectedRoute>
-                        }>
-                        <Route path='dashboard' element={<AdminDashboard />} />
-                        <Route path='allbooks' element={<AllBooks />} />
+                    {/* Admin routes under AdminLayout */}
+                    <Route path='/admin' element={<AdminLayout />}>
+                        <Route
+                            index
+                            element={<Navigate to='/admin/dashboard' replace />}
+                        />
+                        <Route
+                            path='dashboard'
+                            element={
+                                <ProtectedRoute
+                                    element={<AdminDashboard />}
+                                    allowedRoles={['admin']} // Only admins can access dashboard
+                                />
+                            }
+                        />
+                        <Route
+                            path='allbooks'
+                            element={
+                                <ProtectedRoute
+                                    element={<AllBooks />}
+                                    allowedRoles={['admin']} // Only admins can access
+                                />
+                            }
+                        />
                         <Route
                             path='addbook'
-                            element={<AddBookFormComponent />}
+                            element={
+                                <ProtectedRoute
+                                    element={<AddBookFormComponent />}
+                                    allowedRoles={['admin']} // Only admins
+                                />
+                            }
                         />
                         <Route
                             path='allusers'
-                            element={<AllUsersComponent />}
+                            element={
+                                <ProtectedRoute
+                                    element={<AllUsersComponent />}
+                                    allowedRoles={['admin']} // Only admins
+                                />
+                            }
                         />
-                        <Route path='adduser' element={<AddUser />} />
+                        <Route
+                            path='adduser'
+                            element={
+                                <ProtectedRoute
+                                    element={<AddUser />}
+                                    allowedRoles={['admin']} // Only admins
+                                />
+                            }
+                        />
                     </Route>
 
+                    {/* Fallback for undefined routes */}
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </Suspense>

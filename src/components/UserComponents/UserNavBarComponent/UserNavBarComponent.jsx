@@ -1,15 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import React, { useState, useRef, useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext/UserContext'
 import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
-
-import Signup from '../../../Authentication/Signup/Signup'
-import Login from '../../../Authentication/Login/Login'
-import HeroComponent from '../HeroComponent/HeroComponent'
-import AboutUsComponent from '../AboutUsComponent/AboutUsComponent'
-import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent'
-import UserProfileComponent from '../UserProfilePageComponent/UserProfileComponent/UserProfileComponent'
 
 import logoImage from '../../../assets/img/open_book_logo.png'
 import DummyProfileImage from '../../../assets/img/img1.png'
@@ -19,26 +12,14 @@ function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
         useContext(UserContext)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const dropdownRef = useRef(null)
-
+    const menuRef = useRef(null)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (
-                isDropdownOpen &&
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setIsDropdownOpen(false)
-            }
-        }
-
-        document.addEventListener('click', handleOutsideClick)
-        return () => {
-            document.removeEventListener('click', handleOutsideClick)
-        }
-    }, [isDropdownOpen])
+    const toggleMenu = () => {
+        setIsMenuOpen((prev) => !prev)
+    }
 
     const handleLogout = () => {
         axiosInstance
@@ -46,7 +27,6 @@ function UserNavBarComponent() {
                 withCredentials: true,
             })
             .then((response) => {
-                console.log(response.data.message)
                 if (response.status === 200) {
                     setIsLoggedIn(false)
                     setUserProfile(null)
@@ -60,24 +40,52 @@ function UserNavBarComponent() {
             })
     }
 
-    const handleDropDownUserProfileClick = () => {
-        setIsDropdownOpen(false)
-    }
-
     const handleProfileClick = () => {
         setIsDropdownOpen((prev) => !prev)
     }
 
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target) &&
+            menuRef.current &&
+            !menuRef.current.contains(event.target)
+        ) {
+            setIsDropdownOpen(false)
+            setIsMenuOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
+
     return (
         <nav className='user-navbar'>
             <div className='user-navbar-container'>
+                <div
+                    className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+                    onClick={toggleMenu}
+                    ref={menuRef} // Attach ref here
+                >
+                    <span className='line' id='line-top'></span>
+                    <span className='line' id='line-bottom'></span>
+                </div>
+
                 <div className='user-navbar-brand'>
                     <Link to='/' className='user-page-app-logo'>
                         <img src={logoImage} alt='Book hub logo' />
                         <span className='app-name'>Book hub</span>
                     </Link>
                 </div>
-                <div className='user-navbar-center'>
+
+                <div
+                    className={`user-navbar-center ${
+                        isMenuOpen ? 'hidden' : ''
+                    }`}>
                     <div className='page-links'>
                         <Link to='/'>Home</Link>
                         <Link to='/search'>Search Books</Link>
@@ -85,7 +93,23 @@ function UserNavBarComponent() {
                     </div>
                 </div>
 
-                {isLoggedIn ? (
+                {isMenuOpen && (
+                    <div className='menuDropDown'>
+                        <div className='resp-page-links'>
+                            <Link to='/' onClick={toggleMenu}>
+                                Home
+                            </Link>
+                            <Link to='/search' onClick={toggleMenu}>
+                                Search Books
+                            </Link>
+                            <Link to='/about' onClick={toggleMenu}>
+                                About us
+                            </Link>
+                        </div>
+                    </div>
+                )}
+
+                {isLoggedIn && (
                     <div className='signup-login-links'>
                         <div className='user-profile-btn' ref={dropdownRef}>
                             <img
@@ -110,8 +134,8 @@ function UserNavBarComponent() {
                                     </div>
                                     <ul className='user-profile-dropdown-list'>
                                         <li
-                                            onClick={
-                                                handleDropDownUserProfileClick
+                                            onClick={() =>
+                                                setIsDropdownOpen(false)
                                             }>
                                             <Link to='/user-profile'>
                                                 <CircleUserRound
@@ -135,7 +159,9 @@ function UserNavBarComponent() {
                             )}
                         </div>
                     </div>
-                ) : (
+                )}
+
+                {!isLoggedIn && (
                     <div className='signup-login-links'>
                         <Link className='login-btn' to='/login'>
                             Login
@@ -146,18 +172,6 @@ function UserNavBarComponent() {
                     </div>
                 )}
             </div>
-
-            <Routes>
-                <Route path='/' element={<HeroComponent />} />
-                <Route path='/about' element={<AboutUsComponent />} />
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/search' element={<SearchPageComponent />} />
-                <Route
-                    path='/user-profile'
-                    element={<UserProfileComponent />}
-                />
-            </Routes>
         </nav>
     )
 }

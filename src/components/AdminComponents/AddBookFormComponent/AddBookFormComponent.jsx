@@ -4,6 +4,7 @@ import BookFormComponent from '../BookFormComponent/BookFormComponent'
 import validateBookForm from '../../../utils/formValidation.js'
 import addBookService from '../../../services/addBookService.js'
 import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
+import './AddBookFormComponent.css'
 
 function AddBookFormComponent() {
     const { formData, setFormData } = useContext(FormDataContext)
@@ -76,12 +77,9 @@ function AddBookFormComponent() {
     }
 
     return (
-        <div>
+        <div className='add_book_form_container'>
             <BookFormComponent
-                // formData={formData}
-                // setFormData={setFormData}
                 handleSubmit={handleSubmit}
-                // setImagePreview={setImagePreview}
                 errors={errors}
                 title='Add New Book'
             />

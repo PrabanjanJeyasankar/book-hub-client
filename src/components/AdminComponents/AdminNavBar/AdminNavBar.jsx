@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Routes, Route, NavLink, useNavigate } from 'react-router-dom' // Added useNavigate
+import { NavLink, useNavigate } from 'react-router-dom'
 import './AdminNavBar.css'
 import {
     LogOut,
@@ -10,14 +10,8 @@ import {
     UserRoundPlus,
 } from 'lucide-react'
 import { UserContext } from '../../../context/UserContext/UserContext'
-import AdminDashBoardComponent from '../../AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent'
-import AddBookFormComponent from '../../AdminComponents/AddBookFormComponent/AddBookFormComponent'
-import AllBooksComponent from '../../AdminComponents/AllBooksComponent/AllBooksComponent'
-import AddUserComponent from '../../AdminComponents/AddUserComponent/AddUserComponent'
 import LogoImage from '../../../assets/img/open_book_logo.png'
 import Button from '../../SharedComponents/ButtonComponent/ButtonComponent'
-import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent'
-import AllUsersComponent from '../AllUsersComponent/AllUsersComponent'
 import axiosInstance from '../../../utils/axiosInstance'
 
 function AdminNavBar() {
@@ -127,7 +121,7 @@ function AdminNavBar() {
                 </div>
             </aside>
             <div className='main-content'>
-                <Routes>
+                {/* <Routes>
                     <Route
                         path='dashboard'
                         element={<AdminDashBoardComponent />}
@@ -136,7 +130,7 @@ function AdminNavBar() {
                     <Route path='addbook' element={<AddBookFormComponent />} />
                     <Route path='allusers' element={<AllUsersComponent />} />
                     <Route path='adduser' element={<AddUserComponent />} />
-                </Routes>
+                </Routes> */}
             </div>
         </div>
     )

@@ -18,7 +18,7 @@ function App() {
                     </FormDataProvider>
                 </BooksProvider>
             </UserProvider>
-            <Toaster position='top-right' />
+            <Toaster position='bottom-right' />
         </React.Fragment>
     )
 }
