@@ -108,7 +108,7 @@ function OverlayABookComponent({ book, onClose }) {
                                         </p>
                                     </div>
                                     <div className='overlay-actions'>
-                                        {userProfile?.role === 'user' && (
+                                        {userProfile?.role !== 'admin' && (
                                             <>
                                                 <BookmarkComponent
                                                     bookId={bookId}

@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import likeBookService from '../services/likeBookService'
+import useUserContext from './useUserContext'
+import toast from 'react-hot-toast'
 
 const useLikeBook = (bookId, isUserLiked, setIsUserLiked) => {
     const [isProcessing, setIsProcessing] = useState(false)
-
+    const { isLoggedIn } = useUserContext()
     const handleLikeClick = () => {
         if (isProcessing) return
+
+        if(!isLoggedIn) {
+            toast.error('Please Login to like books.')
+            return
+        }
 
         const newLikeStatus = !isUserLiked
         setIsUserLiked(newLikeStatus)

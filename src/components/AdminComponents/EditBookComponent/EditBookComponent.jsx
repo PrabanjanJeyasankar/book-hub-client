@@ -56,7 +56,7 @@ function EditBookFormComponent({ bookId }) {
     useEffect(() => {
         return () => {
             if (imagePreview) {
-                URL.revokeObjectURL(imagePreview) // Clean up the URL if it's a local file
+                URL.revokeObjectURL(imagePreview) // Cleaning up the URL if it's a local file
             }
         }
     }, [imagePreview])
@@ -104,8 +104,8 @@ function EditBookFormComponent({ bookId }) {
                 handleSubmit={handleSubmit}
                 errors={errors}
                 title='Edit Book'
-                imagePreview={imagePreview} // Pass the imagePreview prop if needed
-                setImagePreview={setImagePreview} // Pass setImagePreview to handle file uploads
+                imagePreview={imagePreview}
+                setImagePreview={setImagePreview}
             />
             <ModalComponent
                 popupMessageTitle={popupMessageTitle}

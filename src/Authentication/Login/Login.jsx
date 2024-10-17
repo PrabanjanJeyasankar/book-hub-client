@@ -35,7 +35,7 @@ function Login() {
 
                 // Role-based redirection
                 if (userProfile.role === 'admin') {
-                    navigate('/admin')
+                    navigate('/admin/dashboard')
                 } else {
                     navigate('/')
                 }

@@ -6,7 +6,7 @@
     border-radius: 8px;
     border: 0.01rem solid rgb(228, 228, 228);
     box-shadow: 0 2px 4px rgba(111, 111, 111, 0.1);
-    max-width: 60%;
+    min-width: 30%;
 }
 
 .hero-search-bar .search-form {
@@ -64,8 +64,7 @@
 
 @media (max-width: 768px) {
     .search-form-elem {
-        width: 70%;
-        padding: 8px 16px;
+        width: 100%;
     }
 
     .form-control {
@@ -85,7 +84,6 @@
 
 @media (max-width: 480px) {
     .search-form-elem {
-        width: 70%;
         display: flex;
         align-items: center;
         justify-content: center;
