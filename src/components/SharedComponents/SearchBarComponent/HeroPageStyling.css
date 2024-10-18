@@ -38,9 +38,19 @@
     width: 18px;
 }
 
+@media (max-width: 2600px) {
+    .search-form-elem {
+        width: 60%;
+    }
+}
+@media (max-width: 1900px) {
+    .search-form-elem {
+        width: 50%;
+    }
+}
 @media (max-width: 1700px) {
     .search-form-elem {
-        width: 70%;
+        width: 60%;
     }
 }
 

@@ -60,10 +60,9 @@
 .add-user-email-field {
     border: 1px solid var(--gray-400);
     border-radius: 4px;
-    padding: 0.4rem;
-    min-width: 330px;
-    width: 100%;
     padding: 10px;
+    width: 100%;
+    max-width: 330px;
     box-sizing: border-box;
 }
 
@@ -74,20 +73,19 @@
 
 .add-user-password-toggle-btn {
     position: absolute;
-    top: 55%;
+    top: 50%;
     right: 10px;
     transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
 }
-
 .add-user-role-dropdown {
     border: 1px solid var(--gray-400);
     border-radius: 4px;
     padding: 0.5rem;
-    min-width: 300px;
     width: 100%;
+    min-width: 300px;
 }
 
 .add-user-submit-btn {
@@ -98,11 +96,49 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    width: 330px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 330px;
 }
 
 .signup-page-existing-user {
     margin: 1.5rem 0 0 0;
     font-size: 14px;
+}
+
+@media (max-width: 321px), (max-width: 480px) {
+    .add-user-container {
+        height: calc(100vh);
+    }
+
+    .add-user-content {
+        max-width: 400px;
+        width: 230px;
+        padding: 2rem 1.3rem;
+    }
+
+    .add-user-name-field,
+    .add-user-password-field,
+    .add-user-email-field,
+    .add-user-submit-btn {
+        width: 230px;
+    }
+
+    .add-user-password-toggle-btn {
+        position: absolute;
+        top: 40%;
+        right: 10px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 768px) {
+    .add-user-name-field,
+    .add-user-password-field,
+    .add-user-email-field,
+    .add-user-submit-btn {
+        width: 330px;
+    }
 }
