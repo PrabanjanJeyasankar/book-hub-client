@@ -43,14 +43,95 @@
     user-select: none;
 }
 
-@media (min-width: 1800px) {
+@media (max-width: 2560px) {
     .book-card img {
-        height: 350px;
+        height: 380px;
     }
 }
 
-@media (min-width: 1600px) {
+@media (max-width: 1880px) {
+    .book-card img {
+        height: 330px;
+    }
+}
+
+@media (max-width: 1640px) {
     .book-card img {
         height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-card img {
+        border-radius: 0.2rem;
+        height: 210px;
+        width: 150px;
+    }
+}
+@media (max-width: 650px) {
+    .book-card img {
+        border-radius: 0.2rem;
+        height: 220px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 426px) {
+    .book-card {
+        padding: 0 0.7rem;
+    }
+    .book-card img {
+        border-radius: 0.2rem;
+        height: 250px;
+        width: 180px;
+    }
+    .book-title {
+        font-size: 1rem;
+    }
+
+    .book-author {
+        font-size: 0.8rem;
+        text-overflow: ellipsis;
+        width: 230px;
+    }
+}
+
+@media (max-width: 376px) {
+    .book-card {
+        padding: 0 0.7rem;
+    }
+    .book-card img {
+        border-radius: 0.2rem;
+        height: 210px;
+        width: 152px;
+    }
+    .book-title {
+        font-size: 0.9rem;
+    }
+
+    .book-author {
+        font-size: 0.7rem;
+        text-overflow: ellipsis;
+        width: 230px;
+    }
+}
+
+@media (max-width: 321px) {
+    .book-card {
+        padding: 0 0.7rem;
+    }
+    .book-card img {
+        border-radius: 0.2rem;
+        height: 190px;
+        width: 130px;
+    }
+    .book-title {
+        font-size: 0.9rem;
+    }
+
+    .book-author {
+        font-size: 0.7rem;
+        text-overflow: ellipsis;
+        width: 230px;
     }
 }

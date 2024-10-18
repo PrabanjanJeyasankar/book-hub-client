@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useBooks } from '../../../context/BooksContext/BooksContext'
 import './SearchPageComponent.css'
-// import SearchPageStyle from './SearchPageComponent.module.css'
 import SearchBarComponent from '../SearchBarComponent/SearchBarComponent'
 import BookCardComponent from '../BookCardComponent/BookCardComponent'
 import LottieBookAnimation from '../AnimationComponents/LottieBookAnimation'
 import LottieSearchNotFound from '../AnimationComponents/SearchNotFoundAnimation'
 import Button from '../ButtonComponent/ButtonComponent'
-
-// import SearchIcon3DAsset from '../../../assets/img/search_img-3d-asset.png'
 
 function SearchPageComponent() {
     const location = useLocation()
@@ -24,7 +21,7 @@ function SearchPageComponent() {
     })
 
     useEffect(() => {
-        setFilteredBooks(allBooks) // Initialize filteredBooks with allBooks when they change
+        setFilteredBooks(allBooks) 
     }, [allBooks])
 
     useEffect(() => {

@@ -11,21 +11,29 @@ import axiosInstance from '../../../utils/axiosInstance'
 function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
         useContext(UserContext)
+
+    // State for controlling dropdown and menu
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    // Refs for the dropdown
     const dropdownRef = useRef(null)
-    const menuRef = useRef(null)
     const navigate = useNavigate()
 
+    // Toggle the dropdown menu state
+    const handleProfileClick = () => {
+        setIsDropdownOpen((prev) => !prev)
+    }
+
+    // Toggle the navigation menu state
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev)
     }
 
+    // Handle logout logic
     const handleLogout = () => {
         axiosInstance
-            .get('/user/logout', {
-                withCredentials: true,
-            })
+            .get('/user/logout', { withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
                     setIsLoggedIn(false)
@@ -40,41 +48,40 @@ function UserNavBarComponent() {
             })
     }
 
-    const handleProfileClick = () => {
-        setIsDropdownOpen((prev) => !prev)
-    }
-
-    const handleClickOutside = (event) => {
+    // Handle closing of the dropdown when clicked outside
+    const closeDropdown = (e) => {
         if (
+            isDropdownOpen &&
             dropdownRef.current &&
-            !dropdownRef.current.contains(event.target) &&
-            menuRef.current &&
-            !menuRef.current.contains(event.target)
+            !dropdownRef.current.contains(e.target)
         ) {
             setIsDropdownOpen(false)
-            setIsMenuOpen(false)
         }
     }
 
+    // Attach event listener for dropdown only
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('mousedown', closeDropdown)
+
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('mousedown', closeDropdown)
         }
-    }, [])
+    }, [isDropdownOpen])
 
     return (
         <nav className='user-navbar'>
             <div className='user-navbar-container'>
-                <div
-                    className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-                    onClick={toggleMenu}
-                    ref={menuRef} // Attach ref here
-                >
-                    <span className='line' id='line-top'></span>
-                    <span className='line' id='line-bottom'></span>
+                {/* Hamburger menu */}
+                <div className='hamburger-container'>
+                    <div
+                        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+                        onClick={toggleMenu}>
+                        <span className='line' id='line-top'></span>
+                        <span className='line' id='line-bottom'></span>
+                    </div>
                 </div>
 
+                {/* Navbar brand */}
                 <div className='user-navbar-brand'>
                     <Link to='/' className='user-page-app-logo'>
                         <img src={logoImage} alt='Book hub logo' />
@@ -82,6 +89,7 @@ function UserNavBarComponent() {
                     </Link>
                 </div>
 
+                {/* Center navbar links */}
                 <div
                     className={`user-navbar-center ${
                         isMenuOpen ? 'hidden' : ''
@@ -93,6 +101,7 @@ function UserNavBarComponent() {
                     </div>
                 </div>
 
+                {/* Responsive menu */}
                 {isMenuOpen && (
                     <div className='menuDropDown'>
                         <div className='resp-page-links'>
@@ -109,6 +118,7 @@ function UserNavBarComponent() {
                     </div>
                 )}
 
+                {/* Profile dropdown */}
                 {isLoggedIn && (
                     <div className='signup-login-links'>
                         <div className='user-profile-btn' ref={dropdownRef}>
@@ -161,6 +171,7 @@ function UserNavBarComponent() {
                     </div>
                 )}
 
+                {/* Login/signup links when not logged in */}
                 {!isLoggedIn && (
                     <div className='signup-login-links'>
                         <Link className='login-btn' to='/login'>

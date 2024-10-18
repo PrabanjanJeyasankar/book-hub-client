@@ -210,7 +210,9 @@
     display: none;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    height: 32px;
+    width: 32px;
     cursor: pointer;
     position: relative;
     z-index: 20;
@@ -267,14 +269,24 @@
     display: flex;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
+    .user-navbar-container {
+        padding: 1.5rem 0;
+    }
+    .user-profile-btn {
+        padding: 0;
+    }
+    .user-nav-profile-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
     .user-page-app-logo {
         display: none;
     }
 }
 
 @media (max-width: 768px) {
-   
     .resp-page-links {
         display: flex;
         flex-direction: column;
@@ -294,8 +306,20 @@
     }
 
     .hamburger {
-        flex: 1;
         display: flex;
+    }
+
+    .hamburger-container {
+        flex: 1;
+        display: block;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        /* height: 12px; */
+        /* width: 12px; */
+        cursor: pointer;
+        position: relative;
+        z-index: 20;
     }
 
     .signup-login-links {
@@ -324,5 +348,4 @@
         cursor: pointer;
         font-size: 14px;
     }
-
 }

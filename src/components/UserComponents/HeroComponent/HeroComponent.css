@@ -199,11 +199,15 @@
         padding: 1rem;
     }
     .hero-title {
-        font-size: 3rem;
+        font-size: 4.5rem;
         text-align: center;
+        text-wrap:balance;
+        width: 90%;
     }
     .hero-description {
+        font-size: 1.4rem;
         text-align: center;
+        margin: 1rem 0;
     }
 }
 
