@@ -65,11 +65,9 @@ function DeleteBookComponent({ bookData, onDelete }) {
         }
     }
 
-    useEffect(() => {
-        if (onDelete) {
-            handleDelete()
-        }
-    }, [onDelete])
+    if (onDelete) {
+        handleDelete()
+    }
 
     return (
         <div className='delete-book-component'>
