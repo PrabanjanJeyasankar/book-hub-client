@@ -5,32 +5,44 @@ import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
 
 import logoImage from '../../../assets/img/open_book_logo.png'
-import DummyProfileImage from '../../../assets/img/img1.png'
+import DefaultProfileImage from '../../../assets/img/default_user_profile.jpg'
 import axiosInstance from '../../../utils/axiosInstance'
+import fetchUserProfilePicture from '../../../services/fetchUserProfilePicture'
 
 function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
         useContext(UserContext)
 
-    // State for controlling dropdown and menu
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [imageSrc, setImageSrc] = useState(DefaultProfileImage)
 
-    // Refs for the dropdown
     const dropdownRef = useRef(null)
     const navigate = useNavigate()
 
-    // Toggle the dropdown menu state
+    const loadProfilePicture = async () => {
+        try {
+            const data = await fetchUserProfilePicture()
+            if (data.profileImage) {
+                setImageSrc(data.profileImage)
+            }
+        } catch (error) {
+            console.error('Error fetching profile image:', error)
+        }
+    }
+
+    useEffect(() => {
+        loadProfilePicture()
+    }, [])
+
     const handleProfileClick = () => {
         setIsDropdownOpen((prev) => !prev)
     }
 
-    // Toggle the navigation menu state
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev)
     }
 
-    // Handle logout logic
     const handleLogout = () => {
         axiosInstance
             .get('/user/logout', { withCredentials: true })
@@ -48,7 +60,6 @@ function UserNavBarComponent() {
             })
     }
 
-    // Handle closing of the dropdown when clicked outside
     const closeDropdown = (e) => {
         if (
             isDropdownOpen &&
@@ -59,7 +70,6 @@ function UserNavBarComponent() {
         }
     }
 
-    // Attach event listener for dropdown only
     useEffect(() => {
         document.addEventListener('mousedown', closeDropdown)
 
@@ -71,7 +81,6 @@ function UserNavBarComponent() {
     return (
         <nav className='user-navbar'>
             <div className='user-navbar-container'>
-                {/* Hamburger menu */}
                 <div className='hamburger-container'>
                     <div
                         className={`hamburger ${isMenuOpen ? 'active' : ''}`}
@@ -81,7 +90,6 @@ function UserNavBarComponent() {
                     </div>
                 </div>
 
-                {/* Navbar brand */}
                 <div className='user-navbar-brand'>
                     <Link to='/' className='user-page-app-logo'>
                         <img src={logoImage} alt='Book hub logo' />
@@ -89,7 +97,6 @@ function UserNavBarComponent() {
                     </Link>
                 </div>
 
-                {/* Center navbar links */}
                 <div
                     className={`user-navbar-center ${
                         isMenuOpen ? 'hidden' : ''
@@ -101,7 +108,6 @@ function UserNavBarComponent() {
                     </div>
                 </div>
 
-                {/* Responsive menu */}
                 {isMenuOpen && (
                     <div className='menuDropDown'>
                         <div className='resp-page-links'>
@@ -118,12 +124,11 @@ function UserNavBarComponent() {
                     </div>
                 )}
 
-                {/* Profile dropdown */}
                 {isLoggedIn && (
                     <div className='signup-login-links'>
                         <div className='user-profile-btn' ref={dropdownRef}>
                             <img
-                                src={DummyProfileImage}
+                                src={imageSrc}
                                 alt='Profile'
                                 className='user-nav-profile-icon'
                                 onClick={handleProfileClick}
@@ -132,7 +137,7 @@ function UserNavBarComponent() {
                                 <div className='user-profile-dropdown-menu open'>
                                     <div className='user-profile-dropdown-header'>
                                         <img
-                                            src={DummyProfileImage}
+                                            src={imageSrc}
                                             alt='Profile'
                                             className='user-profile-dropdown-image'
                                         />
@@ -171,7 +176,6 @@ function UserNavBarComponent() {
                     </div>
                 )}
 
-                {/* Login/signup links when not logged in */}
                 {!isLoggedIn && (
                     <div className='signup-login-links'>
                         <Link className='login-btn' to='/login'>

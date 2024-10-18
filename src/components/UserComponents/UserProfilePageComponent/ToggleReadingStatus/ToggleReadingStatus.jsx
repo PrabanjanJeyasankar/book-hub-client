@@ -1,14 +1,14 @@
-import React from 'react'
-import './ToggleReadingStatus.css'
+import React from 'react';
+import './ToggleReadingStatus.css';
 
 function ToggleReadingStatus({
     selectedReadingStatus,
     setSelectedReadingStatus,
 }) {
     const handleStatusChange = (status) => {
-        setSelectedReadingStatus(status)
-    }
-    const largeDot = '\u25CF'
+        setSelectedReadingStatus(status);
+    };
+    const largeDot = '\u25CF';
 
     return (
         <div className='toggle-reading-status'>
@@ -48,7 +48,7 @@ function ToggleReadingStatus({
                 </span>
             </div>
         </div>
-    )
+    );
 }
 
-export default ToggleReadingStatus
+export default ToggleReadingStatus;

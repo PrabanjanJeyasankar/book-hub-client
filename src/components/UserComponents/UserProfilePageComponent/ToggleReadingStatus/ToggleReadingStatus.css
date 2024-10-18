@@ -71,3 +71,29 @@
         opacity: 0;
     }
 }
+
+@media (max-width: 560px) {
+    .toggle-reading-status {
+        display: flex;
+        justify-content: center;
+        margin: 1.2rem 0rem 0.4rem 0rem;
+    }
+    .toggle-switch .slider {
+       display: none;
+    }
+    .toggle-switch {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: #f1f1f1;
+        border-radius: 0.5rem;
+        gap: 0.2re;
+        /* width: 70%; */
+    }
+
+    .toggle-switch span.active {
+        color: #ffffff;
+        background-color: black;
+        border-radius: 0.5rem;
+    }
+}

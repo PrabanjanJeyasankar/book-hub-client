@@ -49,7 +49,7 @@
     margin: 0 0 0.2rem 0;
 }
 
-.profile-location {
+.profile-email {
     font-size: 0.9rem;
     color: #666;
     text-align: center;
@@ -94,6 +94,7 @@
 .bookmark-list,
 .liked-books-list {
     display: grid;
+    align-items: flex-start;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
 }
@@ -137,4 +138,69 @@
 .edit-profile-button:hover svg {
     right: 43%;
     margin: 0;
+}
+
+@media (max-width: 1025px) {
+    .bookmark-list,
+    .liked-books-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 769px) {
+    .bookmark-list,
+    .liked-books-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+    }
+}
+@media (max-width: 650px) {
+    .bookmark-list,
+    .liked-books-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (max-width: 426px) {
+    .profile-container{
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .profile-header {
+        flex-direction: column;
+    }
+    .profile-name {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 0 0 0.2rem 0;
+        text-align: center;
+    }
+    .profile-email {
+        font-size: 0.8rem;
+        color: #666;
+        text-align: center;
+        margin: 0;
+    }
+    .bookmark-list,
+    .liked-books-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0px;
+    }
+}
+
+@media (max-width: 376px) {
+    .bookmark-list,
+    .liked-books-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0px;
+    }
+}
+@media (max-width: 321px) {
+    .bookmark-list,
+    .liked-books-list {
+        align-items: start;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0px;
+    }
 }

@@ -150,18 +150,18 @@
 
 .user-profile-dropdown-header img {
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     background-color: #333333;
 }
 
 .user-profile-dropdown-image {
-    width: 60px;
-    height: 60px;
+    /* width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 8px;
+    margin-bottom: 8px; */
 }
 
 .user-profile-dropdown-name {
@@ -315,8 +315,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        /* height: 12px; */
-        /* width: 12px; */
         cursor: pointer;
         position: relative;
         z-index: 20;
