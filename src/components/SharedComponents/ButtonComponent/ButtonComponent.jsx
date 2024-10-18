@@ -8,6 +8,7 @@ const Button = ({
     onClick,
     children,
     disabled,
+    svgPath,
 }) => {
     return (
         <button
@@ -16,6 +17,11 @@ const Button = ({
             onClick={onClick}
             disabled={disabled}>
             {children}
+            {svgPath && (
+                <svg viewBox='0 0 512 512' className='svg'>
+                    <path d={svgPath}></path>
+                </svg>
+            )}
         </button>
     )
 }
@@ -26,6 +32,7 @@ Button.propTypes = {
     onClick: PropTypes.func,
     children: PropTypes.node.isRequired,
     disabled: PropTypes.bool,
+    svgPath: PropTypes.string,
 }
 
 export default Button

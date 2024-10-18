@@ -17,12 +17,10 @@
 
 .overlay-content {
     background: white;
-    padding: 1rem;
+    padding: 1rem 1rem 3rem 1rem;
     border-radius: 12px;
     position: relative;
     max-width: 1200px;
-    /* width: 100%; */
-    /* width: 87%; */
     margin: 2rem 0;
     overflow-y: auto;
     display: flex;
@@ -107,6 +105,7 @@
 }
 
 .overlay-book-details-grid {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -147,6 +146,8 @@
 .overlay-book-info {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     gap: 0.5rem;
     margin-left: 1rem;
     text-align: left;
@@ -162,11 +163,23 @@
     border-radius: 5px;
     padding: 0.5rem;
     cursor: pointer;
-    
 }
 
+@media (min-width: 220px) and (max-width: 576px) {
+    .overlay-content {
+        padding: 1rem;
+        border-radius: 12px;
+        position: relative;
+        max-width: 1200px;
+        margin: 2rem 2rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: max-width 0.3s ease, width 0.3s ease;
+    }
 
-@media (min-width: 600px) {
     .overlay-book-container {
         display: flex;
         text-align: center;
@@ -175,9 +188,121 @@
         gap: 1rem;
         margin: 1rem;
         padding: 2rem 2rem 2rem 2rem;
-        flex-wrap: wrap;
-        overflow: hidden;
+    }
+
+    .overlay-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .overlay-header-title {
+        font-size: 1.6rem;
+        line-height: normal;
+        text-align: center;
+    }
+    .overlay-header-author {
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .overlay-book-description p {
+        text-align: center;
+    }
+
+    .overlay-details-action-container {
+        padding: 0;
+    }
+    .overlay-book-info {
+        margin: 0;
+    }
+    .overlay-book-container img {
+        margin-bottom: 0.5rem;
+        max-width: 150px;
+        min-width: 50px;
         height: auto;
-        transition: padding 0.3s ease;
+        border-radius: 8px;
+        object-fit: fill;
+    }
+    .overlay-book-other-details {
+        user-select: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .overlay-content {
+        padding: 1rem;
+        border-radius: 12px;
+        position: relative;
+        max-width: 1200px;
+        margin: 2rem 2rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: max-width 0.3s ease, width 0.3s ease;
+    }
+
+    .overlay-book-container {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem;
+        padding: 2rem 2rem 2rem 2rem;
+    }
+
+    .overlay-book-container img {
+        margin-bottom: 1rem;
+        max-width: 300px;
+        min-width: 200px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: fill;
+    }
+    .overlay-book-other-details {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .overlay-content {
+        padding: 1rem;
+        border-radius: 12px;
+        position: relative;
+        max-width: 1200px;
+        margin: 2rem 2rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: max-width 0.3s ease, width 0.3s ease;
+    }
+
+    .overlay-book-container {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem;
+        padding: 2rem 2rem 2rem 2rem;
+    }
+
+    .overlay-book-container img {
+        margin-bottom: 1rem;
+        max-width: 300px;
+        min-width: 200px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: fill;
     }
 }

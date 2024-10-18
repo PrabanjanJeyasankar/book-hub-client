@@ -92,10 +92,7 @@ function OverlayABookComponent({ book, onClose }) {
                     </div>
                 ) : (
                     <div className='overlay-book-container'>
-                        <img
-                            src={`${book.coverImage}`}
-                            alt={book.title}
-                        />
+                        <img src={`${book.coverImage}`} alt={book.title} />
                         <div className='overlay-details-action-container'>
                             <div className='overlay-book-info'>
                                 <div className='overlay-header'>
@@ -106,6 +103,9 @@ function OverlayABookComponent({ book, onClose }) {
                                         <p className='overlay-header-author'>
                                             by {book.author}
                                         </p>
+                                        <div className='overlay-book-description'>
+                                            <p>{book.description}</p>
+                                        </div>
                                     </div>
                                     <div className='overlay-actions'>
                                         {userProfile?.role !== 'admin' && (
@@ -150,9 +150,6 @@ function OverlayABookComponent({ book, onClose }) {
                                     </div>
                                 </div>
                                 <div className='overlay-book-details'>
-                                    <div className='overlay-book-description'>
-                                        <p>{book.description}</p>
-                                    </div>
                                     <div className='overlay-book-grid-container'>
                                         <div className='overlay-book-other-details'>
                                             <div className='overlay-book-details-grid'>

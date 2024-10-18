@@ -8,18 +8,20 @@
 
 .profile-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
 .profile-image-container {
     position: relative;
-    margin-right: 20px;
 }
 
 .profile-image {
-    width: 70px;
-    height: 70px;
+    display: flex;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #fff;
@@ -28,8 +30,8 @@
 
 .status-indicator {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 12px;
+    right: 16px;
     width: 12px;
     height: 12px;
     background-color: #4caf50;
@@ -42,53 +44,28 @@
 }
 
 .profile-name {
-    font-size: 24px;
+    font-size: 1.7rem;
     font-weight: bold;
-    margin: 0 0 5px 0;
+    margin: 0 0 0.2rem 0;
 }
 
 .profile-location {
-    font-size: 14px;
+    font-size: 0.9rem;
     color: #666;
+    text-align: center;
     margin: 0;
 }
 
 .profile-actions {
     display: flex;
-    gap: 10px;
+    gap: 1rem;
+    margin: 1.5rem 0 0 0;
 }
 
 .profile-content {
     width: 100%;
 }
 
-.edit-profile-btn,
-.more-options-btn {
-    padding: 8px 16px;
-    border: 1px solid #c3c3c3;
-    background-color: #fff;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.more-options-btn {
-    padding: 8px 12px;
-}
-
-.profile-badges {
-    margin-bottom: 20px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 4px 8px;
-    background-color: #e3f2fd;
-    color: #1565c0;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 4px;
-}
 .profile-nav ul {
     list-style-type: none;
     padding: 0;
@@ -114,14 +91,50 @@
     border-bottom: 2px solid #000;
 }
 
-.bookmark-list, .liked-books-list{
-   
+.bookmark-list,
+.liked-books-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
-    
 }
 
 .liked-books-list {
     margin-top: 1rem;
+}
+
+.edit-profile-button {
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 160px;
+    height: 40px;
+    border: 1px solid gray;
+    padding: 0px 2rem;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: none;
+    transition: color 0.3s ease;
+}
+
+.edit-pencil-icon {
+    width: 14px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: rgb(255, 255, 255);
+    transition: right 0.3s ease;
+}
+
+.edit-profile-button:hover {
+    color: transparent;
+}
+
+.edit-profile-button:hover svg {
+    right: 43%;
+    margin: 0;
 }
