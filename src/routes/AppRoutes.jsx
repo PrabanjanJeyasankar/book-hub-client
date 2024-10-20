@@ -40,7 +40,7 @@ import AdminLayout from '../layouts/AdminLayout/AdminLayout'
 import useUserContext from '../hooks/useUserContext'
 
 const AppRoutes = () => {
-    const { isLoggedIn, userProfile } = useUserContext()
+    // const { isLoggedIn, userProfile } = useUserContext()
 
     return (
         <ErrorBoundary>

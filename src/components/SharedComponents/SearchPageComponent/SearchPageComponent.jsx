@@ -7,22 +7,22 @@ import BookCardComponent from '../BookCardComponent/BookCardComponent'
 import LottieBookAnimation from '../AnimationComponents/LottieBookAnimation'
 import LottieSearchNotFound from '../AnimationComponents/SearchNotFoundAnimation'
 import Button from '../ButtonComponent/ButtonComponent'
+import useFilterBooks from '../../../hooks/useFilterBooks'
+import useDebounce from '../../../hooks/useDebounce'
 
 function SearchPageComponent() {
     const location = useLocation()
-    const [searchQuery, setSearchQuery] = useState('')
     const { allBooks } = useBooks()
-    const [filteredBooks, setFilteredBooks] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+
+    const [searchQuery, setSearchQuery] = useState('')
     const [searchCriteria, setSearchCriteria] = useState({
         genre: '',
         language: '',
-        publisher: '',
+        publisher: ''
     })
+    const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
-        setFilteredBooks(allBooks) 
-    }, [allBooks])
+    const filteredBooks = useFilterBooks(allBooks, searchQuery, searchCriteria)
 
     useEffect(() => {
         if (location.state?.query) {
@@ -30,72 +30,20 @@ function SearchPageComponent() {
         }
     }, [location.state])
 
-    useEffect(() => {
-        const applyFilters = () => {
-            let updatedFilteredBooks = [...allBooks]
-
-            if (searchQuery) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) =>
-                        book.title
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase()) ||
-                        book.author
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase())
-                )
-            }
-
-            if (searchCriteria.genre) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.genre === searchCriteria.genre
-                )
-            }
-
-            if (searchCriteria.language) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.language === searchCriteria.language
-                )
-            }
-
-            if (searchCriteria.publisher) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.publisher === searchCriteria.publisher
-                )
-            }
-
-            setFilteredBooks(updatedFilteredBooks)
-        }
-
-        applyFilters()
-    }, [searchQuery, searchCriteria, allBooks])
-
     const handleGenreChange = (e) => {
-        const value = e.target.value
-        setSearchCriteria((prev) => ({ ...prev, genre: value }))
+        setSearchCriteria((prev) => ({ ...prev, genre: e.target.value }))
     }
 
     const handleLanguageChange = (e) => {
-        const value = e.target.value
-        setSearchCriteria((prev) => ({ ...prev, language: value }))
+        setSearchCriteria((prev) => ({ ...prev, language: e.target.value }))
     }
 
     const handlePublisherChange = (e) => {
-        const value = e.target.value
-        setSearchCriteria((prev) => ({ ...prev, publisher: value }))
+        setSearchCriteria((prev) => ({ ...prev, publisher: e.target.value }))
     }
 
-    const debounce = (func, delay) => {
-        let timeoutId
-        return function (...args) {
-            clearTimeout(timeoutId)
-            timeoutId = setTimeout(() => func.apply(this, args), delay)
-        }
-    }
-
-    const debouncedSearch = debounce((query) => {
+    const debouncedSearch = useDebounce((query) => {
         setSearchQuery(query)
-        applyFilters()
     }, 300)
 
     const handleSearchChange = (query) => {
@@ -103,28 +51,17 @@ function SearchPageComponent() {
             debouncedSearch(query)
         } else {
             setSearchQuery('')
-            setFilteredBooks(allBooks)
         }
     }
 
     const clearAllFilters = () => {
         setSearchQuery('')
-        setSearchCriteria({
-            genre: '',
-            language: '',
-            publisher: '',
-        })
-        setFilteredBooks(allBooks)
+        setSearchCriteria({ genre: '', language: '', publisher: '' })
     }
 
     return (
         <div className='search_page_outer_container'>
             <div className='search-heading'>
-                {/* <img
-                    src={SearchIcon3DAsset}
-                    className='search_icon_3d'
-                    alt='search_3d_icon'
-                /> */}
                 <h1 className='search-title'>Search</h1>
             </div>
 
@@ -136,39 +73,33 @@ function SearchPageComponent() {
                 initialQuery={searchQuery}
                 onSearchChange={handleSearchChange}
             />
+
             <div className='filter-controls'>
                 <div className='filter-container'>
-                    <select
-                        className='filter-select'
-                        onChange={handleGenreChange}>
+                    <select className='filter-select' onChange={handleGenreChange}>
                         <option value=''>Select Genre</option>
                         <option value='Fiction'>Fiction</option>
                         <option value='Non Fiction'>Non-Fiction</option>
                     </select>
-                    <select
-                        className='filter-select'
-                        onChange={handleLanguageChange}>
+                    <select className='filter-select' onChange={handleLanguageChange}>
                         <option value=''>Select Language</option>
                         <option value='English'>English</option>
                         <option value='Tamil'>Tamil</option>
                         <option value='Spanish'>Spanish</option>
                     </select>
-                    <select
-                        className='filter-select'
-                        onChange={handlePublisherChange}>
+                    <select className='filter-select' onChange={handlePublisherChange}>
                         <option value=''>Select Publisher</option>
                         <option value='Penguin'>Penguin</option>
                         <option value='HarperCollins'>HarperCollins</option>
                     </select>
                 </div>
                 <div className='clear-button'>
-                    <Button
-                        onClick={clearAllFilters}
-                        className='clear-filters-button'>
+                    <Button onClick={clearAllFilters} className='clear-filters-button'>
                         Clear Filters
                     </Button>
                 </div>
             </div>
+
             <div className='search-result'>
                 {isLoading ? (
                     <div className='loading-animation'>
@@ -178,9 +109,7 @@ function SearchPageComponent() {
                 ) : (
                     <div
                         className={`book-results ${
-                            filteredBooks.length > 0
-                                ? 'results-grid-layout'
-                                : 'results-flex-layout'
+                            filteredBooks.length > 0 ? 'results-grid-layout' : 'results-flex-layout'
                         }`}>
                         {filteredBooks.length > 0 ? (
                             filteredBooks.map((book, index) => (

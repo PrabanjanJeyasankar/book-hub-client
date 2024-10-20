@@ -1,42 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
 import './BookCardComponent.css'
 
-function BookCardComponent({ book }) {
-    const [showOverlay, setShowOverlay] = useState(false)
+export default function BookCardComponent({ book }) {
+  const [showOverlay, setShowOverlay] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-    const handleCardClick = () => {
-        setShowOverlay(true)
-    }
+  useEffect(() => {
+    const image = new Image()
+    image.src = book.coverImage
+    image.onload = () => setIsLoading(false)
+  }, [book.coverImage])
 
-    const handleCloseOverlay = () => {
-        setShowOverlay(false)
-    }
+  const handleCardClick = () => {
+    setShowOverlay(true)
+  }
 
-    return (
-        <React.Fragment>
-            <div className='book-card' onClick={handleCardClick}>
-                <img
-                    className='book-cover'
-                    src={`${book.coverImage}`}
-                    alt={book.title}
-                />
-                <div className='book-details'>
-                    <h3 className='book-title'>{book.title}</h3>
-                    <p className='book-author'>by {book.author}</p>
-                </div>
+  const handleCloseOverlay = () => {
+    setShowOverlay(false)
+  }
+
+  return (
+    <React.Fragment>
+      <div className={`book-card ${isLoading ? 'loading' : ''}`} onClick={handleCardClick}>
+        {isLoading ? (
+          <div className="book-card-skeleton">
+            <div className="skeleton-image"></div>
+            <div className="skeleton-details">
+              <div className="skeleton-title"></div>
+              <div className="skeleton-author"></div>
             </div>
-            {showOverlay &&
-                ReactDOM.createPortal(
-                    <OverlayABookComponent
-                        book={book}
-                        onClose={handleCloseOverlay}
-                    />,
-                    document.body
-                )}
-        </React.Fragment>
-    )
+          </div>
+        ) : (
+          <>
+            <img
+              className='book-cover'
+              src={book.coverImage}
+              alt={book.title}
+            />
+            <div className='book-details'>
+              <h3 className='book-title'>{book.title}</h3>
+              <p className='book-author'>by {book.author}</p>
+            </div>
+          </>
+        )}
+      </div>
+      {showOverlay &&
+        ReactDOM.createPortal(
+          <OverlayABookComponent
+            book={book}
+            onClose={handleCloseOverlay}
+          />,
+          document.body
+        )}
+    </React.Fragment>
+  )
 }
-
-export default BookCardComponent
