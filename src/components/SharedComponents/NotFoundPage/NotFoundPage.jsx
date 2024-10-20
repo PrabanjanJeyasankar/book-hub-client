@@ -6,26 +6,37 @@ import './NotFoundPage.css'
 
 function NotFoundPage() {
     const navigate = useNavigate()
-    const [countdown, setCountdown] = useState(30)
+    const [countdown, setCountdown] = useState(15)
     const { userProfile } = useContext(UserContext)
-    
+
     useEffect(() => {
         const timer = setInterval(() => {
             setCountdown((prevCountdown) => {
-                if (prevCountdown === 1) {
-                    if (userProfile?.role === 'admin') {
-                        navigate('/admin/dashboard')
-                    } else {
-                        navigate('/')
-                    }
+                if (prevCountdown > 1) {
+                    return prevCountdown - 1
+                } else {
                     return 0
                 }
-                return prevCountdown - 1
             })
         }, 1000)
 
-        return () => clearInterval(timer)
-    }, [navigate, userProfile?.role])
+        const checkCountdown = setInterval(() => {
+            if (countdown === 0) {
+                clearInterval(timer)
+                clearInterval(checkCountdown)
+                if (userProfile?.role === 'admin') {
+                    window.location.href = '/admin/dashboard'
+                } else {
+                    window.location.href = '/'
+                }
+            }
+        }, 100)
+
+        return () => {
+            clearInterval(timer)
+            clearInterval(checkCountdown)
+        }
+    }, [navigate, countdown, userProfile?.role])
 
     return (
         <ErrorBoundary>

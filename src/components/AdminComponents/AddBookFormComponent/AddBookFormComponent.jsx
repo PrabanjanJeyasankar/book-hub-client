@@ -4,6 +4,7 @@ import BookFormComponent from '../BookFormComponent/BookFormComponent'
 import validateBookForm from '../../../utils/formValidation.js'
 import addBookService from '../../../services/addBookService.js'
 import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
+import LoadingHourGlassComponent from '../../AdminComponents/LoadingHourGlassComponent/LoadingHourGlassComponent.jsx'
 import './AddBookFormComponent.css'
 
 function AddBookFormComponent() {
@@ -13,6 +14,8 @@ function AddBookFormComponent() {
     const [popupMessageBody, setPopupMessageBody] = useState('')
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false) // New loading state
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -20,10 +23,12 @@ function AddBookFormComponent() {
         setErrors(formErrors)
 
         if (Object.keys(formErrors).length === 0) {
+            setIsLoading(true) // Start loading
+
             addBookService(formData)
                 .then((response) => {
                     console.log(response.status)
-                    if (response.status == 201) {
+                    if (response.status === 201) {
                         setPopupMessageTitle('Success')
                         setPopupMessageBody(
                             `"${
@@ -67,6 +72,7 @@ function AddBookFormComponent() {
                     }
                 })
                 .finally(() => {
+                    setIsLoading(false) // Stop loading
                     setIsModalOpen(true)
                 })
         }
@@ -90,6 +96,7 @@ function AddBookFormComponent() {
                 isOpen={isModalOpen}
                 onClose={closeModal}
             />
+            {isLoading && <LoadingHourGlassComponent />} {/* Show loading overlay */}
         </div>
     )
 }

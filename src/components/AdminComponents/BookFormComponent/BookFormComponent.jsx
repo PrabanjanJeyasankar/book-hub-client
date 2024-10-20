@@ -47,7 +47,7 @@ const BookFormComponent = ({
             coverImage: null,
         })
         setErrors({})
-        setImagePreview(null) // Clear the image preview when fields are cleared
+        setImagePreview(null)
     }
 
     const handleFormInputChange = (e) => {

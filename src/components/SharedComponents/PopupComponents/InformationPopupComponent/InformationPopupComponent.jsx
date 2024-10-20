@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import './InformationPopupComponent.css'
-import ThumbsUpImage from '../../../../assets/img/thumb-up.png'
-import RepairImage from '../../../../assets/img/error-tool.png'
-import TrashCanImage from '../../../../assets/img/trash-can.png'
+import ThumbsUpImage from '../../../../assets/img/thumb-up.webp'
+import RepairImage from '../../../../assets/img/error-tool.webp'
+import TrashCanImage from '../../../../assets/img/trash-can.webp'
 import { X } from 'lucide-react'
 
 const images = {

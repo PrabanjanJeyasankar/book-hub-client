@@ -120,18 +120,6 @@ function AdminNavBar() {
                     )}
                 </div>
             </aside>
-            <div className='main-content'>
-                {/* <Routes>
-                    <Route
-                        path='dashboard'
-                        element={<AdminDashBoardComponent />}
-                    />
-                    <Route path='allbooks' element={<AllBooksComponent />} />
-                    <Route path='addbook' element={<AddBookFormComponent />} />
-                    <Route path='allusers' element={<AllUsersComponent />} />
-                    <Route path='adduser' element={<AddUserComponent />} />
-                </Routes> */}
-            </div>
         </div>
     )
 }

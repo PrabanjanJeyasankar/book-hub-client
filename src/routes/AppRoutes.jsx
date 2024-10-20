@@ -37,10 +37,8 @@ import HeroComponent from '../components/UserComponents/HeroComponent/HeroCompon
 import NotFoundPage from '../components/SharedComponents/NotFoundPage/NotFoundPage'
 import UserLayout from '../layouts/UserLayout'
 import AdminLayout from '../layouts/AdminLayout/AdminLayout'
-import useUserContext from '../hooks/useUserContext'
 
 const AppRoutes = () => {
-    // const { isLoggedIn, userProfile } = useUserContext()
 
     return (
         <ErrorBoundary>

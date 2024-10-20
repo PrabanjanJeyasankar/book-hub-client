@@ -12,6 +12,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: fit-content;
 }
 
 .user_card:hover {
@@ -34,13 +35,17 @@
 }
 
 .user_info {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    width:200px;
     margin: 1rem;
     /* padding: ; */
 }
 
 .user_name {
     text-align: center;
-    margin: 0 0 4px 0;
     font-size: 18px;
     font-weight: 600;
     color: black;
@@ -48,7 +53,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     user-select: none;
-    padding: 0.4rem 0.8rem 0rem 0.2rem;
+    padding: 0.4rem 0.4rem 0.2rem 0.2rem;
 }
 
 .user_email,
@@ -70,4 +75,21 @@
     padding: 20px;
     font-size: 18px;
     color: #666;
+}
+
+.delete_user_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 1rem;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 0.5rem;
+    background-color: black;
+    margin-left: 24px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
 }

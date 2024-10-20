@@ -18,13 +18,13 @@ const FileUpload = ({ onFileChange, error, imagePreview, coverImage }) => {
             }
             setFileError(null)
             onFileChange(acceptedFiles)
-            console.log('Accepted files:', acceptedFiles)
+            // console.log('Accepted files:', acceptedFiles)
         },
         accept: 'image/jpeg, image/png, image/gif',
         multiple: false,
     })
 
-    console.log('Image Preview:', imagePreview)
+    // console.log('Image Preview:', imagePreview)
 
     return (
         <>

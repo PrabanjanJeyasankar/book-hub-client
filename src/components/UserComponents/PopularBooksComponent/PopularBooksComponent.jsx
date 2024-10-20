@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './PopularBooksComponent.css'
 import CardSliderComponent from '../CardSliderComponent/CardSliderComponent'
 import axiosInstance from '../../../utils/axiosInstance'
+import PageLoadingAnimation from '../../SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
 
 function PopularBooksComponent() {
     const [books, setBooks] = useState([])
@@ -26,7 +27,7 @@ function PopularBooksComponent() {
     }, [])
 
     if (loading) {
-        return <div>Loading...</div>
+        return <div><PageLoadingAnimation/> </div>
     }
 
     if (error) {

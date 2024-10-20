@@ -7,7 +7,7 @@ import fetchUserPreferences from '../../../../services/fetchUserPreferences'
 import ToggleReadingStatus from '../ToggleReadingStatus/ToggleReadingStatus'
 import ToggleLikedAndBookmark from '../ToggleLikedAndBookmark/ToggleLikedAndBookmark'
 import ProfilePictureUploadComponent from '../ProfilePictureUploadComponent/ProfilePictureUploadComponent'
-
+import PageLoadingAnimation from '../../../SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
 function UserProfileComponent() {
     const { userProfile } = useContext(UserContext)
     const [userBookmarks, setUserBookmarks] = useState([])
@@ -16,7 +16,11 @@ function UserProfileComponent() {
         useState('currentlyReading')
     const [showLikedBooks, setShowLikedBooks] = useState(true)
     if (!userProfile) {
-        return <div>Loading...</div>
+        return (
+            <div>
+                <PageLoadingAnimation />
+            </div>
+        )
     }
 
     useEffect(() => {

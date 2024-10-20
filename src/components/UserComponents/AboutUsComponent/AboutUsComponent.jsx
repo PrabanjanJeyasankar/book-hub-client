@@ -1,7 +1,7 @@
 import React from 'react'
 import './AboutUsComponent.css'
 import { Link } from 'react-router-dom'
-import HeroImage from '../../../assets/img/about_us_image.png'
+import HeroImage from '../../../assets/img/about_us_image.webp'
 
 function AboutUsComponent() {
     return (

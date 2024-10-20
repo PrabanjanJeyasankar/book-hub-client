@@ -76,7 +76,7 @@
         #b26807 40%,
         #e3951f 60%,
         #ffc06f 70%,
-        #683e08 99%
+        #955e16 99%
     );
     filter: drop-shadow(0 0 1px rgba(255, 200, 0, 0.3));
     background-size: 200% auto;
@@ -331,7 +331,7 @@
             margin 0.3s ease;
     }
     .hero-section-left {
-        margin: 1rem 1rem 1rem 3rem;
+        margin: 1rem 1rem 1rem 4rem;
     }
     .hero-book-3d-asset {
         width: 100%;
@@ -376,11 +376,11 @@
             margin 0.3s ease;
     }
     .hero-section-left {
-        margin: 1rem 1rem 1rem 3rem;
+        margin: 1rem 1rem 1rem 6rem;
     }
     .hero-book-3d-asset {
         width: 100%;
-        margin-top: 3rem;
+        margin-top: 10rem;
         margin-right: 4rem;
         z-index: 1000;
         transition: transform 0.1s ease-out, margin 0.3s ease;
@@ -393,6 +393,51 @@
     }
     .hero-description {
         font-size: 2rem;
+        text-align: left;
+        margin: 0.5rem 0 1rem 0;
+    }
+}
+
+@media (min-width: 2560px) {
+    .hero-outer-container {
+        height: 100vh;
+        width: 100%;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero-content-right {
+        display: block;
+    }
+    .hero-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+        height: 57rem;
+        background-color: var(--gray-150);
+        border: 1px solid #ececec;
+        transition: background-color 0.3s ease, padding 0.3s ease,
+            margin 0.3s ease;
+    }
+    .hero-section-left {
+        margin: 1rem 1rem 1rem 3rem;
+    }
+    .hero-book-3d-asset {
+        width: 90%;
+        margin-top: 20rem;
+        margin-right: 4rem;
+        z-index: 1000;
+        transition: transform 0.1s ease-out, margin 0.3s ease;
+        transform: translate(0, 0);
+    }
+    .hero-title {
+        font-size: 7rem;
+        text-align: left;
+        text-wrap: balance;
+    }
+    .hero-description {
+        font-size: 3rem;
         text-align: left;
         margin: 0.5rem 0 1rem 0;
     }

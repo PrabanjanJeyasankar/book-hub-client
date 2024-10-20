@@ -2,12 +2,7 @@ import axiosInstance from '../utils/axiosInstance'
 
 const fetchAllUsersService = async () => {
     try {
-        const response = await axiosInstance.get(
-            '/user/all-users/',
-            {
-                withCredentials: true,
-            }
-        )
+        const response = await axiosInstance.get('/admin/all-users/')
         if (response.status === 200) {
             const users = response.data.users
             // console.log(users)
