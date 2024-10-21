@@ -1,35 +1,35 @@
 .book-text-input,
 .book-select-input,
 .book-textarea-input {
-    border: 1px solid var(--gray-450);
-    border-radius: 4px;
-    padding: 0.4rem;
+  border: 1px solid var(--gray-450);
+  border-radius: 4px;
+  padding: 0.4rem;
 
-    width: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .book-textarea-input {
-    resize: none;
-    height: 106px;
+  resize: none;
+  height: 106px;
 }
 
 .book-error {
-    color: red;
-    font-size: 12px;
-    display: block;
-    text-align: left;
-    margin-top: 4px;
+  color: red;
+  font-size: 12px;
+  display: block;
+  text-align: left;
+  margin-top: 4px;
 }
 
 .form-label {
-    display: block;
-    margin-bottom: 4px;
-    margin-left: 2px;
-    font-weight: 500;
-    text-align: left;
+  display: block;
+  margin-bottom: 4px;
+  margin-left: 2px;
+  font-weight: 500;
+  text-align: left;
 }
 
 .book-input-column {
-    margin-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
 }

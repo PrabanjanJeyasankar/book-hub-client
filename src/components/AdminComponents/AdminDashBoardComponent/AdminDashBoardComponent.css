@@ -1,230 +1,233 @@
 .admin-dash-board-container {
-    width: 100%;
-    margin-top: 1rem;
-    color: var(--color-black);
+  width: 100%;
+  margin-top: 1rem;
+  color: var(--color-black);
 }
 
 .admin-greeting {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
 .clock {
-    padding-top: 0.5rem;
-    font-size: 1.3rem;
-    color: #7d7d7d;
+  padding-top: 0.5rem;
+  font-size: 1.3rem;
+  color: #7d7d7d;
 }
 
 .admin-info {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .statistics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 .statistics-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 6px;
-    box-shadow: rgba(159, 159, 159, 0.21) 0px 30px 60px -30px,
-        rgba(10, 37, 64, 0.245) 0px -2px 6px 0px inset;
-    transition: transform 0.3s ease;
-    will-change: transform;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow:
+    rgba(159, 159, 159, 0.21) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.245) 0px -2px 6px 0px inset;
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .statistics-box:hover {
-    transform: scale(1.05) translateZ(0);
+  transform: scale(1.05) translateZ(0);
 }
 
 .statistics-box span {
-    font-size: 2.5rem;
-    font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .statistics-box p {
-    font-size: 14px;
-    font-weight: 500;
-    color: #7d7d7d;
-    padding-top: 0.2rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7d7d;
+  padding-top: 0.2rem;
 }
 
 .statistics-icon svg {
-    height: 3rem;
-    width: 8rem;
+  height: 3rem;
+  width: 8rem;
 }
 
 .books-and-members {
-    display: flex;
+  display: flex;
 }
 
 .book-list-container {
-    background-color: white;
-    margin: 1rem;
-    flex-grow: 1;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+  background-color: white;
+  margin: 1rem;
+  flex-grow: 1;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
 .book-list-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .add-book-btn {
-    padding: 0.5rem 1rem;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
 }
 
-.books-table, .users-table {
-    width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.21) 0px 30px 60px -30px,
-        rgba(10, 37, 64, 0.245) 0px -2px 6px 0px inset;
+.books-table,
+.users-table {
+  width: 100%;
+  box-shadow:
+    rgba(0, 0, 0, 0.21) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.245) 0px -2px 6px 0px inset;
 }
 
 .action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .users-list-container {
-    background-color: white;
-    margin: 1rem;
-    flex-grow: 1;
+  background-color: white;
+  margin: 1rem;
+  flex-grow: 1;
 }
 
 .users-list-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .users-list-header button {
-    padding: 0.5rem 1rem;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 @media (max-width: 1800px) {
-    .admin-greeting {
-        font-size: 4.2rem;
-    }
-    .statistics-box span {
-        font-size: 2rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 40px;
-        height: 40px;
-    }
+  .admin-greeting {
+    font-size: 4.2rem;
+  }
+  .statistics-box span {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 1440px) {
-    .admin-greeting {
-        font-size: 3.3rem;
-    }
-    .clock {
-        font-size: 1.1rem;
-    }
-    .statistics-box span {
-        font-size: 2rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 36px;
-        height: 36px;
-    }
+  .admin-greeting {
+    font-size: 3.3rem;
+  }
+  .clock {
+    font-size: 1.1rem;
+  }
+  .statistics-box span {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media (max-width: 1200px) {
-    .admin-greeting {
-        font-size: 3.1rem;
-    }
-    .statistics-box span {
-        font-size: 1.8rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 32px;
-        height: 32px;
-    }
+  .admin-greeting {
+    font-size: 3.1rem;
+  }
+  .statistics-box span {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 @media (max-width: 992px) {
-    .admin-greeting {
-        font-size: 3rem;
-    }
-    .statistics-box span {
-        font-size: 1.6rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 28px;
-        height: 28px;
-    }
+  .admin-greeting {
+    font-size: 3rem;
+  }
+  .statistics-box span {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @media (max-width: 768px) {
-    .admin-greeting {
-        font-size: 2.5rem;
-    }
-    .statistics-box span {
-        font-size: 1.4rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 24px;
-        height: 24px;
-    }
-    .books-and-members {
-        display: flex;
-        flex-direction: column;
-    }
+  .admin-greeting {
+    font-size: 2.5rem;
+  }
+  .statistics-box span {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .books-and-members {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 576px) {
-    .admin-greeting {
-        font-size: 2rem;
-    }
-    .statistics-box span {
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 20px;
-        height: 20px;
-    }
+  .admin-greeting {
+    font-size: 2rem;
+  }
+  .statistics-box span {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-    .admin-greeting {
-        font-size: 1.8rem;
-    }
-    .statistics-box span {
-        font-size: 1rem;
-        font-weight: 600;
-    }
-    .statistics-icon svg {
-        width: 18px;
-        height: 18px;
-    }
+  .admin-greeting {
+    font-size: 1.8rem;
+  }
+  .statistics-box span {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .statistics-icon svg {
+    width: 18px;
+    height: 18px;
+  }
 }

@@ -1,13 +1,13 @@
-import axiosInstance from '../utils/axiosInstance'
+import axiosInstance from "../utils/axiosInstance";
 
 const handleSignup = async (formData) => {
-    try {
-        const response = await axiosInstance.post('/user/signup', formData)
-        return response.data
-    } catch (error) {
-        console.error('Signup error:', error)
-        throw error
-    }
-}
+  try {
+    const response = await axiosInstance.post("/user/signup", formData);
+    return response.data;
+  } catch (error) {
+    console.error("Signup error:", error);
+    throw error;
+  }
+};
 
-export default handleSignup
+export default handleSignup;
