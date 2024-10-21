@@ -1,24 +1,11 @@
 version = 1
 
-exclude_patterns = [  
-  "bin/**",  
-  "**/node_modules/",  
-  "js/**/*.min.js"  
-]
+[[analyzers]]
+name = "javascript"
 
-test_patterns = \[  
-  "tests/\*\*",  
-  "test_\*.py"  
-]
+  [analyzers.meta]
+  plugins = ["react"]
+  environment = ["nodejs"]
 
-[[analyzers]]  
-name = "python"  
-enabled = true  
-dependency_file_paths = [  
-  "requirements.txt",  
-  "Pipfile"  
-]
-
-[[transformers]]  
-name = "black"  
-enabled = true
+[[transformers]]
+name = "prettier"
