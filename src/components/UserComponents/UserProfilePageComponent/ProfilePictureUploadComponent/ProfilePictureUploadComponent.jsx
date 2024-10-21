@@ -6,13 +6,17 @@ import patchUserProfilePicture from '../../../../services/patchUserProfilePictur
 import fetchUserProfilePicture from '../../../../services/fetchUserProfilePicture'
 import { toast } from 'react-hot-toast'
 import Button from '../../../SharedComponents/ButtonComponent/ButtonComponent'
+import { useUserContext } from '../../../../context/UserContext/UserContext'
 
 const ProfilePictureUploadComponent = () => {
+    const { isLoggedIn } = useUserContext()
     const [imageSrc, setImageSrc] = useState(DummyProfileImage)
     const [loading, setLoading] = useState(false)
     const fileInputRef = useRef(null)
 
     const loadProfilePicture = async () => {
+        if (!isLoggedIn) return
+
         setLoading(true)
         try {
             const data = await fetchUserProfilePicture()
@@ -28,37 +32,10 @@ const ProfilePictureUploadComponent = () => {
     }
 
     useEffect(() => {
-        loadProfilePicture()
-    }, [])
-
-    const loadFile = async (event) => {
-        const file = event.target.files[0]
-        if (file) {
-            setImageSrc(URL.createObjectURL(file))
-            await handleProfileImageUpdate(file)
+        if (isLoggedIn) {
+            loadProfilePicture()
         }
-    }
-
-    const handleProfileImageUpdate = async (file) => {
-        if (!file) return
-
-        setLoading(true)
-        const data = new FormData()
-        data.append('file', file)
-
-        try {
-            const response = await patchUserProfilePicture(data)
-            if (response.status === 200) {
-                toast.success('Profile image updated successfully!')
-            } else {
-                toast.error('Unexpected status code: ' + response.status)
-            }
-        } catch (error) {
-            handleError(error)
-        } finally {
-            setLoading(false)
-        }
-    }
+    }, [isLoggedIn])
 
     const handleError = (error) => {
         if (error.response) {
@@ -81,6 +58,35 @@ const ProfilePictureUploadComponent = () => {
         } else {
             console.error('Unexpected error:', error)
             toast.error('Error updating profile image. Please try again.')
+        }
+    }
+
+    const handleProfileImageUpdate = async (file) => {
+        if (!file) return
+
+        setLoading(true)
+        const data = new FormData()
+        data.append('file', file)
+
+        try {
+            const response = await patchUserProfilePicture(data)
+            if (response.status === 200) {
+                toast.success('Profile image updated successfully!')
+            } else {
+                toast.error('Unexpected error occurred.')
+            }
+        } catch (error) {
+            handleError(error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const loadFile = async (event) => {
+        const file = event.target.files[0]
+        if (file) {
+            setImageSrc(URL.createObjectURL(file))
+            await handleProfileImageUpdate(file)
         }
     }
 

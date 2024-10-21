@@ -1,3 +1,4 @@
+import React from 'react'
 import NotFoundPage from '../SharedComponents/NotFoundPage/NotFoundPage'
 
 class ErrorBoundary extends React.Component {

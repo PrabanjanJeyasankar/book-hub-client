@@ -21,13 +21,15 @@ function UserNavBarComponent() {
     const navigate = useNavigate()
 
     const loadProfilePicture = async () => {
-        try {
-            const data = await fetchUserProfilePicture()
-            if (data.profileImage) {
-                setImageSrc(data.profileImage)
+        if (isLoggedIn) {
+            try {
+                const data = await fetchUserProfilePicture()
+                if (data.profileImage) {
+                    setImageSrc(data.profileImage)
+                }
+            } catch (error) {
+                console.error('Error fetching profile image:', error)
             }
-        } catch (error) {
-            console.error('Error fetching profile image:', error)
         }
     }
 
@@ -132,6 +134,7 @@ function UserNavBarComponent() {
                                 alt='Profile'
                                 className='user-nav-profile-icon'
                                 onClick={handleProfileClick}
+                                aria-label="Profile picture" 
                             />
                             {isDropdownOpen && (
                                 <div className='user-profile-dropdown-menu open'>
