@@ -1,4 +1,3 @@
-import axios from 'axios'
 import axiosInstance from '../utils/axiosInstance'
 
 const likeBookService = async (bookId, isLiked) => {

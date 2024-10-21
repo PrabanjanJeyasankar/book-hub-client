@@ -1,11 +1,10 @@
-import React from 'react'
 import './ConfirmationPopupComponent.css'
 import TrashCanImage from '../../../../assets/img/trash-can.png'
 
 function ConfirmationPopupComponent({ isOpen, onConfirm, onCancel, bookData }) {
     if (!isOpen) return null
 
-    const handleOverlayClick = (event) => {
+    const handleOverlayClick = () => {
         console.log('Overlay clicked')
         onCancel()
     }

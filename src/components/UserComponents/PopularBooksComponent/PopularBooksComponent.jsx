@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './PopularBooksComponent.css'
 import CardSliderComponent from '../CardSliderComponent/CardSliderComponent'
 import axiosInstance from '../../../utils/axiosInstance'
@@ -12,9 +12,7 @@ function PopularBooksComponent() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axiosInstance.get(
-                    '/book/'
-                )
+                const response = await axiosInstance.get('/book/')
                 setBooks(response.data.books)
             } catch (error) {
                 setError(error.message)
@@ -27,7 +25,11 @@ function PopularBooksComponent() {
     }, [])
 
     if (loading) {
-        return <div><PageLoadingAnimation/> </div>
+        return (
+            <div>
+                <PageLoadingAnimation />{' '}
+            </div>
+        )
     }
 
     if (error) {

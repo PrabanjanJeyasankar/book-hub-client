@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import './InformationPopupComponent.css'
 import ThumbsUpImage from '../../../../assets/img/thumb-up.webp'
 import RepairImage from '../../../../assets/img/error-tool.webp'

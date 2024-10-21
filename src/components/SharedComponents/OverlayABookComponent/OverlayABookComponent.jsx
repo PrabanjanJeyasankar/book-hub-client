@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import { X, Pencil, Trash } from 'lucide-react'
 import { UserContext } from '../../../context/UserContext/UserContext'
 import './OverlayABookComponent.css'

@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import './HeroComponent.css'
 import SearchFormComponent from '../../SharedComponents/SearchBarComponent/SearchBarComponent'
-import HeroFeedComponent from '../HeroFeedComponent/HeroFeedComponent'
 import book3DAsset from '../../../assets/img/book_3d_assets_2.webp'
 
 function HeroComponent() {
@@ -12,8 +11,8 @@ function HeroComponent() {
             const windowWidth = window.innerWidth
             const windowHeight = window.innerHeight
 
-            const offsetX = (0.5 - (x / windowWidth)) * 50;
-            const offsetY = (0.5 - (y / windowHeight)) * 50;
+            const offsetX = (0.5 - x / windowWidth) * 50
+            const offsetY = (0.5 - y / windowHeight) * 50
 
             const image = document.querySelector('.hero-book-3d-asset')
             if (image) {
@@ -29,15 +28,17 @@ function HeroComponent() {
     }, [])
 
     return (
-        <React.Fragment>
+        <>
             <div className='hero-outer-container'>
                 <div className='hero-container'>
                     <div className='hero-section-left'>
                         <div className='hero-content'>
                             <div className='hero-title'>
-                                Discover the book that  <span className='hero-hightlight-text'>Won&#8217;t Judge You.</span>
+                                Discover the book that{' '}
+                                <span className='hero-hightlight-text'>
+                                    Won&#8217;t Judge You.
+                                </span>
                                 {/* Discover  <span className='hero-hightlight-text'>the Book</span> That Won&#8217;t Judge You. */}
-
                             </div>
                             <div className='hero-description'>
                                 Search effortlessly, Start Reading.
@@ -59,7 +60,7 @@ function HeroComponent() {
             {/* <div className='hero-feed'>
                 <HeroFeedComponent />
             </div> */}
-        </React.Fragment>
+        </>
     )
 }
 

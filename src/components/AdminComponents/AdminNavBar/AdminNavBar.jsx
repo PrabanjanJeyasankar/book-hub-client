@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import './AdminNavBar.css'
 import {
@@ -19,9 +19,9 @@ function AdminNavBar() {
     const [isExpanded, setIsExpanded] = useState(true)
     const navigate = useNavigate()
 
-    const toggleNavbar = () => {
-        setIsExpanded(!isExpanded)
-    }
+    // const toggleNavbar = () => {
+    //     setIsExpanded(!isExpanded)
+    // }
 
     const handleLogout = () => {
         axiosInstance
@@ -59,7 +59,7 @@ function AdminNavBar() {
 
                 <div className='admin-page-links'>
                     <NavLink
-                        to='/admin/dashboard' // Updated to '/admin/dashboard'
+                        to='/admin/dashboard'
                         className={({ isActive }) =>
                             `admin-page-link ${isActive ? 'active' : ''}`
                         }>

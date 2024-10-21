@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import UserForm from '../../SharedComponents/UserFormComponent/UserFormComponent'
 import ModalComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import axiosInstance from '../../../utils/axiosInstance'

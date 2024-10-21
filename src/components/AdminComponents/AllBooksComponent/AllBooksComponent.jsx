@@ -1,4 +1,3 @@
-import React from 'react'
 import './AllBooksComponent.css'
 import SearchPageComponent from '../../SharedComponents/SearchPageComponent/SearchPageComponent'
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { FormDataContext } from '../../../context/FormContext/FormContext.jsx'
 import ModalComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import BookFormComponent from '../../AdminComponents/BookFormComponent/BookFormComponent'
@@ -56,7 +56,7 @@ function EditBookFormComponent({ bookId }) {
     useEffect(() => {
         return () => {
             if (imagePreview) {
-                URL.revokeObjectURL(imagePreview) // Cleaning up the URL if it's a local file
+                URL.revokeObjectURL(imagePreview)
             }
         }
     }, [imagePreview])

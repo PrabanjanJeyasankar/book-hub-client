@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import DummyProfileImage from '../../../../assets/img/default_user_profile.jpg'
 import './ProfilePictureUploadComponent.css'
 import { Camera, Pencil } from 'lucide-react'

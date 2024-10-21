@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import InformationPopupComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent'
 import axiosInstance from '../../../utils/axiosInstance'
 import { useBooks } from '../../../context/BooksContext/BooksContext'
 
-function DeleteBookComponent({ bookData, onDelete }) {
+function DeleteBookComponent({ bookData }) {
     const { removeBookFromAllBooks } = useBooks()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [popupImageSrc, setPopupImageSrc] = useState('')
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [popupMessageBody, setPopupMessageBody] = useState('')
-    // console.log(onDelete)
 
     const handleDelete = async () => {
         console.log('Delete triggered')

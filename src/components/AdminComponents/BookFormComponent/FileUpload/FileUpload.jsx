@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { CloudUpload } from 'lucide-react'
 import './FileUpload.css'

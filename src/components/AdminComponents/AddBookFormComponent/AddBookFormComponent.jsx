@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import InformationPopupComponent from '../../SharedComponents/PopupComponents/InformationPopupComponent/InformationPopupComponent.jsx'
 import BookFormComponent from '../BookFormComponent/BookFormComponent'
 import validateBookForm from '../../../utils/formValidation.js'
@@ -8,7 +8,7 @@ import LoadingHourGlassComponent from '../../AdminComponents/LoadingHourGlassCom
 import './AddBookFormComponent.css'
 
 function AddBookFormComponent() {
-    const { formData, setFormData } = useContext(FormDataContext)
+    const { formData } = useContext(FormDataContext)
     const [errors, setErrors] = useState({})
     const [popupImageSrc, setPopupImageSrc] = useState(null)
     const [popupMessageBody, setPopupMessageBody] = useState('')
