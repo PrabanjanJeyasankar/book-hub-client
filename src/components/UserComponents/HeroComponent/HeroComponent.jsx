@@ -29,7 +29,7 @@ function HeroComponent() {
 
     return (
         <>
-            <div className='hero-outer-container'>
+            <main id="main" className='hero-outer-container'>
                 <div className='hero-container'>
                     <div className='hero-section-left'>
                         <div className='hero-content'>
@@ -56,7 +56,7 @@ function HeroComponent() {
                         />
                     </div>
                 </div>
-            </div>
+            </main>
             {/* <div className='hero-feed'>
                 <HeroFeedComponent />
             </div> */}

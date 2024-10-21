@@ -81,116 +81,123 @@ function UserNavBarComponent() {
     }, [isDropdownOpen])
 
     return (
-        <nav className='user-navbar'>
-            <div className='user-navbar-container'>
-                <div className='hamburger-container'>
+        <>
+            <a class='skip-to-content-link' href='#main'>
+                Skip to main content
+            </a>
+            <nav className='user-navbar'>
+                <div className='user-navbar-container'>
+                    <div className='hamburger-container'>
+                        <div
+                            className={`hamburger ${
+                                isMenuOpen ? 'active' : ''
+                            }`}
+                            onClick={toggleMenu}>
+                            <span className='line' id='line-top'></span>
+                            <span className='line' id='line-bottom'></span>
+                        </div>
+                    </div>
+
+                    <div className='user-navbar-brand'>
+                        <Link to='/' className='user-page-app-logo'>
+                            <img src={logoImage} alt='Book hub logo' />
+                            <span className='app-name'>Book hub</span>
+                        </Link>
+                    </div>
+
                     <div
-                        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-                        onClick={toggleMenu}>
-                        <span className='line' id='line-top'></span>
-                        <span className='line' id='line-bottom'></span>
-                    </div>
-                </div>
-
-                <div className='user-navbar-brand'>
-                    <Link to='/' className='user-page-app-logo'>
-                        <img src={logoImage} alt='Book hub logo' />
-                        <span className='app-name'>Book hub</span>
-                    </Link>
-                </div>
-
-                <div
-                    className={`user-navbar-center ${
-                        isMenuOpen ? 'hidden' : ''
-                    }`}>
-                    <div className='page-links'>
-                        <Link to='/'>Home</Link>
-                        <Link to='/search'>Search Books</Link>
-                        <Link to='/about'>About us</Link>
-                    </div>
-                </div>
-
-                {isMenuOpen && (
-                    <div className='menuDropDown'>
-                        <div className='resp-page-links'>
-                            <Link to='/' onClick={toggleMenu}>
-                                Home
-                            </Link>
-                            <Link to='/search' onClick={toggleMenu}>
-                                Search Books
-                            </Link>
-                            <Link to='/about' onClick={toggleMenu}>
-                                About us
-                            </Link>
+                        className={`user-navbar-center ${
+                            isMenuOpen ? 'hidden' : ''
+                        }`}>
+                        <div className='page-links'>
+                            <Link to='/'>Home</Link>
+                            <Link to='/search'>Search Books</Link>
+                            <Link to='/about'>About us</Link>
                         </div>
                     </div>
-                )}
 
-                {isLoggedIn && (
-                    <div className='signup-login-links'>
-                        <div className='user-profile-btn' ref={dropdownRef}>
-                            <img
-                                src={imageSrc}
-                                alt='Profile'
-                                className='user-nav-profile-icon'
-                                onClick={handleProfileClick}
-                                aria-label="Profile picture" 
-                            />
-                            {isDropdownOpen && (
-                                <div className='user-profile-dropdown-menu open'>
-                                    <div className='user-profile-dropdown-header'>
-                                        <img
-                                            src={imageSrc}
-                                            alt='Profile'
-                                            className='user-profile-dropdown-image'
-                                        />
-                                        <Link
-                                            to='/user-profile'
-                                            className='user-profile-dropdown-name'>
-                                            {userProfile.name}
-                                        </Link>
-                                    </div>
-                                    <ul className='user-profile-dropdown-list'>
-                                        <li
-                                            onClick={() =>
-                                                setIsDropdownOpen(false)
-                                            }>
-                                            <Link to='/user-profile'>
-                                                <CircleUserRound
-                                                    strokeWidth={2}
-                                                    size={18}
-                                                />
-                                                <p>Profile</p>
+                    {isMenuOpen && (
+                        <div className='menuDropDown'>
+                            <div className='resp-page-links'>
+                                <Link to='/' onClick={toggleMenu}>
+                                    Home
+                                </Link>
+                                <Link to='/search' onClick={toggleMenu}>
+                                    Search Books
+                                </Link>
+                                <Link to='/about' onClick={toggleMenu}>
+                                    About us
+                                </Link>
+                            </div>
+                        </div>
+                    )}
+
+                    {isLoggedIn && (
+                        <div className='signup-login-links'>
+                            <div className='user-profile-btn' ref={dropdownRef}>
+                                <img
+                                    src={imageSrc}
+                                    alt='Profile'
+                                    className='user-nav-profile-icon'
+                                    onClick={handleProfileClick}
+                                    aria-label='Profile picture'
+                                />
+                                {isDropdownOpen && (
+                                    <div className='user-profile-dropdown-menu open'>
+                                        <div className='user-profile-dropdown-header'>
+                                            <img
+                                                src={imageSrc}
+                                                alt='Profile'
+                                                className='user-profile-dropdown-image'
+                                            />
+                                            <Link
+                                                to='/user-profile'
+                                                className='user-profile-dropdown-name'>
+                                                {userProfile.name}
                                             </Link>
-                                        </li>
-                                        <li>
-                                            <a onClick={handleLogout}>
-                                                <LogOut
-                                                    strokeWidth={2}
-                                                    size={18}
-                                                />
-                                                <p>Log out</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
+                                        </div>
+                                        <ul className='user-profile-dropdown-list'>
+                                            <li
+                                                onClick={() =>
+                                                    setIsDropdownOpen(false)
+                                                }>
+                                                <Link to='/user-profile'>
+                                                    <CircleUserRound
+                                                        strokeWidth={2}
+                                                        size={18}
+                                                    />
+                                                    <p>Profile</p>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <a onClick={handleLogout}>
+                                                    <LogOut
+                                                        strokeWidth={2}
+                                                        size={18}
+                                                    />
+                                                    <p>Log out</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {!isLoggedIn && (
-                    <div className='signup-login-links'>
-                        <Link className='login-btn' to='/login'>
-                            Login
-                        </Link>
-                        <Link className='signup-btn' to='/signup'>
-                            Sign up
-                        </Link>
-                    </div>
-                )}
-            </div>
-        </nav>
+                    {!isLoggedIn && (
+                        <div className='signup-login-links'>
+                            <Link className='login-btn' to='/login'>
+                                Login
+                            </Link>
+                            <Link className='signup-btn' to='/signup'>
+                                Sign up
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </nav>
+        </>
     )
 }
 

@@ -1,15 +1,25 @@
-# Allow all crawlers access to the site
+# Allow all web crawlers access to the public site
 User-agent: *
+Allow: /
 
-# Disallow access to admin pages
-Disallow: /admin/
+# Block node_modules from being crawled
+Disallow: /node_modules/
 
-# Disallow access to user account pages 
-Disallow: /profile/
-Disallow: /settings/
+# Block sensitive configuration files
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /vite.config.js
+Disallow: /.env
+Disallow: /.gitignore
 
-# Disallow access to API endpoints 
-Disallow: /api/
+# Block build files and deployment settings
+Disallow: /.deepsource.toml
+Disallow: /vercel.json
 
-# Allow access to public pages, in case you want to specify
-Allow: /public/
+# Block routes not relevant for indexing
+Disallow: /admin
+Disallow: /authentication
+Disallow: /utils/
+
+# Specify the location of the sitemap if you have one
+Sitemap: https://book-hub-prabanjan.vercel.app/sitemap.xml

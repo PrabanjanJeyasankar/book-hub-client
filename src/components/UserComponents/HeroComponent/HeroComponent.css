@@ -101,7 +101,7 @@
 
 .hero-description {
     margin: 0.5rem;
-    color: #6c757d;
+    color: #646464;
     font-size: 1.1rem;
     user-select: none;
     transition: font-size 0.3s ease;
@@ -213,7 +213,7 @@
     }
 }
 
-@media (min-width: 576px) and (max-width: 768px){
+@media (min-width: 576px) and (max-width: 768px) {
     .hero-title {
         font-size: 4rem;
     }
