@@ -82,7 +82,7 @@ function UserNavBarComponent() {
 
     return (
         <>
-            <a class='skip-to-content-link' href='#main'>
+            <a className='skip-to-content-link' href='#main'>
                 Skip to main content
             </a>
             <nav className='user-navbar'>
