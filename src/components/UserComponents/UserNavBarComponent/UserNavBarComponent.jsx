@@ -4,7 +4,7 @@ import { UserContext } from '../../../context/UserContext/UserContext'
 import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
 
-import logoImage from '../../../assets/img/open_book_logo.png'
+import logoImage from '../../../assets/img/open_book_logo.webp'
 import DefaultProfileImage from '../../../assets/img/default_user_profile.jpg'
 import axiosInstance from '../../../utils/axiosInstance'
 import fetchUserProfilePicture from '../../../services/fetchUserProfilePicture'

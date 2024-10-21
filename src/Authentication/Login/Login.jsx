@@ -87,16 +87,26 @@ function Login() {
                                 placeholder='Enter password'
                                 onChange={handlePasswordChange}
                             />
-                            <button
+                            <Button
                                 type='button'
                                 onClick={togglePasswordVisibility}
-                                className='password-toggle-btn'>
+                                className='password-toggle-btn'
+                                aria-label={
+                                    showPassword
+                                        ? 'Hide password'
+                                        : 'Show password'
+                                }
+                                title={
+                                    showPassword
+                                        ? 'Hide password'
+                                        : 'Show password'
+                                }>
                                 {showPassword ? (
                                     <EyeOff size={18} strokeWidth={1.5} />
                                 ) : (
                                     <Eye size={18} strokeWidth={1.5} />
                                 )}
-                            </button>
+                            </Button>
                         </div>
                         <div className='password-error'>
                             {errors.password && (

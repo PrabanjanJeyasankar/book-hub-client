@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './HeroComponent.css'
 import SearchFormComponent from '../../SharedComponents/SearchBarComponent/SearchBarComponent'
 import HeroFeedComponent from '../HeroFeedComponent/HeroFeedComponent'
-import book3DAsset from '../../../assets/img/book_3d_assets_2.png'
+import book3DAsset from '../../../assets/img/book_3d_assets_2.webp'
 
 function HeroComponent() {
     useEffect(() => {

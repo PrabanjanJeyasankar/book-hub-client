@@ -10,7 +10,7 @@ import {
     UserRoundPlus,
 } from 'lucide-react'
 import { UserContext } from '../../../context/UserContext/UserContext'
-import LogoImage from '../../../assets/img/open_book_logo.png'
+import LogoImage from '../../../assets/img/open_book_logo.webp'
 import Button from '../../SharedComponents/ButtonComponent/ButtonComponent'
 import axiosInstance from '../../../utils/axiosInstance'
 

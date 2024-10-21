@@ -213,7 +213,7 @@
     }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 576px) and (max-width: 768px){
     .hero-title {
         font-size: 4rem;
     }
@@ -226,7 +226,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .hero-content-right {
         display: block;
     }

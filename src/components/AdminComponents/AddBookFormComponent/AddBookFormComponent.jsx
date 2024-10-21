@@ -14,7 +14,7 @@ function AddBookFormComponent() {
     const [popupMessageBody, setPopupMessageBody] = useState('')
     const [popupMessageTitle, setPopupMessageTitle] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(false) // New loading state
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -72,7 +72,7 @@ function AddBookFormComponent() {
                     }
                 })
                 .finally(() => {
-                    setIsLoading(false) // Stop loading
+                    setIsLoading(false)
                     setIsModalOpen(true)
                 })
         }
@@ -96,7 +96,7 @@ function AddBookFormComponent() {
                 isOpen={isModalOpen}
                 onClose={closeModal}
             />
-            {isLoading && <LoadingHourGlassComponent />} {/* Show loading overlay */}
+            {isLoading && <LoadingHourGlassComponent />}
         </div>
     )
 }

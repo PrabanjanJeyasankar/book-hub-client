@@ -37,12 +37,13 @@ import HeroComponent from '../components/UserComponents/HeroComponent/HeroCompon
 import NotFoundPage from '../components/SharedComponents/NotFoundPage/NotFoundPage'
 import UserLayout from '../layouts/UserLayout'
 import AdminLayout from '../layouts/AdminLayout/AdminLayout'
+import PageLoadingAnimation from '../components/SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
 
 const AppRoutes = () => {
 
     return (
         <ErrorBoundary>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<PageLoadingAnimation/>}>
                 <Routes>
                     {/* User routes accessible by users and guests */}
                     <Route element={<UserLayout />}>

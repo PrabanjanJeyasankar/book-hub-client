@@ -3,57 +3,61 @@ import ReactDOM from 'react-dom'
 import OverlayABookComponent from '../OverlayABookComponent/OverlayABookComponent'
 import './BookCardComponent.css'
 
-export default function BookCardComponent({ book }) {
-  const [showOverlay, setShowOverlay] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+function BookCardComponent({ book }) {
+    const [showOverlay, setShowOverlay] = useState(false)
+    const [isImageLoading, setIsImageLoading] = useState(true)
 
-  useEffect(() => {
-    const image = new Image()
-    image.src = book.coverImage
-    image.onload = () => setIsLoading(false)
-  }, [book.coverImage])
+    useEffect(() => {
+        const image = new Image()
+        image.src = book.coverImage
+        image.onload = () => setIsImageLoading(false)
+        image.onerror = () => setIsImageLoading(false)
+    }, [book.coverImage])
 
-  const handleCardClick = () => {
-    setShowOverlay(true)
-  }
+    const handleCardClick = () => {
+        setShowOverlay(true)
+    }
 
-  const handleCloseOverlay = () => {
-    setShowOverlay(false)
-  }
+    const handleCloseOverlay = () => {
+        setShowOverlay(false)
+    }
 
-  return (
-    <React.Fragment>
-      <div className={`book-card ${isLoading ? 'loading' : ''}`} onClick={handleCardClick}>
-        {isLoading ? (
-          <div className="book-card-skeleton">
-            <div className="skeleton-image"></div>
-            <div className="skeleton-details">
-              <div className="skeleton-title"></div>
-              <div className="skeleton-author"></div>
+    return (
+        <React.Fragment>
+            <div className='book-card' onClick={handleCardClick}>
+                {isImageLoading ? (
+                    <div className='book-details'>
+                        <div className='loader-container'>
+                            <div className='book-cover loader'></div>
+                        </div>
+                        <h3 className='book-title'>{book.title}</h3>
+                        <p className='book-author'>by {book.author}</p>
+                    </div>
+                ) : (
+                    <>
+                        <div className='book-details'>
+                            <img
+                                className='book-cover'
+                                src={book.coverImage}
+                                alt={book.title}
+                                loading='lazy'
+                            />
+                            <h3 className='book-title'>{book.title}</h3>
+                            <p className='book-author'>by {book.author}</p>
+                        </div>
+                    </>
+                )}
             </div>
-          </div>
-        ) : (
-          <>
-            <img
-              className='book-cover'
-              src={book.coverImage}
-              alt={book.title}
-            />
-            <div className='book-details'>
-              <h3 className='book-title'>{book.title}</h3>
-              <p className='book-author'>by {book.author}</p>
-            </div>
-          </>
-        )}
-      </div>
-      {showOverlay &&
-        ReactDOM.createPortal(
-          <OverlayABookComponent
-            book={book}
-            onClose={handleCloseOverlay}
-          />,
-          document.body
-        )}
-    </React.Fragment>
-  )
+            {showOverlay &&
+                ReactDOM.createPortal(
+                    <OverlayABookComponent
+                        book={book}
+                        onClose={handleCloseOverlay}
+                    />,
+                    document.body
+                )}
+        </React.Fragment>
+    )
 }
+
+export default BookCardComponent

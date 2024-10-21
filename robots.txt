@@ -1,0 +1,15 @@
+# Allow all crawlers access to the site
+User-agent: *
+
+# Disallow access to admin pages
+Disallow: /admin/
+
+# Disallow access to user account pages 
+Disallow: /profile/
+Disallow: /settings/
+
+# Disallow access to API endpoints 
+Disallow: /api/
+
+# Allow access to public pages, in case you want to specify
+Allow: /public/
