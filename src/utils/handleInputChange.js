@@ -1,15 +1,15 @@
-import validateInput from './inputValidation'
+import validateInput from "./inputValidation";
 
 const handleInputChange = (e, setFormData, setErrors) => {
-    const { name, value } = e.target
+  const { name, value } = e.target;
 
-    const error = validateInput(name, value)
-    setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: error,
-    }))
+  const error = validateInput(name, value);
+  setErrors((prevErrors) => ({
+    ...prevErrors,
+    [name]: error,
+  }));
 
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
-}
+  setFormData((prevData) => ({ ...prevData, [name]: value }));
+};
 
-export default handleInputChange
+export default handleInputChange;

@@ -1,14 +1,14 @@
 .book-clear-field-button,
 .add-book-button {
-    flex: 1;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .add-book-button {
-    color: white;
-    background-color: black;
-    border: 1px solid black;
+  color: white;
+  background-color: black;
+  border: 1px solid black;
 }

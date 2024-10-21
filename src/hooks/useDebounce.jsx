@@ -1,17 +1,16 @@
-import { useRef } from 'react'
+import { useRef } from "react";
 
 const useDebounce = (func, delay) => {
-    const timeoutRef = useRef(null)
+  const timeoutRef = useRef(null);
 
-    const debouncedFunc = (...args) => {
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = setTimeout(() => {
-            func(...args)
-        }, delay)
-    }
+  const debouncedFunc = (...args) => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
 
-    return debouncedFunc
-}
+  return debouncedFunc;
+};
 
-
-export default useDebounce
+export default useDebounce;

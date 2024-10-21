@@ -1,144 +1,144 @@
 .add-user-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    flex: 1;
-    height: calc(100vh - 17vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  flex: 1;
+  height: calc(100vh - 17vh);
 }
 
 .add-user-content {
-    max-width: 500px;
-    width: 330px;
-    padding: 2.5rem 1.6rem;
-    text-align: center;
-    border: 1px solid var(--gray-400);
-    border-radius: 16px;
+  max-width: 500px;
+  width: 330px;
+  padding: 2.5rem 1.6rem;
+  text-align: center;
+  border: 1px solid var(--gray-400);
+  border-radius: 16px;
 }
 
 .add-user-title {
-    padding: 0rem 0.5rem 2.5rem 0.5rem;
+  padding: 0rem 0.5rem 2.5rem 0.5rem;
 }
 
 .add-user-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .add-user-input-container {
-    margin-bottom: 15px;
-    padding: 0 0 1rem 0;
+  margin-bottom: 15px;
+  padding: 0 0 1rem 0;
 }
 
 .add-user-name-field:focus,
 .add-user-email-field:focus,
 .add-user-password-field:focus {
-    outline: none;
+  outline: none;
 }
 
 .add-user-name-error,
 .add-user-email-error,
 .add-user-password-error {
-    color: red;
-    font-size: 12px;
-    width: 200%;
+  color: red;
+  font-size: 12px;
+  width: 200%;
 }
 
 .add-user-name-error-container,
 .add-user-email-error-container,
 .add-user-password-error-container {
-    display: flex;
-    padding: 2px 0 0 0;
-    position: absolute;
-    box-sizing: border-box;
+  display: flex;
+  padding: 2px 0 0 0;
+  position: absolute;
+  box-sizing: border-box;
 }
 
 .add-user-name-field,
 .add-user-password-field,
 .add-user-email-field {
-    border: 1px solid var(--gray-400);
-    border-radius: 4px;
-    padding: 10px;
-    width: 100%;
-    max-width: 330px;
-    box-sizing: border-box;
+  border: 1px solid var(--gray-400);
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+  max-width: 330px;
+  box-sizing: border-box;
 }
 
 .add-user-password-input {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .add-user-password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.add-user-role-dropdown {
+  border: 1px solid var(--gray-400);
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+  min-width: 300px;
+}
+
+.add-user-submit-btn {
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.signup-page-existing-user {
+  margin: 1.5rem 0 0 0;
+  font-size: 14px;
+}
+
+@media (max-width: 321px), (max-width: 480px) {
+  .add-user-container {
+    height: calc(100vh);
+  }
+
+  .add-user-content {
+    max-width: 400px;
+    width: 230px;
+    padding: 2rem 1.3rem;
+  }
+
+  .add-user-name-field,
+  .add-user-password-field,
+  .add-user-email-field,
+  .add-user-submit-btn {
+    width: 230px;
+  }
+
+  .add-user-password-toggle-btn {
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 10px;
     transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
-}
-.add-user-role-dropdown {
-    border: 1px solid var(--gray-400);
-    border-radius: 4px;
-    padding: 0.5rem;
-    width: 100%;
-    min-width: 300px;
-}
-
-.add-user-submit-btn {
-    color: white;
-    background-color: black;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%;
-    max-width: 330px;
-}
-
-.signup-page-existing-user {
-    margin: 1.5rem 0 0 0;
-    font-size: 14px;
-}
-
-@media (max-width: 321px), (max-width: 480px) {
-    .add-user-container {
-        height: calc(100vh);
-    }
-
-    .add-user-content {
-        max-width: 400px;
-        width: 230px;
-        padding: 2rem 1.3rem;
-    }
-
-    .add-user-name-field,
-    .add-user-password-field,
-    .add-user-email-field,
-    .add-user-submit-btn {
-        width: 230px;
-    }
-
-    .add-user-password-toggle-btn {
-        position: absolute;
-        top: 40%;
-        right: 10px;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+  }
 }
 
 @media (min-width: 768px) {
-    .add-user-name-field,
-    .add-user-password-field,
-    .add-user-email-field,
-    .add-user-submit-btn {
-        width: 330px;
-    }
+  .add-user-name-field,
+  .add-user-password-field,
+  .add-user-email-field,
+  .add-user-submit-btn {
+    width: 330px;
+  }
 }
