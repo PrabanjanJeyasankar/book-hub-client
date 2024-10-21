@@ -53,12 +53,12 @@ function SearchBarComponent({ initialQuery = '', onSearchChange }) {
         <div className={`search-container ${containerClass}`}>
             <form className='search-form' onSubmit={handleSubmit}>
                 <div className='search-form-elem'>
-                    <Button
+                    <button
                         type='submit'
                         className='search-icon'
-                        aria-label='Search'>
+                        aria-label='Search for books'>
                         <Search />
-                    </Button>
+                    </button>
 
                     <input
                         type='text'
