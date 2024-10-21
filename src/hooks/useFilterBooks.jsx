@@ -1,46 +1,45 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 const useFilterBooks = (allBooks, searchQuery, searchCriteria) => {
-    const [filteredBooks, setFilteredBooks] = useState([])
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
-    useEffect(() => {
-        const applyFilters = () => {
-            let updatedFilteredBooks = [...allBooks]
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedFilteredBooks = [...allBooks];
 
-            if (searchQuery) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) =>
-                        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        book.author.toLowerCase().includes(searchQuery.toLowerCase())
-                )
-            }
+      if (searchQuery) {
+        updatedFilteredBooks = updatedFilteredBooks.filter(
+          (book) =>
+            book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            book.author.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
+      }
 
-            if (searchCriteria.genre) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.genre === searchCriteria.genre
-                )
-            }
+      if (searchCriteria.genre) {
+        updatedFilteredBooks = updatedFilteredBooks.filter(
+          (book) => book.genre === searchCriteria.genre,
+        );
+      }
 
-            if (searchCriteria.language) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.language === searchCriteria.language
-                )
-            }
+      if (searchCriteria.language) {
+        updatedFilteredBooks = updatedFilteredBooks.filter(
+          (book) => book.language === searchCriteria.language,
+        );
+      }
 
-            if (searchCriteria.publisher) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) => book.publisher === searchCriteria.publisher
-                )
-            }
+      if (searchCriteria.publisher) {
+        updatedFilteredBooks = updatedFilteredBooks.filter(
+          (book) => book.publisher === searchCriteria.publisher,
+        );
+      }
 
-            setFilteredBooks(updatedFilteredBooks)
-        }
+      setFilteredBooks(updatedFilteredBooks);
+    };
 
-        applyFilters()
-    }, [allBooks, searchQuery, searchCriteria])
+    applyFilters();
+  }, [allBooks, searchQuery, searchCriteria]);
 
-    return filteredBooks
-}
+  return filteredBooks;
+};
 
-
-export default useFilterBooks
+export default useFilterBooks;

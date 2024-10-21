@@ -1,26 +1,27 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from "react";
 
-const UserContext = createContext()
+const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const storedUserProfile = localStorage.getItem('userProfile')
-    const storedIsLoggedIn = localStorage.getItem('isLoggedIn')
+  const storedUserProfile = localStorage.getItem("userProfile");
+  const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
 
-    const [isLoggedIn, setIsLoggedIn] = useState(storedIsLoggedIn === 'true')
-    const [userProfile, setUserProfile] = useState(
-        storedUserProfile ? JSON.parse(storedUserProfile) : null
-    )
+  const [isLoggedIn, setIsLoggedIn] = useState(storedIsLoggedIn === "true");
+  const [userProfile, setUserProfile] = useState(
+    storedUserProfile ? JSON.parse(storedUserProfile) : null,
+  );
 
-    return (
-        <UserContext.Provider
-            value={{ isLoggedIn, userProfile, setIsLoggedIn, setUserProfile }}>
-            {children}
-        </UserContext.Provider>
-    )
-}
+  return (
+    <UserContext.Provider
+      value={{ isLoggedIn, userProfile, setIsLoggedIn, setUserProfile }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
 
 const useUserContext = () => {
-    return useContext(UserContext)
-}
+  return useContext(UserContext);
+};
 
-export { UserContext, UserProvider, useUserContext }
+export { UserContext, UserProvider, useUserContext };
