@@ -1,8 +1,8 @@
-import { useContext } from "react"
-import { UserContext } from "../context/UserContext/UserContext"
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext/UserContext";
 
 function useUserContext() {
-  return useContext(UserContext)
+  return useContext(UserContext);
 }
 
-export default useUserContext
+export default useUserContext;

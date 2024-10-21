@@ -1,281 +1,285 @@
 .book-card {
-    text-align: left;
-    max-width: 250px;
-    overflow: hidden;
-    padding: 0.7rem;
+  text-align: left;
+  max-width: 250px;
+  overflow: hidden;
+  padding: 0.7rem;
 }
 
 .book-card img:hover {
-    transform: scale(1.05);
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 
 .book-card img {
-    border-radius: 0.4rem;
-    height: 310px;
-    object-fit: fill;
-    width: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+  border-radius: 0.4rem;
+  height: 310px;
+  object-fit: fill;
+  width: 100%;
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
         rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
         rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
 }
 
 .book-details {
-    padding-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .book-title {
-    color: #333;
-    font-size: 1.2em;
-    letter-spacing: -0.5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0.4rem 0.8rem 0rem 0.2rem;
-    user-select: none;
+  color: #333;
+  font-size: 1.2em;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.4rem 0.8rem 0rem 0.2rem;
+  user-select: none;
 }
 
 .book-author {
-    color: #7b7b7b;
-    font-size: 0.875em;
-    padding: 0rem 0.8rem 0rem 0.2rem;
-    user-select: none;
+  color: #7b7b7b;
+  font-size: 0.875em;
+  padding: 0rem 0.8rem 0rem 0.2rem;
+  user-select: none;
 }
 
 /* Loading animation styles */
 .book-card-skeleton {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .skeleton-image {
-    width: 100%;
-    height: 310px;
-    background-color: #e0e0e0;
-    border-radius: 0.4rem;
-    animation: pulse 1.5s infinite;
+  width: 100%;
+  height: 310px;
+  background-color: #e0e0e0;
+  border-radius: 0.4rem;
+  animation: pulse 1.5s infinite;
 }
 
 .skeleton-details {
-    padding-top: 0.4rem;
+  padding-top: 0.4rem;
 }
 
 .skeleton-title {
-    width: 80%;
-    height: 1.2em;
-    background-color: #e0e0e0;
-    margin-bottom: 0.4rem;
-    animation: pulse 1.5s infinite;
+  width: 80%;
+  height: 1.2em;
+  background-color: #e0e0e0;
+  margin-bottom: 0.4rem;
+  animation: pulse 1.5s infinite;
 }
 
 .skeleton-author {
-    width: 60%;
-    height: 0.875em;
-    background-color: #e0e0e0;
-    animation: pulse 1.5s infinite;
+  width: 60%;
+  height: 0.875em;
+  background-color: #e0e0e0;
+  animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    0% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.6;
-    }
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 @media (max-width: 2560px) {
-    .book-card img,
-    .skeleton-image {
-        height: 380px;
-    }
+  .book-card img,
+  .skeleton-image {
+    height: 380px;
+  }
 }
 
 @media (max-width: 1880px) {
-    .book-card img,
-    .skeleton-image {
-        height: 330px;
-    }
+  .book-card img,
+  .skeleton-image {
+    height: 330px;
+  }
 }
 
 @media (max-width: 1640px) {
-    .book-card img,
-    .skeleton-image {
-        height: 320px;
-    }
+  .book-card img,
+  .skeleton-image {
+    height: 320px;
+  }
 }
 
 @media (max-width: 768px) {
-    .book-card img,
-    .skeleton-image {
-        border-radius: 0.2rem;
-        height: 210px;
-        width: 150px;
-    }
+  .book-card img,
+  .skeleton-image {
+    border-radius: 0.2rem;
+    height: 210px;
+    width: 150px;
+  }
 }
 
 @media (max-width: 650px) {
-    .book-card img,
-    .skeleton-image {
-        border-radius: 0.2rem;
-        height: 220px;
-        width: 150px;
-    }
+  .book-card img,
+  .skeleton-image {
+    border-radius: 0.2rem;
+    height: 220px;
+    width: 150px;
+  }
 }
 
 @media (max-width: 426px) {
-    .book-card {
-        padding: 0 0.7rem;
-    }
-    .book-card img,
-    .skeleton-image {
-        border-radius: 0.2rem;
-        height: 250px;
-        width: 180px;
-    }
-    .book-title,
-    .skeleton-title {
-        font-size: 1rem;
-    }
+  .book-card {
+    padding: 0 0.7rem;
+  }
+  .book-card img,
+  .skeleton-image {
+    border-radius: 0.2rem;
+    height: 250px;
+    width: 180px;
+  }
+  .book-title,
+  .skeleton-title {
+    font-size: 1rem;
+  }
 
-    .book-author,
-    .skeleton-author {
-        font-size: 0.8rem;
-        text-overflow: ellipsis;
-        width: 230px;
-    }
+  .book-author,
+  .skeleton-author {
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+    width: 230px;
+  }
 }
 
 @media (max-width: 376px) {
-    .book-card {
-        padding: 0 0.7rem;
-    }
-    .book-card img,
-    .skeleton-image {
-        border-radius: 0.2rem;
-        height: 210px;
-        width: 152px;
-    }
-    .book-title,
-    .skeleton-title {
-        font-size: 0.9rem;
-    }
+  .book-card {
+    padding: 0 0.7rem;
+  }
+  .book-card img,
+  .skeleton-image {
+    border-radius: 0.2rem;
+    height: 210px;
+    width: 152px;
+  }
+  .book-title,
+  .skeleton-title {
+    font-size: 0.9rem;
+  }
 
-    .book-author,
-    .skeleton-author {
-        font-size: 0.7rem;
-        text-overflow: ellipsis;
-        width: 230px;
-    }
+  .book-author,
+  .skeleton-author {
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    width: 230px;
+  }
 }
 
 @media (max-width: 321px) {
-    .book-card {
-        padding: 0 0.7rem;
-    }
-    .book-card img,
-    .skeleton-image {
-        border-radius: 0.2rem;
-        height: 190px;
-        width: 130px;
-    }
-    .book-title,
-    .skeleton-title {
-        font-size: 0.9rem;
-    }
+  .book-card {
+    padding: 0 0.7rem;
+  }
+  .book-card img,
+  .skeleton-image {
+    border-radius: 0.2rem;
+    height: 190px;
+    width: 130px;
+  }
+  .book-title,
+  .skeleton-title {
+    font-size: 0.9rem;
+  }
 
-    .book-author,
-    .skeleton-author {
-        font-size: 0.7rem;
-        text-overflow: ellipsis;
-        width: 230px;
-    }
+  .book-author,
+  .skeleton-author {
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    width: 230px;
+  }
 }
 
 .loader-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.4rem;
-    height: 310px;
-    object-fit: fill;
-    width: 100%;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+  height: 310px;
+  object-fit: fill;
+  width: 100%;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    position: relative;
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  position: relative;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .loader:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 40px;
-    height: 40px;
-    transform: rotate(45deg) translate(30%, 40%);
-    background: #d3d3d3;
-    box-shadow: 32px -34px 0 5px #000000;
-    animation: slide 2s infinite ease-in-out alternate;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg) translate(30%, 40%);
+  background: #d3d3d3;
+  box-shadow: 32px -34px 0 5px #000000;
+  animation: slide 2s infinite ease-in-out alternate;
 }
 
 .loader:after {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #545454;
-    transform: rotate(0deg);
-    transform-origin: 35px 145px;
-    animation: rotate 2s infinite ease-in-out;
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #545454;
+  transform: rotate(0deg);
+  transform-origin: 35px 145px;
+  animation: rotate 2s infinite ease-in-out;
 }
 
 @keyframes slide {
-    0%,
-    100% {
-        bottom: -35px;
-    }
+  0%,
+  100% {
+    bottom: -35px;
+  }
 
-    25%,
-    75% {
-        bottom: -2px;
-    }
+  25%,
+  75% {
+    bottom: -2px;
+  }
 
-    20%,
-    80% {
-        bottom: 2px;
-    }
+  20%,
+  80% {
+    bottom: 2px;
+  }
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(-15deg);
-    }
+  0% {
+    transform: rotate(-15deg);
+  }
 
-    25%,
-    75% {
-        transform: rotate(0deg);
-    }
+  25%,
+  75% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(25deg);
-    }
+  100% {
+    transform: rotate(25deg);
+  }
 }
