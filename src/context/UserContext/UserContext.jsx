@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 
 const UserContext = createContext()
 
@@ -10,6 +10,20 @@ const UserProvider = ({ children }) => {
     const [userProfile, setUserProfile] = useState(
         storedUserProfile ? JSON.parse(storedUserProfile) : null
     )
+
+    // Synchronize isLoggedIn with localStorage
+    useEffect(() => {
+        localStorage.setItem('isLoggedIn', isLoggedIn.toString())
+    }, [isLoggedIn])
+
+    // Synchronize userProfile with localStorage
+    useEffect(() => {
+        if (userProfile) {
+            localStorage.setItem('userProfile', JSON.stringify(userProfile))
+        } else {
+            localStorage.removeItem('userProfile') // Clear localStorage if no profile
+        }
+    }, [userProfile])
 
     return (
         <UserContext.Provider

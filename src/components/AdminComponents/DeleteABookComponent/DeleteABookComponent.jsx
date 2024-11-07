@@ -11,16 +11,16 @@ function DeleteBookComponent({ bookData }) {
     const [popupMessageBody, setPopupMessageBody] = useState('')
 
     const handleDelete = async () => {
-        console.log('Delete triggered')
+        // console.log('Delete triggered')
         if (!bookData) {
-            console.error('No bookData provided for deletion.')
+            // console.error('No bookData provided for deletion.')
             return
         }
         try {
             const response = await axiosInstance.delete(
                 `/book/delete/${bookData.isbn}`
             )
-            console.log('Delete response:', response)
+            // console.log('Delete response:', response)
             if (response.status === 200) {
                 removeBookFromAllBooks(bookData._id)
 
@@ -42,7 +42,7 @@ function DeleteBookComponent({ bookData }) {
                 setIsModalOpen(true)
             }
         } catch (error) {
-            console.error('Error Message:', error.message)
+            // console.error('Error Message:', error.message)
             if (error.response) {
                 if (error.response.status === 404) {
                     setPopupImageSrc('errorImage')

@@ -1,6 +1,6 @@
-import './InputField.css'
+import './FormInputField.css'
 
-const InputField = ({
+const FormInputField = ({
     outerDivClassName,
     label,
     name,
@@ -48,4 +48,4 @@ const InputField = ({
     )
 }
 
-export default InputField
+export default FormInputField

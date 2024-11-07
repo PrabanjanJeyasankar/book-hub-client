@@ -20,7 +20,6 @@ function OverlayABookComponent({ book, onClose }) {
     const { userProfile } = useContext(UserContext)
 
     const bookId = book._id
-
     const {
         isUserLiked,
         setIsUserLiked,
@@ -108,7 +107,7 @@ function OverlayABookComponent({ book, onClose }) {
                                         </div>
                                     </div>
                                     <div className='overlay-actions'>
-                                        {userProfile?.role !== 'admin' && (
+                                        {userProfile?.role === 'user' && (
                                             <>
                                                 <BookmarkComponent
                                                     bookId={bookId}

@@ -29,7 +29,9 @@ function BookmarkComponent({
                 <div className='bookmark__dropdown'>
                     <div
                         className={`bookmark_dropdown_option ${
-                            bookmarkStatus === 'finishedReading' ? 'selected' : ''
+                            bookmarkStatus === 'finishedReading'
+                                ? 'selected'
+                                : ''
                         }`}
                         id='finished_reading_option'
                         onClick={() => updateBookmarkStatus('finishedReading')}>
@@ -37,10 +39,14 @@ function BookmarkComponent({
                     </div>
                     <div
                         className={`bookmark_dropdown_option ${
-                            bookmarkStatus === 'currentlyReading' ? 'selected' : ''
+                            bookmarkStatus === 'currentlyReading'
+                                ? 'selected'
+                                : ''
                         }`}
                         id='currently_reading_option'
-                        onClick={() => updateBookmarkStatus('currentlyReading')}>
+                        onClick={() =>
+                            updateBookmarkStatus('currentlyReading')
+                        }>
                         Currently Reading
                     </div>
                     <div

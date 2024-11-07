@@ -25,7 +25,6 @@ const ProfilePictureUploadComponent = () => {
             }
         } catch (error) {
             console.error('Error fetching profile image:', error)
-            toast.error('Could not load profile image.')
         } finally {
             setLoading(false)
         }

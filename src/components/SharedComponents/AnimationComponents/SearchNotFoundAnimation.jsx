@@ -7,7 +7,7 @@ function SearchNotFoundAnimation() {
             animationData={SearchNotFound}
             loop={true}
             autoplay={true}
-            style={{ width: '250px', height: '250px', color: '#FFFFFF' }}
+            style={{ width: '250px', color: '#FFFFFF' }}
         />
     )
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { FormDataContext } from '../../../context/FormContext/FormContext'
 import './BookFormComponent.css'
-import InputField from './InputField/InputField'
+import FormInputField from '../FormInputField/FormInputField'
 import FileUpload from './FileUpload/FileUpload'
 import handleFileChange from '../../../utils/handleFileChange'
 import validateBookForm from '../../../utils/formValidation'
@@ -80,7 +80,7 @@ const BookFormComponent = ({
                 <div className='book-form-wrapper'>
                     <div className='book-form-input-container'>
                         <div className='book-form-left-column'>
-                            <InputField
+                            <FormInputField
                                 outerDivClassName='book-input-column'
                                 label='Book Title'
                                 name='title'
@@ -90,7 +90,7 @@ const BookFormComponent = ({
                                 error={errors.title}
                             />
                             <div className='book-input-column'>
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Author'
                                     name='author'
@@ -99,7 +99,7 @@ const BookFormComponent = ({
                                     onChange={handleFormInputChange}
                                     error={errors.author}
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Genre'
                                     name='genre'
@@ -123,7 +123,7 @@ const BookFormComponent = ({
                                         },
                                     ]}
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Publisher'
                                     name='publisher'
@@ -132,7 +132,7 @@ const BookFormComponent = ({
                                     onChange={handleFormInputChange}
                                     error={errors.publisher}
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='ISBN'
                                     name='isbn'
@@ -142,7 +142,7 @@ const BookFormComponent = ({
                                     error={errors.isbn}
                                     type='text'
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Publication Date'
                                     name='publicationDate'
@@ -156,7 +156,7 @@ const BookFormComponent = ({
                                     error={errors.publicationDate}
                                     type='date'
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Language'
                                     name='language'
@@ -165,7 +165,7 @@ const BookFormComponent = ({
                                     onChange={handleFormInputChange}
                                     error={errors.language}
                                 />
-                                <InputField
+                                <FormInputField
                                     outerDivClassName='book-input-column'
                                     label='Available Copies'
                                     name='availableCopies'
@@ -178,7 +178,7 @@ const BookFormComponent = ({
                             </div>
                         </div>
                         <div className='book-form-right-column'>
-                            <InputField
+                            <FormInputField
                                 outerDivClassName='book-input-column'
                                 label='Description'
                                 name='description'

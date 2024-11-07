@@ -1,13 +1,13 @@
 import { useState, useRef, useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext/UserContext'
 import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
 
 import logoImage from '../../../assets/img/open_book_logo.webp'
 import DefaultProfileImage from '../../../assets/img/default_user_profile.jpg'
-import axiosInstance from '../../../utils/axiosInstance'
 import fetchUserProfilePicture from '../../../services/fetchUserProfilePicture'
+import handleLogoutService from '../../../services/authenticationServices/handleLogoutService'
 
 function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
@@ -18,14 +18,16 @@ function UserNavBarComponent() {
     const [imageSrc, setImageSrc] = useState(DefaultProfileImage)
 
     const dropdownRef = useRef(null)
-    const navigate = useNavigate()
 
     const loadProfilePicture = async () => {
         if (isLoggedIn) {
             try {
                 const data = await fetchUserProfilePicture()
+                // console.log(data.profileImage)
                 if (data.profileImage) {
                     setImageSrc(data.profileImage)
+                } else {
+                    setImageSrc(DefaultProfileImage)
                 }
             } catch (error) {
                 console.error('Error fetching profile image:', error)
@@ -46,20 +48,7 @@ function UserNavBarComponent() {
     }
 
     const handleLogout = () => {
-        axiosInstance
-            .get('/user/logout', { withCredentials: true })
-            .then((response) => {
-                if (response.status === 200) {
-                    setIsLoggedIn(false)
-                    setUserProfile(null)
-                    localStorage.removeItem('userProfile')
-                    localStorage.removeItem('isLoggedIn')
-                    navigate('/')
-                }
-            })
-            .catch((error) => {
-                console.error('Logout error:', error)
-            })
+        handleLogoutService(setIsLoggedIn, setUserProfile)
     }
 
     const closeDropdown = (e) => {
@@ -87,6 +76,12 @@ function UserNavBarComponent() {
             </a>
             <nav className='user-navbar'>
                 <div className='user-navbar-container'>
+                    <div className='user-navbar-brand'>
+                        <Link to='/' className='user-page-app-logo'>
+                            <img src={logoImage} alt='Book hub logo' />
+                            <span className='app-name'>Book hub</span>
+                        </Link>
+                    </div>
                     <div className='hamburger-container'>
                         <div
                             className={`hamburger ${
@@ -96,13 +91,6 @@ function UserNavBarComponent() {
                             <span className='line' id='line-top'></span>
                             <span className='line' id='line-bottom'></span>
                         </div>
-                    </div>
-
-                    <div className='user-navbar-brand'>
-                        <Link to='/' className='user-page-app-logo'>
-                            <img src={logoImage} alt='Book hub logo' />
-                            <span className='app-name'>Book hub</span>
-                        </Link>
                     </div>
 
                     <div
@@ -129,6 +117,20 @@ function UserNavBarComponent() {
                                     About us
                                 </Link>
                             </div>
+                            {!isLoggedIn && (
+                                <div className='resp-auth-links'>
+                                    <Link
+                                        className='resp-login-btn'
+                                        to='/login'>
+                                        Login
+                                    </Link>
+                                    <Link
+                                        className='resp-signup-btn'
+                                        to='/signup'>
+                                        Sign up
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     )}
 

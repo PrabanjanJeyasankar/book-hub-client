@@ -2,7 +2,13 @@ import { Suspense, lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
+import UserLayout from '../layouts/UserLayout'
+import AdminLayout from '../layouts/AdminLayout/AdminLayout'
+import PageLoadingAnimation from '../components/SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
+import GoogleAccountVerification from '../components/SharedComponents/GoogleAccountVerification/GoogleAccountVerification'
+import GoogleAuthLayout from '../layouts/googleAuthLayout'
 
+// Lazy load components
 const AddUser = lazy(() =>
     import('../components/AdminComponents/AddUserComponent/AddUserComponent')
 )
@@ -30,29 +36,46 @@ const UserProfileComponent = lazy(() =>
         '../components/UserComponents/UserProfilePageComponent/UserProfileComponent/UserProfileComponent'
     )
 )
-import Signup from '../Authentication/Signup/Signup'
-import Login from '../Authentication/Login/Login'
-import AdminDashboard from '../components/AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent'
-import HeroComponent from '../components/UserComponents/HeroComponent/HeroComponent'
-import NotFoundPage from '../components/SharedComponents/NotFoundPage/NotFoundPage'
-import UserLayout from '../layouts/UserLayout'
-import AdminLayout from '../layouts/AdminLayout/AdminLayout'
-import PageLoadingAnimation from '../components/SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
+const Signup = lazy(() =>
+    import('../authentication/SignupComponent/SignupComponent')
+)
+const Login = lazy(() =>
+    import('../authentication/LoginComponent/LoginComponent')
+)
+const AdminDashboard = lazy(() =>
+    import(
+        '../components/AdminComponents/AdminDashBoardComponent/AdminDashBoardComponent'
+    )
+)
+const HeroComponent = lazy(() =>
+    import('../components/UserComponents/HeroComponent/HeroComponent')
+)
+const NotFoundPage = lazy(() =>
+    import('../components/SharedComponents/NotFoundPage/NotFoundPage')
+)
+const RequestOtpComponent = lazy(() =>
+    import('../authentication/RequestOtpComponent/RequestOtpComponent')
+)
+const OTPVerificationComponent = lazy(() =>
+    import('../authentication/VerifyOtpComponent/VerifyOtpComponent')
+)
+const SetupNewPasswordComponent = lazy(() =>
+    import('../authentication/SetNewPasswordComponent/SetNewPasswordComponent')
+)
 
 const AppRoutes = () => {
-
     return (
         <ErrorBoundary>
-            <Suspense fallback={<PageLoadingAnimation/>}>
+            <Suspense fallback={<PageLoadingAnimation />}>
                 <Routes>
-                    {/* User routes accessible by users and guests */}
+                    {/* User and Authentication routes with UserLayout */}
                     <Route element={<UserLayout />}>
                         <Route
                             path='/'
                             element={
                                 <ProtectedRoute
                                     element={<HeroComponent />}
-                                    allowedRoles={['user', 'guest']} // Users and guests can access
+                                    allowedRoles={['user', 'guest']} // Accessible to users and guests
                                 />
                             }
                         />
@@ -61,7 +84,7 @@ const AppRoutes = () => {
                             element={
                                 <ProtectedRoute
                                     element={<SearchPage />}
-                                    allowedRoles={['user', 'guest']} // Users and guests can search
+                                    allowedRoles={['user', 'guest']} // Accessible to users and guests
                                 />
                             }
                         />
@@ -70,17 +93,31 @@ const AppRoutes = () => {
                             element={
                                 <ProtectedRoute
                                     element={<UserProfileComponent />}
-                                    allowedRoles={['user']} // Only users can access profile
-                                    redirectTo='/login' // Redirect unauthorized access
+                                    allowedRoles={['user']} // Accessible only to users
+                                    redirectTo='/login'
                                 />
                             }
                         />
                         <Route path='/about' element={<AboutUs />} />
+
+                        {/* Authentication routes */}
                         <Route path='/signup' element={<Signup />} />
                         <Route path='/login' element={<Login />} />
+                        <Route
+                            path='/request-otp'
+                            element={<RequestOtpComponent />}
+                        />
+                        <Route
+                            path='/verify-otp'
+                            element={<OTPVerificationComponent />}
+                        />
+                        <Route
+                            path='/set-new-password'
+                            element={<SetupNewPasswordComponent />}
+                        />
                     </Route>
 
-                    {/* Admin routes under AdminLayout */}
+                    {/* Admin routes with AdminLayout */}
                     <Route path='/admin' element={<AdminLayout />}>
                         <Route
                             index
@@ -91,7 +128,7 @@ const AppRoutes = () => {
                             element={
                                 <ProtectedRoute
                                     element={<AdminDashboard />}
-                                    allowedRoles={['admin']} // Only admins can access dashboard
+                                    allowedRoles={['admin']} // Only admins can access
                                 />
                             }
                         />
@@ -100,7 +137,7 @@ const AppRoutes = () => {
                             element={
                                 <ProtectedRoute
                                     element={<AllBooks />}
-                                    allowedRoles={['admin']} // Only admins can access
+                                    allowedRoles={['admin']} // Only admins
                                 />
                             }
                         />
@@ -133,8 +170,16 @@ const AppRoutes = () => {
                         />
                     </Route>
 
+                    {/* Google authentication routes */}
+                    <Route element={<GoogleAuthLayout />}>
+                        <Route
+                            path='/google-account-verification'
+                            element={<GoogleAccountVerification />}
+                        />
+                    </Route>
+
                     {/* Fallback for undefined routes */}
-                    <Route path='*' element={<NotFoundPage />} />
+                    {/* <Route path='*' element={<NotFoundPage />} /> */}
                 </Routes>
             </Suspense>
         </ErrorBoundary>

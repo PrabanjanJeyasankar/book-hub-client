@@ -4,7 +4,6 @@ import { useBooks } from '../../../context/BooksContext/BooksContext'
 import './SearchPageComponent.css'
 import SearchBarComponent from '../SearchBarComponent/SearchBarComponent'
 import BookCardComponent from '../BookCardComponent/BookCardComponent'
-// import LottieBookAnimation from '../AnimationComponents/LottieBookAnimation'
 import LottieSearchNotFound from '../AnimationComponents/SearchNotFoundAnimation'
 import Button from '../ButtonComponent/ButtonComponent'
 import useFilterBooks from '../../../hooks/useFilterBooks'
@@ -20,7 +19,6 @@ function SearchPageComponent() {
         language: '',
         publisher: '',
     })
-    // const [isLoading, setIsLoading] = useState(false)
 
     const filteredBooks = useFilterBooks(allBooks, searchQuery, searchCriteria)
 
@@ -78,6 +76,7 @@ function SearchPageComponent() {
                 <div className='filter-container'>
                     <select
                         className='filter-select'
+                        value={searchCriteria.genre}
                         onChange={handleGenreChange}>
                         <option value=''>Select Genre</option>
                         <option value='Fiction'>Fiction</option>
@@ -85,6 +84,7 @@ function SearchPageComponent() {
                     </select>
                     <select
                         className='filter-select'
+                        value={searchCriteria.language}
                         onChange={handleLanguageChange}>
                         <option value=''>Select Language</option>
                         <option value='English'>English</option>
@@ -93,6 +93,7 @@ function SearchPageComponent() {
                     </select>
                     <select
                         className='filter-select'
+                        value={searchCriteria.publisher}
                         onChange={handlePublisherChange}>
                         <option value=''>Select Publisher</option>
                         <option value='Penguin'>Penguin</option>
@@ -109,12 +110,6 @@ function SearchPageComponent() {
             </div>
 
             <div className='search-result'>
-                {/* {isLoading ? (
-                    <div className='loading-animation'>
-                        <LottieBookAnimation className='book-animation' />
-                        <p className='loading-text'>Loading...</p>
-                    </div>
-                ) : ( */}
                 <div
                     className={`book-results ${
                         filteredBooks.length > 0
@@ -134,7 +129,6 @@ function SearchPageComponent() {
                         </div>
                     )}
                 </div>
-                {/* )} */}
             </div>
         </div>
     )

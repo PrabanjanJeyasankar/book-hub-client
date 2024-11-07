@@ -6,7 +6,7 @@ import './NotFoundPage.css'
 
 function NotFoundPage() {
     const navigate = useNavigate()
-    const [countdown, setCountdown] = useState(15)
+    const [countdown, setCountdown] = useState(150)
     const { userProfile } = useContext(UserContext)
 
     useEffect(() => {

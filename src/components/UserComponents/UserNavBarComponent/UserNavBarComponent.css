@@ -101,7 +101,7 @@
     font-weight: 500;
     padding: 0.5rem 1rem;
     background-color: black;
-    margin-left: 24px;
+    margin-left: 12px;
     border: 1px solid black;
     border-radius: 8px;
     cursor: pointer;
@@ -164,6 +164,9 @@
 }
 
 .user-profile-dropdown-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem 2rem 1rem 2rem;
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -270,101 +273,299 @@
     background-color: black;
 }
 
-.menuDropDown {
-    font-size: 1.1rem;
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 130px;
-    background-color: #fff;
-    padding: 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.8rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    gap: 1rem;
-}
-
 .hamburger.active + .menuDropDown {
     display: flex;
 }
 
-@media (max-width: 426px) {
+@media (min-width: 320px) and (max-width: 374px) {
     .user-navbar-container {
-        padding: 1.5rem 0;
-    }
-    .user-profile-btn {
-        padding: 0;
-    }
-    .user-nav-profile-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-    }
-    .user-page-app-logo {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .resp-page-links {
-        display: flex;
-        flex-direction: column;
-        width: 140px;
-        gap: 1.5rem;
+        padding: 2rem 0rem;
     }
 
-    .resp-page-links a {
-        text-decoration: none;
-        color: rgb(0, 0, 0);
-        font-weight: normal;
-        transition: opacity 0.3s ease;
+    .user-page-app-logo img {
+        width: 20px;
+        height: 25px;
     }
 
-    .resp-page-links a:hover {
-        opacity: 0.7;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger-container {
-        flex: 1;
-        display: block;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        cursor: pointer;
-        position: relative;
-        z-index: 20;
-    }
-
-    .signup-login-links {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .user-navbar-brand {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .app-name {
+        font-size: 14px !important;
     }
 
     .user-navbar-center {
         display: none;
     }
 
-    .signup-btn {
-        width: 55px;
-        padding: 0.5rem 0.9rem;
-        margin-left: 2px;
+    .hamburger {
+        display: flex;
+    }
+
+    .menuDropDown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 140px;
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        gap: 1.5rem;
+        border: 1px solid #00000032;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .menuDropDown a {
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .resp-page-links {
+        display: flex;
+        flex-direction: column;
+        width: -webkit-fill-available;
+        gap: 1.5rem;
+    }
+
+    .resp-page-links a {
+        color: black;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .resp-auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .signup-login-links {
+        display: none;
+    }
+
+    .resp-login-btn,
+    .resp-signup-btn {
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .resp-login-btn {
+        color: black;
+        padding: 0.3rem 0.7rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+
+    .resp-signup-btn {
+        width: 100%;
+        color: white;
+        font-weight: 500;
+        padding: 0.3rem 0.7rem;
+        background-color: black;
         border: 1px solid black;
         border-radius: 8px;
         cursor: pointer;
         font-size: 14px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 426px) {
+    .user-navbar-container {
+        padding: 2rem 0rem;
+    }
+
+    .user-page-app-logo img {
+        width: 20px;
+        height: 25px;
+    }
+
+    .app-name {
+        font-size: 14px !important;
+    }
+
+    .user-navbar-center {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .menuDropDown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 160px;
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 0.8rem;
+        gap: 1.5rem;
+        border: 1px solid #00000032;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .menuDropDown a {
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .resp-page-links {
+        display: flex;
+        flex-direction: column;
+        width: -webkit-fill-available;
+        gap: 1.5rem;
+    }
+
+    .resp-page-links a {
+        color: black;
+        font-size: 14px;
+        text-align: center;
+    }
+    .resp-auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .signup-login-links {
+        display: none;
+    }
+
+    .resp-login-btn,
+    .resp-signup-btn {
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .resp-login-btn {
+        color: black;
+        padding: 0.3rem 0.7rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+
+    .resp-signup-btn {
+        width: 100%;
+        color: white;
+        font-weight: 500;
+        padding: 0.3rem 0.7rem;
+        background-color: black;
+        border: 1px solid black;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 769px) {
+    .user-navbar-container {
+        padding: 2rem 2rem;
+    }
+
+    .user-page-app-logo img {
+        width: 20px;
+        height: 25px;
+    }
+
+    .app-name {
+        font-size: 14px !important;
+    }
+
+    .user-navbar-center {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .menuDropDown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 190px;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 0.8rem;
+        gap: 1.5rem;
+        border: 1px solid #00000032;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .menuDropDown a {
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .resp-page-links {
+        display: flex;
+        flex-direction: column;
+        width: -webkit-fill-available;
+        gap: 1.5rem;
+    }
+
+    .resp-page-links a {
+        color: black;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .resp-auth-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .signup-login-links {
+        display: none;
+    }
+
+    .resp-login-btn,
+    .resp-signup-btn {
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .resp-login-btn {
+        color: black;
+        padding: 0.3rem 0.7rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+
+    .resp-signup-btn {
+        width: 100%;
+        color: white;
+        font-weight: 500;
+        padding: 0.3rem 0.7rem;
+        background-color: black;
+        border: 1px solid black;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
     }
 }
