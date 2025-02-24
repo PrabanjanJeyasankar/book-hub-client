@@ -96,7 +96,7 @@ function LoginComponent() {
                     className={loginStyles.app_logo}
                     alt='App Logo'
                 />
-                <h1 className={loginStyles.app_name}>Better Auth Login</h1>
+                <h1 className={loginStyles.app_name}>Login</h1>
                 <h1 className={loginStyles.title}>Welcome Back</h1>
                 <p className={loginStyles.subtitle}>
                     Don&#39;t have an account?

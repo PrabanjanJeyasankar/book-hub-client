@@ -1,7 +1,7 @@
 import axiosInstance from '../utils/axiosInstance'
 
 const editBookService = async (formData, bookId) => {
-    console.log(bookId)
+    // console.log(bookId)
     const data = new FormData()
     Object.keys(formData).forEach((key) => {
         data.append(key, formData[key])

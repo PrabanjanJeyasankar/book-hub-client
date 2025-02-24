@@ -21,9 +21,9 @@ const useLikeBook = (bookId, isUserLiked, setIsUserLiked) => {
         likeBookService(bookId, newLikeStatus)
             .then(() => {
                 if (newLikeStatus) {
-                    console.log('Liked the book')
+                    // console.log('Liked the book')
                 } else {
-                    console.log('Unliked the book')
+                    // console.log('Unliked the book')
                 }
             })
             .catch((error) => {

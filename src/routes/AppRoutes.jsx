@@ -1,12 +1,13 @@
 import { Suspense, lazy } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import AllBooksComponent from '../components/AdminComponents/AllBooksComponent/AllBooksComponent'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'
-import UserLayout from '../layouts/UserLayout'
-import AdminLayout from '../layouts/AdminLayout/AdminLayout'
-import PageLoadingAnimation from '../components/SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
 import GoogleAccountVerification from '../components/SharedComponents/GoogleAccountVerification/GoogleAccountVerification'
+import PageLoadingAnimation from '../components/SharedComponents/PageLoadingAnimation/PageLoadingAnimation'
+import AdminLayout from '../layouts/AdminLayout/AdminLayout'
 import GoogleAuthLayout from '../layouts/googleAuthLayout'
+import UserLayout from '../layouts/UserLayout'
 
 // Lazy load components
 const AddUser = lazy(() =>
@@ -136,7 +137,7 @@ const AppRoutes = () => {
                             path='allbooks'
                             element={
                                 <ProtectedRoute
-                                    element={<AllBooks />}
+                                    element={<AllBooksComponent />}
                                     allowedRoles={['admin']} // Only admins
                                 />
                             }

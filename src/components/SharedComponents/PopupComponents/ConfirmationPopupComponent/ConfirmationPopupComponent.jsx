@@ -5,12 +5,10 @@ function ConfirmationPopupComponent({ isOpen, onConfirm, onCancel, bookData }) {
     if (!isOpen) return null
 
     const handleOverlayClick = () => {
-        // console.log('Overlay clicked')
         onCancel()
     }
 
     const handlePopupClick = (event) => {
-        // console.log('Popup content clicked')
         event.stopPropagation()
     }
 

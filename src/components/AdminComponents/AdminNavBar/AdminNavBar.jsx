@@ -1,18 +1,18 @@
+import {
+    BookPlus,
+    LayoutDashboard,
+    LibraryBig,
+    LogOut,
+    UserRoundPlus,
+    UsersRound,
+} from 'lucide-react'
 import { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import './AdminNavBar.css'
-import {
-    LogOut,
-    LayoutDashboard,
-    BookPlus,
-    LibraryBig,
-    UsersRound,
-    UserRoundPlus,
-} from 'lucide-react'
-import { UserContext } from '../../../context/UserContext/UserContext'
 import LogoImage from '../../../assets/img/open_book_logo.webp'
-import Button from '../../SharedComponents/ButtonComponent/ButtonComponent'
+import { UserContext } from '../../../context/UserContext/UserContext'
 import axiosInstance from '../../../utils/axiosInstance'
+import Button from '../../SharedComponents/ButtonComponent/ButtonComponent'
+import './AdminNavBar.css'
 
 function AdminNavBar() {
     const { setIsLoggedIn, setUserProfile } = useContext(UserContext)
@@ -25,9 +25,8 @@ function AdminNavBar() {
 
     const handleLogout = () => {
         axiosInstance
-            .get('/user/logout')
+            .post('/user/logout')
             .then((response) => {
-                console.log(response.data.message)
                 if (response.status === 200) {
                     setIsLoggedIn(false)
                     setUserProfile(null)
@@ -110,12 +109,12 @@ function AdminNavBar() {
                     </NavLink>
                 </div>
                 <div className='admin-logout'>
-                    <LogOut size={18} className='icon' />
                     {isExpanded && (
                         <Button
-                            onClick={handleLogout}
-                            className='admin_logout_button'>
-                            Log out
+                            className='admin_logout_button'
+                            onClick={handleLogout}>
+                            <LogOut size={18} className='icon' />
+                            <span> Log out</span>
                         </Button>
                     )}
                 </div>

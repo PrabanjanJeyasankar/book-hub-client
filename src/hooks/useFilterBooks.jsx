@@ -7,12 +7,26 @@ const useFilterBooks = (allBooks, searchQuery, searchCriteria) => {
         const applyFilters = () => {
             let updatedFilteredBooks = [...allBooks]
 
+            // Applied the search query filter (ONLY on title and author)
+            // And only when query matches the beginning of a word
             if (searchQuery) {
-                updatedFilteredBooks = updatedFilteredBooks.filter(
-                    (book) =>
-                        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        book.author.toLowerCase().includes(searchQuery.toLowerCase())
-                )
+                const lowerCaseQuery = searchQuery.toLowerCase().trim()
+                
+                updatedFilteredBooks = updatedFilteredBooks.filter((book) => {
+                    // For title: check if any word starts with the query
+                    const titleWords = book.title.toLowerCase().split(/\s+/)
+                    const titleMatch = titleWords.some(word => 
+                        word.startsWith(lowerCaseQuery)
+                    )
+                    
+                    // For author: check if any word starts with the query
+                    const authorWords = book.author.toLowerCase().split(/\s+/)
+                    const authorMatch = authorWords.some(word => 
+                        word.startsWith(lowerCaseQuery)
+                    )
+                    
+                    return titleMatch || authorMatch
+                })
             }
 
             if (searchCriteria.genre) {
@@ -41,6 +55,5 @@ const useFilterBooks = (allBooks, searchQuery, searchCriteria) => {
 
     return filteredBooks
 }
-
 
 export default useFilterBooks

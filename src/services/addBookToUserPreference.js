@@ -10,7 +10,7 @@ const addBookToUserPreference = (bookId, status) => {
         )
         .then((response) => {
             console.log(
-                'Book successfully added to preferences:',
+                // 'Book successfully added to preferences:',
                 response.data
             )
         })

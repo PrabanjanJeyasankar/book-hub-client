@@ -23,7 +23,6 @@ function UserNavBarComponent() {
         if (isLoggedIn) {
             try {
                 const data = await fetchUserProfilePicture()
-                // console.log(data.profileImage)
                 if (data.profileImage) {
                     setImageSrc(data.profileImage)
                 } else {

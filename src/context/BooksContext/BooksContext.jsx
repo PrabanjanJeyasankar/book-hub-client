@@ -20,10 +20,8 @@ export const BooksProvider = ({ children }) => {
     }, [])
 
     const removeBookFromAllBooks = (bookId) => {
-        // console.log('Trying to remove book with ID:', bookId)
         setAllBooks((prevBooks) =>
             prevBooks.filter((book) => {
-                // console.log('Current book ID:', book._id)
                 return book._id !== bookId
             })
         )

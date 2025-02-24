@@ -24,9 +24,7 @@ const AllUsersComponent = () => {
         }
 
         fetchUsers()
-    }, [])
-
-    console.log(users)
+    }, []) 
 
     const handleDeleteUser = async (userId) => {
         try {

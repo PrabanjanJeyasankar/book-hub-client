@@ -108,10 +108,10 @@ function SignupComponent() {
                 <img
                     src={AppLogo}
                     className={signupStyles.app_logo}
-                    alt='Better Auth Logo'
+                    alt='App Logo'
                 />
                 <h1 className={signupStyles.app_name}>
-                    Create a Better Auth Account
+                    Create Account
                 </h1>
                 <h1 className={signupStyles.title}>Create account</h1>
                 <p className={signupStyles.subtitle}>
