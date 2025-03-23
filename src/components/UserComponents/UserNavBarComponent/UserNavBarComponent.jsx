@@ -1,13 +1,13 @@
-import { useState, useRef, useContext, useEffect } from 'react'
+import { CircleUserRound, LogOut } from 'lucide-react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext/UserContext'
-import { CircleUserRound, LogOut } from 'lucide-react'
 import './UserNavBarComponent.css'
 
-import logoImage from '../../../assets/img/open_book_logo.webp'
 import DefaultProfileImage from '../../../assets/img/default_user_profile.jpg'
-import fetchUserProfilePicture from '../../../services/fetchUserProfilePicture'
+import logoImage from '../../../assets/img/open_book_logo.webp'
 import handleLogoutService from '../../../services/authenticationServices/handleLogoutService'
+import fetchUserProfilePicture from '../../../services/fetchUserProfilePicture'
 
 function UserNavBarComponent() {
     const { isLoggedIn, userProfile, setIsLoggedIn, setUserProfile } =
@@ -24,7 +24,9 @@ function UserNavBarComponent() {
             try {
                 const data = await fetchUserProfilePicture()
                 if (data.profileImage) {
-                    setImageSrc(data.profileImage)
+                    const img = new Image()
+                    img.src = data.profileImage
+                    img.onload = () => setImageSrc(data.profileImage)
                 } else {
                     setImageSrc(DefaultProfileImage)
                 }
@@ -139,6 +141,7 @@ function UserNavBarComponent() {
                                 <img
                                     src={imageSrc}
                                     alt='Profile'
+                                    loading='eager'
                                     className='user-nav-profile-icon'
                                     onClick={handleProfileClick}
                                     aria-label='Profile picture'
@@ -149,6 +152,7 @@ function UserNavBarComponent() {
                                             <img
                                                 src={imageSrc}
                                                 alt='Profile'
+                                                loading='eager'
                                                 className='user-profile-dropdown-image'
                                             />
                                             <Link
